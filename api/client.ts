@@ -1,6 +1,6 @@
 /// <reference types="node" />
 
-const NOTION_VERSION = "2025-09-03";
+const NOTION_VERSION = "2022-06-28";
 
 export async function queryDatabase(body: Record<string, unknown>) {
   const token = process.env.NOTION_TOKEN;
