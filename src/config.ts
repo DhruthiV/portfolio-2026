@@ -14,6 +14,8 @@ export const SITE_CONFIG = {
     linkedin: "https://linkedin.com/in/dhruthi-venkatesh-heerguppe",
   },
   contactLine: "Let's connect! I typically reply within a business day.",
+  notionProjectsUrl:
+    "https://dhruthivh.notion.site/2508debe72c980a39969f972dfe7706a?v=2508debe72c980a89df1000c2570ddf0",
 };
 
 // "Request latest resume" mailto button on the Home page

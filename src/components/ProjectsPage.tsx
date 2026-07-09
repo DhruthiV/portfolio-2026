@@ -1,205 +1,194 @@
-import { useState } from "react";
-import { ArrowLeft, Table2, LayoutGrid, ExternalLink } from "lucide-react";
-import { GithubIcon } from "./icons/BrandIcons";
-import { PROJECTS, type Project, type ProjectStatus } from "../data/projects";
+import { useEffect, useState } from "react";
+import {
+  ArrowLeft,
+  LayoutGrid,
+  Table2,
+  AlertCircle,
+  ExternalLink,
+} from "lucide-react";
+import { lazy, Suspense } from "react";
+import { ProjectsTable } from "./projects/ProjectsTable";
 import { SITE_CONFIG } from "../config";
-
+import type { Project } from "../lib/notionProjects";
+import { fetchNotionProjects } from "../lib/notionProjects";
 type ViewMode = "table" | "board";
-
-const STATUS_DOT: Record<ProjectStatus, string> = {
-  Completed: "bg-emerald-500",
-  "In Progress": "bg-amber-500",
-};
-
-const STATUS_COLUMNS: ProjectStatus[] = ["In Progress", "Completed"];
+type LoadStatus = "loading" | "loaded" | "error";
 
 interface ProjectsPageProps {
   onBack: () => void;
 }
 
+const ProjectsBoard = lazy(() =>
+  import("./projects/ProjectsBoard").then((m) => ({
+    default: m.ProjectsBoard,
+  })),
+);
+
 export function ProjectsPage({ onBack }: ProjectsPageProps) {
   const [view, setView] = useState<ViewMode>("table");
+  const [status, setStatus] = useState<LoadStatus>("loading");
+  const [projects, setProjects] = useState<Project[]>([]);
+
+  useEffect(() => {
+    fetchNotionProjects()
+      .then((data) => {
+        setProjects(data);
+        setStatus("loaded");
+      })
+      .catch(() => setStatus("error"));
+  }, []);
 
   return (
     <div className="h-full overflow-y-auto">
-      <div className="max-w-5xl mx-auto p-4 md:p-8">
-        {/* Breadcrumb / back */}
-        <button
-          type="button"
-          onClick={onBack}
-          className="inline-flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground transition-colors mb-4"
-        >
-          <ArrowLeft size={13} /> Back ·{" "}
-          <span className="text-foreground/70">{SITE_CONFIG.name.toLowerCase().replace(" ", ".")}</span> ·{" "}
-          <span className="font-medium text-foreground">Projects</span>
-        </button>
+      <div className="min-h-full flex justify-center">
+        <div className="w-full max-w-5xl px-4 py-6 md:px-8 md:py-8">
+          {/* Back */}
+          <button
+            type="button"
+            onClick={onBack}
+            className="mb-5 inline-flex items-center gap-1.5 text-xs text-muted-foreground transition-colors hover:text-foreground"
+          >
+            <ArrowLeft size={13} />
+            Back ·<span className="text-foreground/70">{SITE_CONFIG.name}</span>
+            ·<span className="font-medium text-foreground">Projects</span>
+          </button>
 
-        {/* Header */}
-        <div className="flex items-start justify-between gap-4 mb-6">
-          <div>
-            <h1 className="text-2xl font-bold text-foreground mb-1" style={{ fontFamily: "var(--font-heading)" }}>
-              Projects
-            </h1>
-            <p className="text-sm text-muted-foreground">
-              {PROJECTS.length} builds · personal projects, internship work, and learning
-            </p>
+          {/* Header */}
+          <div className="mb-7 flex items-start justify-between gap-4">
+            <div>
+              <h1
+                className="mb-1 text-2xl font-bold text-foreground"
+                style={{ fontFamily: "var(--font-heading)" }}
+              >
+                Projects
+              </h1>
+
+              <p className="text-sm text-muted-foreground">
+                {status === "loaded"
+                  ? `${projects.length} builds · personal projects, internship work, and learning`
+                  : "Loading projects..."}
+              </p>
+            </div>
+
+            {/* Desktop only */}
+            <div className="hidden sm:flex items-center gap-1 rounded-lg border border-border bg-muted/40 p-1">
+              <button
+                type="button"
+                disabled={status !== "loaded"}
+                onClick={() => setView("table")}
+                className={`inline-flex items-center gap-1.5 rounded-md px-3 py-1.5 text-xs font-medium transition-colors disabled:opacity-50 ${
+                  view === "table"
+                    ? "bg-card text-foreground shadow-sm"
+                    : "text-muted-foreground hover:text-foreground"
+                }`}
+              >
+                <Table2 size={13} />
+                Table
+              </button>
+
+              <button
+                type="button"
+                disabled={status !== "loaded"}
+                onClick={() => setView("board")}
+                className={`inline-flex items-center gap-1.5 rounded-md px-3 py-1.5 text-xs font-medium transition-colors disabled:opacity-50 ${
+                  view === "board"
+                    ? "bg-card text-foreground shadow-sm"
+                    : "text-muted-foreground hover:text-foreground"
+                }`}
+              >
+                <LayoutGrid size={13} />
+                Board
+              </button>
+            </div>
           </div>
 
-          <div className="flex items-center gap-1 p-1 rounded-lg border border-border bg-muted/40 shrink-0">
-            <button
-              type="button"
-              onClick={() => setView("table")}
-              className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-medium transition-colors ${
-                view === "table" ? "bg-card text-foreground shadow-sm" : "text-muted-foreground hover:text-foreground"
-              }`}
-            >
-              <Table2 size={13} /> Table
-            </button>
-            <button
-              type="button"
-              onClick={() => setView("board")}
-              className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-medium transition-colors ${
-                view === "board" ? "bg-card text-foreground shadow-sm" : "text-muted-foreground hover:text-foreground"
-              }`}
-            >
-              <LayoutGrid size={13} /> Board
-            </button>
-          </div>
-        </div>
+          {status === "loading" && (
+            <div className="flex min-h-[60vh] items-center justify-center">
+              <ProjectsSkeleton />
+            </div>
+          )}
 
-        {/* Notion integration note */}
-        <div className="rounded-lg border border-primary/20 bg-primary/5 px-4 py-2.5 mb-6 text-xs text-muted-foreground">
-          <span className="font-medium text-primary">Notion integration ready</span> — swap the local{" "}
-          <code className="px-1 py-0.5 rounded bg-muted text-foreground/80">PROJECTS</code> array in{" "}
-          <code className="px-1 py-0.5 rounded bg-muted text-foreground/80">data/projects.ts</code> for a fetch from
-          your published Notion page once the URL is ready.
-        </div>
+          {status === "error" && (
+            <div className="flex min-h-[60vh] items-center justify-center">
+              <ProjectsError />
+            </div>
+          )}
 
-        {view === "table" ? <ProjectsTable /> : <ProjectsBoard />}
+          {status === "loaded" && (
+            <>
+              {/* Mobile */}
+              <div className="sm:hidden">
+                <Suspense fallback={<ProjectsSkeleton />}>
+                  <ProjectsBoard projects={projects} />
+                </Suspense>
+              </div>
+
+              {/* Desktop */}
+              <div className="hidden sm:block">
+                {view === "table" ? (
+                  <ProjectsTable projects={projects} />
+                ) : (
+                  <Suspense fallback={<ProjectsSkeleton />}>
+                    <ProjectsBoard projects={projects} />
+                  </Suspense>
+                )}
+              </div>
+            </>
+          )}
+        </div>
       </div>
     </div>
   );
 }
 
-function ProjectsTable() {
+function ProjectsSkeleton() {
   return (
-    <div className="rounded-xl border border-border bg-card overflow-hidden">
-      <table className="w-full text-sm">
-        <thead>
-          <tr className="border-b border-border bg-muted/40 text-xs text-muted-foreground">
-            <th className="text-left font-medium px-4 py-2.5">Name</th>
-            <th className="text-left font-medium px-4 py-2.5">Type</th>
-            <th className="text-left font-medium px-4 py-2.5 hidden sm:table-cell">Stack</th>
-            <th className="text-left font-medium px-4 py-2.5">Status</th>
-            <th className="text-left font-medium px-4 py-2.5 hidden md:table-cell">Year</th>
-            <th className="text-left font-medium px-4 py-2.5">Links</th>
-          </tr>
-        </thead>
-        <tbody>
-          {PROJECTS.map((p) => (
-            <tr key={p.name} className="border-b border-border last:border-0 hover:bg-muted/30 transition-colors">
-              <td className="px-4 py-3">
-                <span className="inline-flex items-center gap-2 font-medium text-foreground">
-                  <span>{p.emoji}</span>
-                  {p.name}
-                </span>
-              </td>
-              <td className="px-4 py-3">
-                <span className="text-xs px-2 py-0.5 rounded-full border border-border text-muted-foreground">
-                  {p.category}
-                </span>
-              </td>
-              <td className="px-4 py-3 hidden sm:table-cell">
-                <div className="flex flex-wrap gap-1">
-                  {p.tech.slice(0, 3).map((t) => (
-                    <span key={t} className="text-xs px-1.5 py-0.5 rounded bg-muted text-muted-foreground">
-                      {t}
-                    </span>
-                  ))}
-                  {p.tech.length > 3 && (
-                    <span className="text-xs text-muted-foreground/70">+{p.tech.length - 3}</span>
-                  )}
-                </div>
-              </td>
-              <td className="px-4 py-3">
-                <span className="inline-flex items-center gap-1.5 text-xs text-muted-foreground">
-                  <span className={`w-1.5 h-1.5 rounded-full ${STATUS_DOT[p.status]}`} />
-                  {p.status}
-                </span>
-              </td>
-              <td className="px-4 py-3 hidden md:table-cell text-xs text-muted-foreground">{p.year}</td>
-              <td className="px-4 py-3">
-                <ProjectLinks project={p} size={13} />
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
-  );
-}
+    <div className="w-full animate-pulse overflow-hidden rounded-xl border border-border bg-card">
+      <div className="border-b border-border bg-muted/30 px-5 py-4">
+        <div className="h-4 w-40 rounded bg-muted" />
+      </div>
 
-function ProjectsBoard() {
-  return (
-    <div className="grid sm:grid-cols-2 gap-4">
-      {STATUS_COLUMNS.map((status) => {
-        const items = PROJECTS.filter((p) => p.status === status);
-        return (
-          <div key={status} className="rounded-xl border border-border bg-muted/20 p-3">
-            <div className="flex items-center gap-2 px-1 pb-3">
-              <span className={`w-2 h-2 rounded-full ${STATUS_DOT[status]}`} />
-              <span className="text-xs font-semibold text-foreground uppercase tracking-wide">{status}</span>
-              <span className="text-xs text-muted-foreground">{items.length}</span>
-            </div>
-            <div className="space-y-2">
-              {items.map((p) => (
-                <div key={p.name} className="rounded-lg border border-border bg-card p-3 space-y-2">
-                  <div className="flex items-start justify-between gap-2">
-                    <span className="text-sm font-medium text-foreground flex items-center gap-1.5">
-                      <span>{p.emoji}</span> {p.name}
-                    </span>
-                    <ProjectLinks project={p} size={12} />
-                  </div>
-                  <p className="text-xs text-muted-foreground leading-relaxed">{p.tagline}</p>
-                  <div className="flex flex-wrap gap-1">
-                    <span className="text-xs px-1.5 py-0.5 rounded bg-muted text-muted-foreground">
-                      {p.category}
-                    </span>
-                    {p.tech.slice(0, 2).map((t) => (
-                      <span key={t} className="text-xs px-1.5 py-0.5 rounded bg-muted text-muted-foreground">
-                        {t}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        );
-      })}
-    </div>
-  );
-}
-
-function ProjectLinks({ project, size }: { project: Project; size: number }) {
-  return (
-    <div className="flex items-center gap-1.5">
-      <a
-        href={project.github}
-        aria-label={`${project.name} on GitHub`}
-        className="text-muted-foreground hover:text-foreground transition-colors"
-      >
-        <GithubIcon size={size} />
-      </a>
-      {project.live && (
-        <a
-          href={project.live}
-          aria-label={`${project.name} live site`}
-          className="text-muted-foreground hover:text-foreground transition-colors"
+      {[...Array(6)].map((_, i) => (
+        <div
+          key={i}
+          className="flex items-center gap-6 border-b border-border px-5 py-5 last:border-0"
         >
-          <ExternalLink size={size} />
-        </a>
-      )}
+          <div className="h-10 w-10 rounded-full bg-muted" />
+          <div className="flex-1 space-y-3">
+            <div className="h-4 w-48 rounded bg-muted" />
+            <div className="h-3 w-full rounded bg-muted" />
+            <div className="h-3 w-2/3 rounded bg-muted" />
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function ProjectsError() {
+  return (
+    <div className="max-w-md rounded-xl border border-border bg-card p-10 text-center">
+      <div className="mx-auto mb-4 flex h-10 w-10 items-center justify-center rounded-full bg-amber-500/10">
+        <AlertCircle size={18} className="text-amber-600" />
+      </div>
+
+      <h3 className="mb-2 text-sm font-medium text-foreground">
+        Couldn't load the live project list.
+      </h3>
+
+      <p className="mb-5 text-xs leading-6 text-muted-foreground">
+        The Notion connection is temporarily unavailable.
+      </p>
+
+      <a
+        href={SITE_CONFIG.notionProjectsUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="inline-flex items-center gap-2 rounded-lg bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-opacity hover:opacity-90"
+      >
+        View on Notion
+        <ExternalLink size={13} />
+      </a>
     </div>
   );
 }
