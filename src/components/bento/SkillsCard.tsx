@@ -16,9 +16,11 @@ export function SkillsCard(currentSkillFocus: CurrentFocus) {
       </h2>
 
       <div className="flex flex-wrap gap-1">
-        <div className="flex items-center gap-1 text-[11px] text-muted-foreground mr-1">
-          <Zap size={18} className="text-primary" />
-        </div>
+        {currentSkillFocus.skills && (
+          <div className="flex items-center gap-1 text-[11px] text-muted-foreground mr-1">
+            <Zap size={18} className="text-primary" />
+          </div>
+        )}
 
         {currentSkillFocus?.skills?.map((skill) => (
           <span
