@@ -1,5 +1,5 @@
 import { ArrowRight } from "lucide-react";
-import { PROJECTS } from "../../data/projects";
+// import { PROJECTS } from "../../data/projects";
 import { BentoCard } from "./BentoCard";
 
 interface ProjectsCardProps {
@@ -7,36 +7,19 @@ interface ProjectsCardProps {
 }
 
 export function ProjectsCard({ onViewProjects }: ProjectsCardProps) {
-  const categories = Array.from(new Set(PROJECTS.map((p) => p.category)));
+  // const categories = Array.from(new Set(PROJECTS.map((p) => p.category)));
 
   return (
-    <BentoCard className="gap-4">
-      <div className="flex items-center justify-between">
-        <h2
+    <BentoCard className="gap-1.5">
+      <div className="flex items-start justify-between flex-col">
+        <h3
           className="text-sm font-semibold text-foreground"
           style={{ fontFamily: "var(--font-heading)" }}
         >
           Projects
-        </h2>
-        {/* <span className="text-xs text-muted-foreground">
-          {PROJECTS.length} builds
-        </span> */}
+        </h3>
       </div>
-
-      <p className="text-xs text-muted-foreground leading-relaxed">
-        Personal projects, internship work, and learning experiments.
-      </p>
-
-      <div className="flex flex-wrap gap-1">
-        {categories.map((cat) => (
-          <span
-            key={cat}
-            className="text-xs px-2.5 py-1 rounded-full border border-border bg-muted/60 text-foreground/80 font-medium"
-          >
-            {cat}
-          </span>
-        ))}
-      </div>
+      <h3 className="text-xs text-muted-foreground ">Developed Projects.</h3>
 
       <button
         type="button"

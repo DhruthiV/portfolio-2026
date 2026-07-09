@@ -28,13 +28,29 @@ export function EducationCard() {
                 : ""
             }
           >
-            <h3 className="text-sm font-semibold leading-snug text-foreground">
-              {edu.degree}
-            </h3>
+            <div className="flex items-center gap-1">
+              <img
+                src={`/public/${edu.icon}.png`}
+                alt={edu.school}
+                width={65}
+                height={65}
+                style={{ opacity: 0.75 }}
+              />
 
-            <p className="mt-1 text-xs text-muted-foreground">{edu.school}</p>
+              <div className="flex-col">
+                <h3 className="text-sm font-semibold leading-snug text-foreground">
+                  {edu.degree}
+                </h3>
+                <h4 className="text-sm leading-snug text-muted-foreground">
+                  {edu.desc}
+                </h4>
 
-            <p className="text-xs text-muted-foreground">{edu.period}</p>
+                <p className="mt-1 text-xs font-semibold text-muted-foreground">
+                  {edu.school}
+                </p>
+                <p className="text-xs text-muted-foreground">{edu.period}</p>
+              </div>
+            </div>
           </div>
         ))}
       </div>

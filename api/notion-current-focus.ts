@@ -2,7 +2,7 @@
 /// <reference types="node" />
 
 import { queryDatabase } from "./notion/client";
-import { mapPageToProject } from "./notion/utils";
+import { mapPageToCurrentFocus } from "./notion/utils";
 
 export const config = {
   runtime: "nodejs",
@@ -15,20 +15,24 @@ export default async function handler(req: any, res: any) {
 
   try {
     const data = await queryDatabase({
-      page_size: 20,
+      page_size: 1,
       filter: {
-        property: "Status",
-        status: {
-          equals: "Completed",
+        property: "Active",
+        checkbox: {
+          equals: true,
         },
       },
     });
 
-    const projects = data.results.map(mapPageToProject);
+    if (!data.results.length) {
+      return res.status(404).json({ error: "No active focus found." });
+    }
+
+    const focus = mapPageToCurrentFocus(data.results[0]);
 
     res.setHeader("Cache-Control", "s-maxage=60, stale-while-revalidate=300");
 
-    return res.status(200).json(projects);
+    return res.status(200).json(focus);
   } catch (err: any) {
     return res.status(500).json({
       error: err.message,

@@ -60,30 +60,31 @@ export function ContactCard() {
         className="inline-flex items-center justify-center gap-2 h-9 rounded-lg bg-primary text-primary-foreground text-sm font-medium hover:opacity-90 transition-opacity"
         style={{ fontFamily: "var(--font-heading)" }}
       >
-        <FileText size={14} /> Request latest resume
+        <FileText size={14} /> Request resume
       </a>
 
-      <div className="flex items-start gap-2">
-        <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-emerald-500 animate-pulse" />
-        <span className="text-xs text-muted-foreground">
-          {SITE_CONFIG.contactLine}
-        </span>
-      </div>
       <div className="flex items-center justify-center gap-1.5 shrink-0">
         <a
           href={SITE_CONFIG.socials.github}
           aria-label="GitHub"
           className="w-8 h-8 flex items-center justify-center rounded-lg border border-border text-muted-foreground hover:text-primary hover:border-primary/50 transition-colors"
         >
-          <GithubIcon size={16} />
+          <GithubIcon size={18} />
         </a>
         <a
           href={SITE_CONFIG.socials.linkedin}
           aria-label="LinkedIn"
           className="w-8 h-8 flex items-center justify-center rounded-lg border border-border text-muted-foreground hover:text-primary hover:border-primary/50 transition-colors"
         >
-          <LinkedinIcon size={16} />
+          <LinkedinIcon size={18} />
         </a>
+      </div>
+
+      <div className="flex items-start gap-2">
+        <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-emerald-500 animate-pulse" />
+        <span className="text-xs text-muted-foreground">
+          {SITE_CONFIG.contactLine}
+        </span>
       </div>
     </BentoCard>
   );

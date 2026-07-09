@@ -41,12 +41,24 @@ export function JourneyCard() {
                         {entry.title}
                       </h3>
                     </div>
-
-                    <p className="text-xs text-muted-foreground">{entry.org}</p>
-
-                    <p className="text-xs text-muted-foreground">
-                      {entry.period}
-                    </p>
+                    <div className="flex gap-1.5 items-center">
+                      {entry.icon && (
+                        <img
+                          src={`/public/${entry.icon}.png`}
+                          alt={entry.org}
+                          style={{ opacity: 0.75 }}
+                          className="w-8 h-8 object-contain shrink-0"
+                        />
+                      )}
+                      <div className="flex-col">
+                        <p className="text-xs text-muted-foreground">
+                          {entry.org}
+                        </p>
+                        <p className="text-xs text-muted-foreground">
+                          {entry.period}
+                        </p>
+                      </div>
+                    </div>
                   </div>
 
                   {isOpen && (
