@@ -127,7 +127,7 @@ export function AboutCard() {
         {SITE_CONFIG.summary}
       </p>
 
-      <div className="relative z-10 mt-2 flex items-start gap-1">
+      <div className="relative z-10 mt-3 flex items-start gap-1">
         <span className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-green-600 animate-pulse" />
 
         <span className="text-xs text-muted-foreground break-words ">

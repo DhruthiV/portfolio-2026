@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { EXPERIENCE } from "../../data/experience";
 import { BentoCard } from "./BentoCard";
+import { Icons } from "../../assets";
 
 export function JourneyCard() {
   const [openId, setOpenId] = useState<string | null>(
@@ -44,9 +45,8 @@ export function JourneyCard() {
                     <div className="flex gap-1.5 items-center">
                       {entry.icon && (
                         <img
-                          src={`../../assets/${entry.icon}.png`}
+                          src={Icons[entry.icon as keyof typeof Icons]}
                           alt={entry.org}
-                          style={{ opacity: 0.75 }}
                           className="w-8 h-8 object-contain shrink-0"
                         />
                       )}

@@ -1,7 +1,7 @@
 import { GraduationCap } from "lucide-react";
 import { EDUCATION } from "../../data/education";
 import { BentoCard } from "./BentoCard";
-
+import { Icons } from "../../assets";
 export function EducationCard() {
   return (
     <BentoCard className="gap-4">
@@ -30,11 +30,9 @@ export function EducationCard() {
           >
             <div className="flex items-center gap-1">
               <img
-                src={`../../assets/${edu.icon}.png`}
+                src={Icons[edu.icon as keyof typeof Icons]}
                 alt={edu.school}
-                width={65}
-                height={65}
-                style={{ opacity: 0.75 }}
+                className="w-8 h-8 object-contain shrink-0"
               />
 
               <div className="flex-col">
