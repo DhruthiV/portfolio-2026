@@ -5,7 +5,7 @@ import { JourneyCard } from "./bento/JourneyCard";
 import { ProjectsCard } from "./bento/ProjectsCard";
 import { SkillsCard } from "./bento/SkillsCard";
 import { useEffect, useState } from "react";
-import { CurrentFocusCard } from "./bento/CurrentfocusCard";
+import { CurrentFocusCard } from "./bento/CurrentFocusCard";
 import {
   fallbackCurrentFocus,
   fetchCurrentFocus,
