@@ -1,7 +1,7 @@
 import { SKILL_GROUPS } from "../../data/skills";
 import { BentoCard } from "./BentoCard";
 
-const BADGE_COLOR = "var(--chart-2)";
+const BADGE_COLOR = "var(--chart-4)";
 
 export function SkillsCard() {
   return (

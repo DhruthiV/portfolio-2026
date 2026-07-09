@@ -53,10 +53,7 @@ export default async function handler(req: any, res: any) {
     const data = await notionRes.json();
     const projects = data.results.map(mapPageToProject);
 
-    res.setHeader(
-      "Cache-Control",
-      "s-maxage=3600, stale-while-revalidate=86400",
-    );
+    res.setHeader("Cache-Control", "s-maxage=60, stale-while-revalidate=300");
     res.status(200).json(projects);
   } catch (err) {
     res.status(500).json({ error: "Failed to reach Notion" });

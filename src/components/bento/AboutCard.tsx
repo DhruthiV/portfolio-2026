@@ -130,7 +130,7 @@ export function AboutCard() {
       <div className="relative z-10 mt-auto flex items-start gap-2">
         <span className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-green-500 animate-pulse" />
 
-        <span className="text-xs text-muted-foreground break-words">
+        <span className="text-xs text-muted-foreground break-words my-1">
           {SITE_CONFIG.headline}
         </span>
       </div>

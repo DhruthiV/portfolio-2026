@@ -14,7 +14,7 @@ export function ProjectLinks({ project, size = 22 }: ProjectLinksProps) {
   }
 
   return (
-    <div className="flex items-center gap-2">
+    <div className="flex items-center gap-1">
       {project.github && (
         <a
           href={project.github}
