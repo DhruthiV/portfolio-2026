@@ -2,8 +2,8 @@ import { useEffect, useRef, useState } from "react";
 import { SITE_CONFIG } from "../../config";
 import { BentoCard } from "./BentoCard";
 
-import profile from "../../assets/portfolio-photo-dhruthi.png";
-import profileVideo from "../../assets/portfolio-video-dhruthi.webm";
+import profile from "../../../public/portfolio-photo-dhruthi.png";
+import profileVideo from "../../../public/portfolio-video-dhruthi.webm";
 
 export function AboutCard() {
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -91,7 +91,7 @@ export function AboutCard() {
           ref={videoRef}
           muted
           playsInline
-          preload="metadata"
+          preload="auto"
           controls={false}
           disablePictureInPicture
           controlsList="nodownload noplaybackrate noremoteplayback nofullscreen"
@@ -104,7 +104,6 @@ export function AboutCard() {
             pointer-events-none
             ${playing ? "opacity-95" : "opacity-0"}
           `}
-          src={profileVideo}
         >
           <source src={profileVideo} type="video/webm" />
         </video>
