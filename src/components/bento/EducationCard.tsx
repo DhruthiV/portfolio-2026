@@ -30,7 +30,7 @@ export function EducationCard() {
           >
             <div className="flex items-center gap-1">
               <img
-                src={`/public/${edu.icon}.png`}
+                src={`../../assets/${edu.icon}.png`}
                 alt={edu.school}
                 width={65}
                 height={65}

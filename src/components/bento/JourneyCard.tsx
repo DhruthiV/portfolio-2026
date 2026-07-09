@@ -44,7 +44,7 @@ export function JourneyCard() {
                     <div className="flex gap-1.5 items-center">
                       {entry.icon && (
                         <img
-                          src={`/public/${entry.icon}.png`}
+                          src={`../../assets/${entry.icon}.png`}
                           alt={entry.org}
                           style={{ opacity: 0.75 }}
                           className="w-8 h-8 object-contain shrink-0"
