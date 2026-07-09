@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /// <reference types="node" />
 
-import { queryDatabase } from "./notion/client.ts";
-import { mapPageToProject } from "./notion/utils.ts";
+import { queryDatabase } from "./client.js";
+import { mapPageToProject } from "./utils.js";
 
 export const config = {
   runtime: "nodejs",
