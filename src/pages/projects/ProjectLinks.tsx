@@ -1,7 +1,7 @@
 import { ExternalLink } from "lucide-react";
 
 import type { Project } from "../../lib/notionProjects";
-import { GithubIcon } from "../icons/BrandIcons";
+import { GithubIcon } from "../../components/icons/BrandIcons";
 
 interface ProjectLinksProps {
   project: Project;

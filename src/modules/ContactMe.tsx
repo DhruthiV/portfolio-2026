@@ -1,14 +1,10 @@
 import { useState } from "react";
 import { Copy, Check, FileText } from "lucide-react";
-import {
-  SITE_CONFIG,
-  RESUME_REQUEST_MAILTO,
-  buildMailtoLink,
-} from "../../config";
-import { MainCard } from "./MainCard";
-import { GithubIcon, LinkedinIcon } from "../icons/BrandIcons";
+import { SITE_CONFIG, RESUME_REQUEST_MAILTO, buildMailtoLink } from "../config";
+import { MainCard } from "../components/common/MainCard";
+import { GithubIcon, LinkedinIcon } from "../components/icons/BrandIcons";
 
-export function ContactCard() {
+export function ContactMe() {
   const [copied, setCopied] = useState(false);
   const resumeMailto = buildMailtoLink(RESUME_REQUEST_MAILTO);
 

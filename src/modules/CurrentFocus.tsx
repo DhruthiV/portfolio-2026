@@ -1,6 +1,6 @@
 import { BookOpen, Compass, Hammer, Users } from "lucide-react";
-import { MainCard } from "./MainCard";
-import type { CurrentFocus } from "../../lib/notionCurrentFocus";
+import { MainCard } from "../components/common/MainCard";
+import type { CurrentFocusType } from "../lib/notionCurrentFocus";
 
 const focusConfig = {
   Building: {
@@ -20,14 +20,14 @@ const focusConfig = {
     icon: Users,
   },
 } satisfies Record<
-  CurrentFocus["type"],
+  CurrentFocusType["type"],
   {
     label: string;
     icon: React.ComponentType<{ size?: number; className?: string }>;
   }
 >;
 
-export function CurrentFocusCard(focus: CurrentFocus) {
+export function CurrentFocus(focus: CurrentFocusType) {
   const config = focusConfig[focus.type] ?? focusConfig.Learning;
   const Icon = config.icon;
 

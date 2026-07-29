@@ -1,8 +1,8 @@
 import { GraduationCap } from "lucide-react";
-import { EDUCATION } from "../../data/education";
-import { MainCard } from "./MainCard";
-import { Icons } from "../../assets";
-export function EducationCard() {
+import { EDUCATION } from "../data/education";
+import { MainCard } from "../components/common/MainCard";
+import { Icons } from "../assets";
+export function Education() {
   return (
     <MainCard className="gap-4">
       <div className="flex items-center gap-2">

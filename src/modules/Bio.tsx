@@ -1,7 +1,7 @@
-import { SITE_CONFIG } from "../../config";
-import { MainCard } from "./MainCard";
+import { SITE_CONFIG } from "../config";
+import { MainCard } from "../components/common/MainCard";
 
-export function BioCard() {
+export function Bio() {
   return (
     <MainCard className="gap-3">
       <h2

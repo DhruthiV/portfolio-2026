@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { ArrowRight } from "lucide-react";
-import { MainCard } from "./MainCard";
-import { ProjectsTable } from "../projects/ProjectsTable";
+import { MainCard } from "../../components/common/MainCard";
+import { ProjectsTable } from "./ProjectsTable";
 import { fetchNotionProjects } from "../../lib/notionProjects";
 import type { Project } from "../../lib/notionProjects";
-import ProjectsError from "../projects/ProjectsError";
+import ProjectsError from "./ProjectsError";
 
 interface ProjectsCardProps {
   onViewProjects: () => void;
@@ -12,7 +12,7 @@ interface ProjectsCardProps {
 
 type LoadStatus = "loading" | "loaded" | "error";
 
-export function ProjectsCard({ onViewProjects }: ProjectsCardProps) {
+export function Projects({ onViewProjects }: ProjectsCardProps) {
   const [status, setStatus] = useState<LoadStatus>("loading");
   const [projects, setProjects] = useState<Project[]>([]);
 

@@ -1,11 +1,11 @@
 import { Zap } from "lucide-react";
-import { SKILL_GROUPS } from "../../data/skills";
-import { MainCard } from "./MainCard";
-import type { CurrentFocus } from "../../lib/notionCurrentFocus";
+import { SKILL_GROUPS } from "../data/skills";
+import { MainCard } from "../components/common/MainCard";
+import type { CurrentFocusType } from "../lib/notionCurrentFocus";
 
 const BADGE_COLOR = "var(--chart-4)";
 
-export function SkillsCard(currentSkillFocus: CurrentFocus) {
+export function Skills(currentSkillFocus: CurrentFocusType) {
   return (
     <MainCard className="gap-4">
       <h2
@@ -22,7 +22,7 @@ export function SkillsCard(currentSkillFocus: CurrentFocus) {
           </div>
         )}
 
-        {currentSkillFocus?.skills?.map((skill) => (
+        {currentSkillFocus?.skills?.map((skill: string) => (
           <span
             key={skill}
             className="

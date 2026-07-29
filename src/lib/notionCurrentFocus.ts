@@ -1,4 +1,4 @@
-export interface CurrentFocus {
+export interface CurrentFocusType {
   type: "Building" | "Learning" | "Exploring" | "Collaboration";
   title: string;
   description: string;
@@ -6,16 +6,16 @@ export interface CurrentFocus {
   skills?: string[];
 }
 
-let pendingRequest: Promise<CurrentFocus> | null = null;
+let pendingRequest: Promise<CurrentFocusType> | null = null;
 
-export const fallbackCurrentFocus: CurrentFocus = {
+export const fallbackCurrentFocus: CurrentFocusType = {
   type: "Learning",
   title: "System Design",
   description:
     "Learning scalable backend architecture and distributed systems.",
 };
 
-export async function fetchCurrentFocus(): Promise<CurrentFocus> {
+export async function fetchCurrentFocus(): Promise<CurrentFocusType> {
   if (pendingRequest) return pendingRequest;
 
   pendingRequest = fetch("/api/notion-current-focus")

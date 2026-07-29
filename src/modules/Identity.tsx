@@ -1,11 +1,11 @@
 import { useEffect, useRef, useState } from "react";
-import { SITE_CONFIG } from "../../config";
-import { MainCard } from "./MainCard";
+import { SITE_CONFIG } from "../config";
+import { MainCard } from "../components/common/MainCard";
 
-import profile from "../../../public/portfolio-photo-dhruthi.png";
-import profileVideo from "../../../public/portfolio-video-dhruthi.webm";
+import profile from "../../public/portfolio-photo-dhruthi.png";
+import profileVideo from "../../public/portfolio-video-dhruthi.webm";
 
-export function IdentityCard() {
+export function Identity() {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [playing, setPlaying] = useState(false);
 

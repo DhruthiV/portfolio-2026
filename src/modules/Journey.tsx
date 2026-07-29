@@ -1,8 +1,8 @@
-import { EXPERIENCE } from "../../data/experience";
-import { MainCard } from "./MainCard";
-import { Icons } from "../../assets";
+import { EXPERIENCE } from "../data/experience";
+import { MainCard } from "../components/common/MainCard";
+import { Icons } from "../assets";
 
-export function JourneyCard() {
+export function Journey() {
   return (
     <MainCard className="gap-4">
       <h2
