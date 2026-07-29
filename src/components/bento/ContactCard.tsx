@@ -5,7 +5,7 @@ import {
   RESUME_REQUEST_MAILTO,
   buildMailtoLink,
 } from "../../config";
-import { BentoCard } from "./BentoCard";
+import { MainCard } from "./MainCard";
 import { GithubIcon, LinkedinIcon } from "../icons/BrandIcons";
 
 export function ContactCard() {
@@ -26,7 +26,7 @@ export function ContactCard() {
   };
 
   return (
-    <BentoCard className="gap-3">
+    <MainCard className="gap-3 ">
       <h2
         className="text-sm font-semibold text-foreground"
         style={{ fontFamily: "var(--font-heading)" }}
@@ -86,6 +86,6 @@ export function ContactCard() {
           {SITE_CONFIG.contactLine}
         </span>
       </div>
-    </BentoCard>
+    </MainCard>
   );
 }

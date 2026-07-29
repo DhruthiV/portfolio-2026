@@ -1,13 +1,13 @@
 import { Zap } from "lucide-react";
 import { SKILL_GROUPS } from "../../data/skills";
-import { BentoCard } from "./BentoCard";
+import { MainCard } from "./MainCard";
 import type { CurrentFocus } from "../../lib/notionCurrentFocus";
 
 const BADGE_COLOR = "var(--chart-4)";
 
 export function SkillsCard(currentSkillFocus: CurrentFocus) {
   return (
-    <BentoCard className="gap-4">
+    <MainCard className="gap-4">
       <h2
         className="text-sm font-semibold text-foreground"
         style={{ fontFamily: "var(--font-heading)" }}
@@ -96,6 +96,6 @@ export function SkillsCard(currentSkillFocus: CurrentFocus) {
           ))}
         </div>
       </div>
-    </BentoCard>
+    </MainCard>
   );
 }

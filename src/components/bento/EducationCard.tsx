@@ -1,10 +1,10 @@
 import { GraduationCap } from "lucide-react";
 import { EDUCATION } from "../../data/education";
-import { BentoCard } from "./BentoCard";
+import { MainCard } from "./MainCard";
 import { Icons } from "../../assets";
 export function EducationCard() {
   return (
-    <BentoCard className="gap-4">
+    <MainCard className="gap-4">
       <div className="flex items-center gap-2">
         <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary/10">
           <GraduationCap size={15} className="text-primary" />
@@ -52,6 +52,6 @@ export function EducationCard() {
           </div>
         ))}
       </div>
-    </BentoCard>
+    </MainCard>
   );
 }

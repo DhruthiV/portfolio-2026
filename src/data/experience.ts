@@ -25,7 +25,7 @@ export const EXPERIENCE: ExperienceEntry[] = [
     org: "Vegam Smart Factory Solutions",
     period: "Sep 2025 – May 2026",
     bullets: [
-      "Worked on AI-Product - AIIntime an exterprise SaaS internal Knowledge Management System ",
+      "Worked on AI-Product - AI Intime an exterprise SaaS internal Knowledge Management System ",
       "Built the frontend for an AI-powered SaaS product and enhanced the customer experience.",
       "Improved the codebase by resolving performance issues and refining the application's architecture.",
       "Developed reusable, maintainable React components following SOLID principles.",

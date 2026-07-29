@@ -1,20 +1,17 @@
 import { useEffect, useRef, useState } from "react";
 import { SITE_CONFIG } from "../../config";
-import { BentoCard } from "./BentoCard";
+import { MainCard } from "./MainCard";
 
 import profile from "../../../public/portfolio-photo-dhruthi.png";
 import profileVideo from "../../../public/portfolio-video-dhruthi.webm";
 
-export function AboutCard() {
+export function IdentityCard() {
   const videoRef = useRef<HTMLVideoElement>(null);
-
   const [playing, setPlaying] = useState(false);
 
   const handleMouseEnter = async () => {
     const video = videoRef.current;
-
     if (!video) return;
-
     try {
       setPlaying(true);
       video.currentTime = 0;
@@ -26,9 +23,7 @@ export function AboutCard() {
 
   const handleMouseLeave = () => {
     const video = videoRef.current;
-
     if (!video) return;
-
     video.pause();
     video.currentTime = 0;
     setPlaying(false);
@@ -36,41 +31,25 @@ export function AboutCard() {
 
   useEffect(() => {
     const video = videoRef.current;
-
     if (!video) return;
-
     const handleEnded = () => {
       video.currentTime = 0;
       setPlaying(false);
     };
-
     video.addEventListener("ended", handleEnded);
-
-    return () => {
-      video.removeEventListener("ended", handleEnded);
-    };
+    return () => video.removeEventListener("ended", handleEnded);
   }, []);
 
   return (
-    <BentoCard className="relative overflow-hidden gap-4">
-      {/* Glow */}
-      <div className="absolute -top-12 -right-8 h-72 w-72 rounded-full bg-primary/10 blur-[80px]" />
-
-      {/* Image / Video */}
+    <MainCard className="relative overflow-hidden gap-4 items-center text-center">
+      {/* Photo / video — soft circular glow behind, rectangle stays uncropped */}
       <div
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
-        className="
-          absolute
-          -right-1
-          top-0
-          h-48
-          w-40
-          z-0
-          select-none
-        "
+        className="relative mt-2 h-45 w-37 select-none"
       >
-        {/* Image */}
+        <div className="absolute inset-0 rounded-full bg-primary/15 blur-xl" />
+
         <img
           src={profile}
           alt={SITE_CONFIG.name}
@@ -86,7 +65,6 @@ export function AboutCard() {
           `}
         />
 
-        {/* Video */}
         <video
           ref={videoRef}
           muted
@@ -109,31 +87,21 @@ export function AboutCard() {
         </video>
       </div>
 
-      {/* Content */}
-      <div className="relative z-10 max-w-[65%]">
+      {/* Name / role / one-line bio */}
+      <div>
         <h1
-          className="text-xl font-bold text-foreground leading-tight"
+          className="text-lg font-bold text-foreground leading-tight"
           style={{ fontFamily: "var(--font-heading)" }}
         >
           {SITE_CONFIG.name}
         </h1>
-
         <p className="mt-1 text-sm font-medium text-primary">
           {SITE_CONFIG.role}
         </p>
-      </div>
-
-      <p className="relative z-10 max-w-[60%] text-[13px] leading-relaxed text-muted-foreground sm:max-w-[65%] sm:text-sm">
-        {SITE_CONFIG.summary}
-      </p>
-
-      <div className=" max-w-[65%] relative z-10 mt-3 flex items-start gap-1">
-        <span className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-green-600 animate-pulse" />
-
-        <span className="text-xs text-muted-foreground break-words ">
+        <p className="mt-2 text-xs leading-relaxed text-muted-foreground">
           {SITE_CONFIG.headline}
-        </span>
+        </p>
       </div>
-    </BentoCard>
+    </MainCard>
   );
 }

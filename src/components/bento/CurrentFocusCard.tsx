@@ -1,5 +1,5 @@
 import { BookOpen, Compass, Hammer, Users } from "lucide-react";
-import { BentoCard } from "./BentoCard";
+import { MainCard } from "./MainCard";
 import type { CurrentFocus } from "../../lib/notionCurrentFocus";
 
 const focusConfig = {
@@ -32,7 +32,7 @@ export function CurrentFocusCard(focus: CurrentFocus) {
   const Icon = config.icon;
 
   return (
-    <BentoCard className="gap-2">
+    <MainCard className="gap-3">
       <div className="flex items-center gap-2">
         <h2
           className="text-sm font-semibold text-foreground"
@@ -61,6 +61,6 @@ export function CurrentFocusCard(focus: CurrentFocus) {
       <p className="text-xs text-muted-foreground leading-relaxed">
         {focus.description}
       </p>
-    </BentoCard>
+    </MainCard>
   );
 }

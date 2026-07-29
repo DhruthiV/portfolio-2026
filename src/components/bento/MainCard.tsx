@@ -1,17 +1,17 @@
 import type { ReactNode } from "react";
 import { motion } from "motion/react";
 
-interface BentoCardProps {
+interface MainCardProps {
   children: ReactNode;
   className?: string;
 }
 
-export function BentoCard({ children, className = "" }: BentoCardProps) {
+export function MainCard({ children, className = "" }: MainCardProps) {
   return (
     <motion.div
       className={`
         relative
-        h-full
+        h-fit
         overflow-hidden
         rounded-2xl
         border

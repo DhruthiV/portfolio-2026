@@ -1,34 +1,66 @@
+import { useEffect, useState } from "react";
 import { ArrowRight } from "lucide-react";
-// import { PROJECTS } from "../../data/projects";
-import { BentoCard } from "./BentoCard";
+import { MainCard } from "./MainCard";
+import { ProjectsTable } from "../projects/ProjectsTable";
+import { fetchNotionProjects } from "../../lib/notionProjects";
+import type { Project } from "../../lib/notionProjects";
+import ProjectsError from "../projects/ProjectsError";
 
 interface ProjectsCardProps {
   onViewProjects: () => void;
 }
 
+type LoadStatus = "loading" | "loaded" | "error";
+
 export function ProjectsCard({ onViewProjects }: ProjectsCardProps) {
-  // const categories = Array.from(new Set(PROJECTS.map((p) => p.category)));
+  const [status, setStatus] = useState<LoadStatus>("loading");
+  const [projects, setProjects] = useState<Project[]>([]);
+
+  useEffect(() => {
+    fetchNotionProjects()
+      .then((data) => {
+        setProjects(data.slice(0, 3));
+        setStatus("loaded");
+      })
+      .catch(() => setStatus("error"));
+  }, []);
 
   return (
-    <BentoCard className="gap-1.5">
-      <div className="flex items-start justify-between flex-col">
+    <MainCard className="gap-3">
+      <div className="flex items-center justify-between">
         <h3
           className="text-sm font-semibold text-foreground"
           style={{ fontFamily: "var(--font-heading)" }}
         >
           Projects
         </h3>
-      </div>
-      <h3 className="text-xs text-muted-foreground ">Developed Projects.</h3>
 
-      <button
-        type="button"
-        onClick={onViewProjects}
-        className="inline-flex items-center justify-center gap-2 h-9 rounded-lg bg-primary text-primary-foreground text-sm font-medium hover:opacity-90 transition-opacity"
-        style={{ fontFamily: "var(--font-heading)" }}
-      >
-        View projects <ArrowRight size={14} />
-      </button>
-    </BentoCard>
+        <button
+          type="button"
+          onClick={onViewProjects}
+          className="inline-flex items-center gap-1 text-sm font-medium text-primary hover:opacity-80 transition-opacity"
+          style={{ fontFamily: "var(--font-heading)" }}
+        >
+          View all
+          <ArrowRight size={12} />
+        </button>
+      </div>
+
+      {status === "loading" && (
+        <div className="animate-pulse space-y-2">
+          {[...Array(3)].map((_, i) => (
+            <div key={i} className="h-10 rounded-lg bg-muted" />
+          ))}
+        </div>
+      )}
+
+      {status === "error" && (
+        <div className="justify-items-center">
+          <ProjectsError />
+        </div>
+      )}
+
+      {status === "loaded" && <ProjectsTable projects={projects} />}
+    </MainCard>
   );
 }
