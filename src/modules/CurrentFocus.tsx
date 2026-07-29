@@ -1,24 +1,11 @@
 import { BookOpen, Compass, Hammer, Users } from "lucide-react";
-import { MainCard } from "../components/common/MainCard";
-import type { CurrentFocusType } from "../lib/notionCurrentFocus";
+import type { CurrentFocusType } from "@/lib/notionCurrentFocus";
 
 const focusConfig = {
-  Building: {
-    label: "Building",
-    icon: Hammer,
-  },
-  Learning: {
-    label: "Learning",
-    icon: BookOpen,
-  },
-  Exploring: {
-    label: "Exploring",
-    icon: Compass,
-  },
-  Collaboration: {
-    label: "Collaboration",
-    icon: Users,
-  },
+  Building: { label: "Building", icon: Hammer },
+  Learning: { label: "Learning", icon: BookOpen },
+  Exploring: { label: "Exploring", icon: Compass },
+  Collaboration: { label: "Collaboration", icon: Users },
 } satisfies Record<
   CurrentFocusType["type"],
   {
@@ -32,35 +19,30 @@ export function CurrentFocus(focus: CurrentFocusType) {
   const Icon = config.icon;
 
   return (
-    <MainCard className="gap-3">
-      <div className="flex items-center gap-2">
-        <h2
-          className="text-sm font-semibold text-foreground"
+    <div className="flex flex-col gap-2 w-full border-t border-border/40 pt-4">
+      <div className="flex items-start justify-between gap-2">
+        <h3
+          className="text-xs font-bold text-foreground tracking-tight"
           style={{ fontFamily: "var(--font-heading)" }}
         >
-          Current Focus
-        </h2>
+          {focus.title}
+        </h3>
 
-        <Icon size={12} className="text-primary" />
-
-        <p
-          className="text-sm font-medium text-primary"
-          style={{ fontFamily: "var(--font-heading)" }}
-        >
-          {config.label}
-        </p>
+        <div className="flex items-center gap-1 shrink-0 bg-primary/5 border border-primary/10 px-2 py-0.5 rounded-md">
+          <Icon size={12} className="text-primary" />
+          <span
+            className="text-[10px] font-medium text-primary tracking-wide uppercase"
+            style={{ fontFamily: "var(--font-heading)" }}
+          >
+            {config.label}
+          </span>
+        </div>
       </div>
 
-      <h3
-        className="text-xs font-semibold text-foreground"
-        style={{ fontFamily: "var(--font-heading)" }}
-      >
-        {focus.title}
-      </h3>
-
+      {/* Description Body */}
       <p className="text-xs text-muted-foreground leading-relaxed">
         {focus.description}
       </p>
-    </MainCard>
+    </div>
   );
 }

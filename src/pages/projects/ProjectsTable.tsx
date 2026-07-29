@@ -19,14 +19,6 @@ export function ProjectsTable({ projects }: ProjectsTableProps) {
               Description
             </th>
 
-            {/* <th className="w-[15%] px-5 py-3 text-left text-xs font-medium uppercase tracking-wide text-muted-foreground">
-              Category
-            </th> */}
-
-            {/* <th className="w-[30%] px-5 py-3 text-left text-xs font-medium uppercase tracking-wide text-muted-foreground">
-              Stack
-            </th> */}
-
             <th className="w-[10%] px-5 py-3 text-center text-xs font-medium uppercase tracking-wide text-muted-foreground">
               Links
             </th>
@@ -64,27 +56,6 @@ export function ProjectsTable({ projects }: ProjectsTableProps) {
                   {project.desc}
                 </p>
               </td>
-
-              {/* Category */}
-              {/* <td className="px-5 py-4 align-top">
-                <span className="inline-flex rounded-full border border-blue-200 bg-blue-50 px-2.5 py-1 text-xs font-medium text-blue-700 dark:border-blue-900/60 dark:bg-blue-950/40 dark:text-blue-300">
-                  {project.category}
-                </span>
-              </td> */}
-
-              {/* Stack */}
-              {/* <td className="px-5 py-4 align-top">
-                <div className="flex flex-wrap gap-1.5">
-                  {project.tech.map((tech) => (
-                    <span
-                      key={tech}
-                      className="rounded-full border border-emerald-200 bg-emerald-50 px-2 py-0.5 text-xs font-medium text-emerald-700 dark:border-emerald-900/60 dark:bg-emerald-950/40 dark:text-emerald-300"
-                    >
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-              </td> */}
 
               {/* Links */}
               <td className="px-5 py-4 align-top">

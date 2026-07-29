@@ -3,8 +3,7 @@
 export const SITE_CONFIG = {
   name: "Dhruthi V H",
   initials: "DVH",
-  headline:
-    "Let's connect to talk tech, architecture, or potential collaborations.",
+  headline: "This is the short bio",
   role: "Software Engineer",
   summary:
     "Building full-stack applications, exploring scalable system design, and continuously learning modern technologies.",

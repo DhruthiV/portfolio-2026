@@ -1,10 +1,9 @@
-import { useEffect, useState } from "react";
+import { type Project, fetchNotionProjects } from "@/lib/notionProjects";
 import { ArrowRight } from "lucide-react";
-import { MainCard } from "../../components/common/MainCard";
-import { ProjectsTable } from "./ProjectsTable";
-import { fetchNotionProjects } from "../../lib/notionProjects";
-import type { Project } from "../../lib/notionProjects";
+import { useState, useEffect } from "react";
 import ProjectsError from "./ProjectsError";
+import { ProjectsTable } from "./ProjectsTable";
+import { Card } from "@/components/ui/card";
 
 interface ProjectsCardProps {
   onViewProjects: () => void;
@@ -26,7 +25,7 @@ export function Projects({ onViewProjects }: ProjectsCardProps) {
   }, []);
 
   return (
-    <MainCard className="gap-3">
+    <div>
       <div className="flex items-center justify-between">
         <h3
           className="text-sm font-semibold text-foreground"
@@ -61,6 +60,6 @@ export function Projects({ onViewProjects }: ProjectsCardProps) {
       )}
 
       {status === "loaded" && <ProjectsTable projects={projects} />}
-    </MainCard>
+    </div>
   );
 }

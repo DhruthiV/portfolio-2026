@@ -27,7 +27,7 @@ export const SKILL_GROUPS: SkillGroup[] = [
       { name: "Node.js" },
       { name: "Express.js" },
       { name: "MongoDB" },
-      { name: "PostgreSQL" },
+      { name: "PostgreSQL(Neon)" },
     ],
   },
   {
@@ -39,14 +39,13 @@ export const SKILL_GROUPS: SkillGroup[] = [
     ],
   },
   {
-    category: "Tooling",
+    category: "Tools",
     items: [
       { name: "Git" },
       { name: "Figma" },
       { name: "VS Code" },
       { name: "Vite" },
       { name: "Vercel" },
-      { name: "Neon" },
     ],
   },
 ];
