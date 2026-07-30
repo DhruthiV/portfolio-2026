@@ -1,6 +1,6 @@
 import type { Project } from "@/data/projects";
-import { Badge } from "lucide-react";
 import { ProjectLinks } from "../../common/ProjectLinks";
+import { Badge } from "@/components/ui/badge";
 
 interface ProjectCardProps {
   project: Project;
@@ -21,7 +21,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
           {project.status === "Ongoing" && <Badge>{project.status}</Badge>}
         </div>
 
-        <p className="mt-5 text-sm leading-7 text-muted-foreground">
+        <p className="mt-5 text-sm leading-7 text-foreground/75">
           {project.description}
         </p>
       </header>

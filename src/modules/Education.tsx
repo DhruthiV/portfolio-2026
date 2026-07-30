@@ -21,20 +21,20 @@ export function Education() {
           >
             <div className="grid grid-cols-[1fr_auto] gap-6 items-start">
               <div>
-                <h3 className="text-sm font-semibold text-foreground ">
+                <h3 className="text-base font-semibold text-foreground ">
                   {edu.degree}
                 </h3>
 
-                <CardDescription className="mt-1 text-xs text-muted-foreground hover:text-primary  transition-colors duration-300">
+                <CardDescription className="mt-1 text-sm text-muted-foreground hover:text-primary  transition-colors duration-300">
                   {edu.desc}
                 </CardDescription>
 
-                <p className="mt-2 text-xs text-primary/75 font-semibold">
+                <p className="mt-2 text-sm text-primary/75 font-semibold">
                   {edu.school}
                 </p>
               </div>
 
-              <p className="text-xs text-muted-foreground whitespace-nowrap">
+              <p className="text-sm text-muted-foreground whitespace-nowrap">
                 {edu.period}
               </p>
             </div>

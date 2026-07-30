@@ -60,7 +60,7 @@ export function ProjectsPage({ onBack }: ProjectsPageProps) {
         <button
           type="button"
           onClick={onBack}
-          className="mb-5 inline-flex items-center gap-1.5 text-xs text-muted-foreground transition-colors hover:text-foreground"
+          className="mb-5 inline-flex items-center gap-1.5 text-sm text-muted-foreground transition-colors hover:text-foreground"
         >
           <ArrowLeft size={13} />
           Back ·<span className="text-foreground/70">{SITE_CONFIG.name}</span> ·

@@ -27,7 +27,7 @@ export function ContactMe() {
         {/* Email button with matching radius variables */}
         <Button
           onClick={handleCopy}
-          className="inline-flex h-7 w-full items-center justify-center gap-2 rounded-(--radius) border border-border bg-muted/40 text-xs font-medium text-foreground transition-all duration-200 hover:bg-muted"
+          className="inline-flex h-7 w-full items-center justify-center gap-2 rounded-(--radius) border border-border bg-muted/40 text-sm font-medium text-foreground transition-all duration-200 hover:bg-muted"
           style={{ fontFamily: "var(--font-heading)" }}
         >
           {copied ? (
@@ -52,7 +52,7 @@ export function ContactMe() {
           href={resumeMailto}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center justify-center gap-2 h-7 w-full rounded-(--radius) bg-primary text-primary-foreground text-xs font-medium transition-all duration-150 hover:brightness-110 hover:shadow-sm"
+          className="inline-flex items-center justify-center gap-2 h-7 w-full rounded-(--radius) bg-primary text-primary-foreground text-sm font-medium transition-all duration-150 hover:brightness-110 hover:shadow-sm"
           style={{ fontFamily: "var(--font-heading)" }}
         >
           <FileText size={14} />

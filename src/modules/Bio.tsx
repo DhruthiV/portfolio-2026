@@ -22,7 +22,7 @@ export function Bio({ notionBio }: BioProps) {
       </CardTitle>
 
       <div className="flex flex-col gap-3">
-        <h3 className="text-sm font-bold leading-snug text-foreground/95 tracking-tight">
+        <h3 className="text-base font-bold leading-snug text-foreground/95 tracking-tight">
           {bioHeadline}
         </h3>
 
@@ -30,7 +30,7 @@ export function Bio({ notionBio }: BioProps) {
           {bioParagraphs.map((paragraph, index) => (
             <CardDescription
               key={index}
-              className="text-xs md:text-sm leading-relaxed text-muted-foreground/90 font-medium font-sans"
+              className="text-sm md:text-base leading-relaxed text-muted-foreground/90 font-medium font-sans"
             >
               {paragraph}
             </CardDescription>

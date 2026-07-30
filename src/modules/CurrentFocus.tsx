@@ -22,7 +22,7 @@ export function CurrentFocus(focus: CurrentFocusType) {
     <div className="flex flex-col gap-2 w-full border-t border-border/40 pt-4">
       <div className="flex items-start justify-between gap-2">
         <h3
-          className="text-xs font-bold text-foreground tracking-tight"
+          className="text-sm font-bold text-foreground tracking-tight"
           style={{ fontFamily: "var(--font-heading)" }}
         >
           {focus.title}
@@ -40,7 +40,7 @@ export function CurrentFocus(focus: CurrentFocusType) {
       </div>
 
       {/* Description Body */}
-      <p className="text-xs text-muted-foreground leading-relaxed">
+      <p className="text-sm text-muted-foreground leading-relaxed">
         {focus.description}
       </p>
     </div>

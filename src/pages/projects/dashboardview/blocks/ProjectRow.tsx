@@ -13,7 +13,7 @@ export function ProjectRow({ project, onViewProjects }: ProjectRowProps) {
   return (
     <div className="group flex gap-4 p-5 transition-colors hover:bg-accent/5">
       {/* Index */}
-      <div className="hidden pt-1 text-xs font-medium text-muted-foreground/50 sm:block">
+      <div className="hidden pt-1 text-sm font-medium text-muted-foreground/50 sm:block">
         {String(project.order).padStart(2, "0")}
       </div>
 

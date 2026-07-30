@@ -36,7 +36,7 @@ export function Skills(currentSkillFocus: CurrentFocusType) {
                       className="inline-flex items-center space-y-1"
                     >
                       <span
-                        className={`relative text-xs tracking-wide transition-all duration-300 cursor-default select-none py-0.5 px-2 ${
+                        className={`relative text-sm tracking-wide transition-all duration-300 cursor-default select-none py-0.5 px-2 ${
                           active
                             ? "text-foreground hover:text-primary font-bold tracking-tight"
                             : "text-muted-foreground font-medium hover:text-foreground hover:scale-105 hover:drop-shadow-[0_0_8px_rgba(from_var(--foreground)_r_g_b_/_0.3)]"

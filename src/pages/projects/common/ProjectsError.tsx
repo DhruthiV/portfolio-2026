@@ -10,7 +10,7 @@ function ProjectsError() {
       <h3 className="mb-2 text-sm font-medium text-foreground">
         Couldn't load the live project list.
       </h3>
-      <p className="mb-5 text-xs leading-6 text-muted-foreground">
+      <p className="mb-5 text-sm leading-6 text-muted-foreground">
         The Notion connection is temporarily unavailable.
       </p>
       <a

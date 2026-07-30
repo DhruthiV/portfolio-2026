@@ -40,13 +40,13 @@ export function Journey() {
                 {/* 
                   Three-Row Metadata Stack */}
                 <div className="flex flex-col min-w-0">
-                  <h3 className="text-sm sm:text-md font-bold tracking-tight text-primary break-words whitespace-normal">
+                  <h3 className="text-base sm:text-md font-bold tracking-tight text-primary break-words whitespace-normal">
                     {entry.title}
                   </h3>
-                  <p className="text-xs sm:text-sm font-semibold text-foreground/90 mt-0.5 break-words whitespace-normal sm:truncate">
+                  <p className="text-sm sm:text-base font-semibold text-foreground/90 mt-0.5 break-words whitespace-normal sm:truncate">
                     {entry.org}
                   </p>
-                  <span className="text-[10px] sm:text-xs font-mono font-medium text-muted-foreground/80 mt-0.5">
+                  <span className="text-[10px] sm:text-sm font-mono font-medium text-muted-foreground/80 mt-0.5">
                     {entry.period}
                   </span>
                 </div>
@@ -57,7 +57,7 @@ export function Journey() {
                 {entry.bullets.map((bullet, index) => (
                   <li
                     key={index}
-                    className="relative pl-4 text-xs leading-relaxed text-muted-foreground/95 transition-colors duration-200 hover:text-foreground hover:drop-shadow-[0_0_6px_rgba(from_var(--primary)_r_g_b_/_0.15)] flex items-start group/bullet"
+                    className="relative pl-4 text-sm leading-relaxed text-muted-foreground/95 transition-colors duration-200 hover:text-foreground hover:drop-shadow-[0_0_6px_rgba(from_var(--primary)_r_g_b_/_0.15)] flex items-start group/bullet"
                   >
                     <span className="absolute left-0 text-primary/70 font-bold select-none group-hover/bullet:text-primary transition-colors duration-200">
                       -

@@ -74,10 +74,10 @@ export function Identity() {
         <h1 className="text-lg font-bold text-foreground tracking-tight leading-tight">
           {SITE_CONFIG.name}
         </h1>
-        <p className="mt-1 text-sm font-semibold text-primary">
+        <p className="mt-1 text-base font-semibold text-primary">
           {SITE_CONFIG.role}
         </p>
-        <p className="mt-2 text-xs leading-relaxed text-muted-foreground w-full max-w-[240px] mx-auto">
+        <p className="mt-2 text-sm leading-relaxed text-muted-foreground w-full max-w-[240px] mx-auto">
           {SITE_CONFIG.headline}
         </p>
       </div>
