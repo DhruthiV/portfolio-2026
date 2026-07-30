@@ -11,21 +11,33 @@ export function mapPageToProject(page: any) {
   return {
     name: getPlainText(props["Project Name"]?.title) || "Untitled",
 
-    emoji: page.icon?.type === "emoji" ? page.icon.emoji : "📦",
+    description: getPlainText(props["Project Description"]?.rich_text),
 
-    desc: getPlainText(props["Project Description"]?.rich_text),
+    whatIDid: getPlainText(props["What I Did"]?.rich_text),
 
-    category: props.Part?.select?.name ?? "",
+    whyIDid: getPlainText(props["Why Description"]?.rich_text),
 
-    kind: props.Kind?.select?.name ?? "",
+    whoItHelps: getPlainText(props["Who it helps"]?.rich_text),
+
+    type: props["Project Type"]?.select?.name ?? "",
+
+    density: props["Project Density"]?.select?.name ?? "",
 
     status: props.Status?.status?.name ?? "",
 
-    tech: (props["Tech Stack"]?.multi_select ?? []).map((t: any) => t.name),
+    techStack: (props["Tech Stack"]?.multi_select ?? []).map(
+      (t: any) => t.name,
+    ),
 
     github: props["Github Link"]?.url ?? undefined,
 
-    live: props.Link?.url ?? undefined,
+    youtube: props["Youtube Link"]?.url ?? undefined,
+
+    liveUrl: props["Deployed Link"]?.url ?? undefined,
+
+    order: props["Order"]?.number ?? undefined,
+
+    visibility: props["Visibility"]?.checkbox ?? false,
   };
 }
 
