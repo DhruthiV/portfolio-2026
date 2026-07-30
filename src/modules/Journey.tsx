@@ -1,16 +1,12 @@
-import { Code2 } from "lucide-react";
 import { EXPERIENCE } from "../data/experience";
-import { Icons } from "../assets";
-import { Card } from "@/components/ui/card";
+import { Card, CardTitle } from "@/components/ui/card";
 
 export function Journey() {
   return (
-    <Card className="flex flex-col gap-3 p-6 bg-card/30 backdrop-blur-sm border border-white/10 dark:border-white/5 w-full h-fit shadow-sm">
-      <div className="flex items-center justify-between border-b border-border/40 pb-2 justify-center">
-        <h2 className="text-sm font-semibold text-foreground ">
-          Engineering Journey
-        </h2>
-      </div>
+    <Card className="group/card flex flex-col gap-3 p-6 bg-card backdrop-blur-sm border border-white/10 dark:border-white/5 w-full h-fit shadow-sm">
+      <CardTitle className="text-xl font-semibold text-muted-foreground text-center transition-colors duration-300 group-hover/card:text-foreground">
+        Engineering Journey
+      </CardTitle>
 
       <div className="relative border-none sm:border-l-2 sm:border-border/70 sm:ml-2 pl-0 sm:pl-6 space-y-4 ">
         {EXPERIENCE.map((entry) => {
@@ -29,7 +25,7 @@ export function Journey() {
                   Mobile: Sized down to h-10 w-10 with tight padding.
                   Desktop (sm+): Restored to your original h-12 w-12 sizes.
                 */}
-                <div className="flex h-10 w-10 sm:h-12 sm:w-12 items-center justify-center rounded-xl border border-border/60 bg-muted/10 p-1.5 sm:p-1 shrink-0 shadow-sm">
+                {/* <div className="flex h-10 w-10 sm:h-12 sm:w-12 items-center justify-center rounded-xl border border-border/60 bg-muted/10 p-1.5 sm:p-1 shrink-0 shadow-sm">
                   {entry.icon && Icons[entry.icon as keyof typeof Icons] ? (
                     <img
                       src={Icons[entry.icon as keyof typeof Icons]}
@@ -39,7 +35,7 @@ export function Journey() {
                   ) : (
                     <Code2 className="w-4 h-4 sm:w-5 sm:h-5 text-muted-foreground/80" />
                   )}
-                </div>
+                </div> */}
 
                 {/* 
                   Three-Row Metadata Stack */}

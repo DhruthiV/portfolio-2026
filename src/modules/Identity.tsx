@@ -44,7 +44,7 @@ export function Identity() {
         onMouseLeave={handleMouseLeave}
         className="relative h-42 w-34 select-none mx-auto"
       >
-        <div className="absolute inset-0 rounded-full bg-primary/15 blur-xl" />
+        <div className="absolute inset-0 rounded-full bg-primary/20 blur-xl" />
         <img
           src={"/portfolio-photo-dhruthi.png"}
           alt={SITE_CONFIG.name}

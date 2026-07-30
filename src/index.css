@@ -170,19 +170,3 @@
 ::-ms-scrollbar-button {
   display: none;
 }
-
-@layer base {
-  * {
-    @apply border-border outline-ring/50;
-  }
-  body {
-    /* 🟢 Added tracking and selection styling for elegant reading */
-    @apply bg-background text-foreground tracking-normal antialiased;
-  }
-  html {
-    @apply font-sans;
-
-    /* Scale Global Font size and set default as 18px */
-    font-size: 18px;
-  }
-}

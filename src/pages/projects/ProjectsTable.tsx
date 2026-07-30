@@ -34,7 +34,7 @@ export function ProjectsTable({ projects }: ProjectsTableProps) {
               {/* Project */}
               <td className="px-5 py-4 align-top">
                 <div className="flex items-start gap-3">
-                  <span className="text-sm leading-none">{project.emoji}</span>
+                  {/* <span className="text-sm leading-none">{project.emoji}</span> */}
 
                   <div className="min-w-0">
                     <h3 className="text-sm font-medium text-foreground">

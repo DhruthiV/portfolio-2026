@@ -16,12 +16,10 @@ export function Bio({ notionBio }: BioProps) {
   const bioParagraphs = notionBio?.paragraphs || [SITE_CONFIG.summary];
 
   return (
-    <Card className="flex flex-col gap-4 bg-card/30 backdrop-blur-md border border-white/10 dark:border-white/5 w-full h-fit shadow-sm p-(--card-spacing) p-4">
-      <div className="flex items-center justify-between border-b border-border/40 pb-2">
-        <CardTitle className="text-xs font-bold tracking-widest text-foreground">
-          About Me
-        </CardTitle>
-      </div>
+    <Card className="group/card flex flex-col gap-6 p-6 bg-card/50 ...">
+      <CardTitle className="text-xl font-semibold text-muted-foreground text-center transition-colors duration-300 group-hover/card:text-foreground">
+        About Me
+      </CardTitle>
 
       <div className="flex flex-col gap-3">
         <h3 className="text-sm font-bold leading-snug text-foreground/95 tracking-tight">
