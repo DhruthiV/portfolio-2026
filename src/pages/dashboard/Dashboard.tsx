@@ -9,7 +9,7 @@ import {
   fetchCurrentFocus,
   type CurrentFocusType,
 } from "../../lib/notionCurrentFocus";
-import { Projects } from "../projects/Projects";
+import { ProjectsView } from "../projects/dashboardview/ProjectsView";
 import { ContactMe } from "../../modules/ContactMe";
 import { Journey } from "@/modules/Journey";
 import { Skills } from "@/modules/Skills";
@@ -49,7 +49,7 @@ export function Dashboard({ onViewProjects }: DashboardProps) {
           <main className="flex flex-col gap-10 order-2">
             <Bio />
             <Journey />
-            <Projects onViewProjects={onViewProjects} />
+            <ProjectsView onViewProjects={onViewProjects} />
             <Skills {...currentSkillFocus} />
             <Education />
           </main>

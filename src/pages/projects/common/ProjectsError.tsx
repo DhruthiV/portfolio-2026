@@ -1,5 +1,5 @@
+import { SITE_CONFIG } from "@/config";
 import { AlertCircle, ExternalLink } from "lucide-react";
-import { SITE_CONFIG } from "../../config";
 
 function ProjectsError() {
   return (
