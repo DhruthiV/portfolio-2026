@@ -13,9 +13,9 @@ export function mapDBToProject(page: any) {
 
     description: getPlainText(props["Project Description"]?.rich_text),
 
-    whatIDid: getPlainText(props["What I Did"]?.rich_text),
+    whatIDid: getPlainText(props["What I did"]?.rich_text),
 
-    whyIDid: getPlainText(props["Why Description"]?.rich_text),
+    whyIDid: getPlainText(props["Why I did"]?.rich_text),
 
     whoItHelps: getPlainText(props["Who it helps"]?.rich_text),
 

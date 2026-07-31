@@ -6,7 +6,7 @@ export const SITE_CONFIG = {
   headline: "Building, Exploring and Learning!",
   role: "Software Engineer",
   summary: [
-    "Building full-stack applications, exploring scalable system design, and continuously learning modern technologies.",
+    " Building full-stack applications, designing systems, and continuously learning new technologies.",
   ],
   email: "dhruthivenkateshheerguppe@gmail.com",
   socials: {

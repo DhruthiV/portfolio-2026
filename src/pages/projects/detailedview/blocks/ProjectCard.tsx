@@ -16,9 +16,14 @@ export function ProjectCard({ project }: ProjectCardProps) {
         </h2>
 
         <div className="mt-3 flex flex-wrap gap-2">
-          <Badge>{project.type}</Badge>
-          <Badge>{project.density}</Badge>
-          {project.status === "Ongoing" && <Badge>{project.status}</Badge>}
+          <Badge className="bg-chart-5">{project.type}</Badge>
+          <Badge variant="secondary">{project.density}</Badge>
+          {project.status === "Ongoing" && (
+            <Badge className="bg-secondary text-chart-1">
+              <span className="h-1 w-1 shrink-0 rounded-full bg-emerald-500 animate-pulse shadow-[0_0_8px_#10b981]" />
+              {project.status}
+            </Badge>
+          )}
         </div>
 
         <p className="mt-5 text-sm leading-7 text-foreground/75">

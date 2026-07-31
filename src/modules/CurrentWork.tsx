@@ -1,5 +1,6 @@
 import { BookOpen, Compass, Hammer, Users } from "lucide-react";
 import type { ProfileContent } from "@/lib/notionProfile";
+import { Skeleton } from "@/components/ui/skeleton";
 
 type CurrentWorkType = ProfileContent["currentWork"]["type"];
 
@@ -13,13 +14,30 @@ const focusConfig = {
   CurrentWorkType,
   {
     label: string;
-    icon: React.ComponentType<{ size?: number; className?: string }>;
+    icon: React.ComponentType<{
+      size?: number;
+      className?: string;
+    }>;
   }
 >;
 
-type CurrentWorkProps = ProfileContent["currentWork"];
+interface CurrentWorkProps {
+  loading: boolean;
+  type: CurrentWorkType;
+  title: string;
+  description: string;
+}
 
-export function CurrentWork({ type, title, description }: CurrentWorkProps) {
+export function CurrentWork({
+  loading,
+  type,
+  title,
+  description,
+}: CurrentWorkProps) {
+  if (loading) {
+    return <CurrentWorkSkeleton />;
+  }
+
   const { icon: Icon, label: typeLabel } = focusConfig[type];
 
   return (
@@ -34,7 +52,9 @@ export function CurrentWork({ type, title, description }: CurrentWorkProps) {
 
           <span
             className="text-[10px] font-semibold text-primary tracking-wide uppercase"
-            style={{ fontFamily: "var(--font-heading)" }}
+            style={{
+              fontFamily: "var(--font-heading)",
+            }}
           >
             {typeLabel}
           </span>
@@ -44,6 +64,24 @@ export function CurrentWork({ type, title, description }: CurrentWorkProps) {
       <p className="text-sm text-muted-foreground leading-relaxed">
         {description}
       </p>
+    </div>
+  );
+}
+
+function CurrentWorkSkeleton() {
+  return (
+    <div className="flex flex-col gap-3 w-full border-t border-border/40 pt-4">
+      <div className="flex items-start justify-between gap-2">
+        <Skeleton className="h-4 w-36" />
+
+        <Skeleton className="h-5 w-20 rounded-md" />
+      </div>
+
+      <div className="space-y-2">
+        <Skeleton className="h-3 w-full" />
+
+        <Skeleton className="h-3 w-4/5" />
+      </div>
     </div>
   );
 }

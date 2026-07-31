@@ -6,7 +6,11 @@ interface SkillsProps {
 }
 
 export function Skills({ skills }: SkillsProps) {
-  const isActiveFocus = (skillName: string) => skills.includes(skillName);
+  const isActiveFocus = (skillName: string) => {
+    return skills.some((skill) =>
+      skill.toLowerCase().includes(skillName.toLowerCase()),
+    );
+  };
 
   return (
     <Card className="group/card flex flex-col gap-6 p-6 bg-card/80 ...">
