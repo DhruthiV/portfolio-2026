@@ -8,7 +8,7 @@ export function Skills(currentSkillFocus: CurrentFocusType) {
   };
 
   return (
-    <Card className="group/card flex flex-col gap-6 p-6 bg-card/50 ...">
+    <Card className="group/card flex flex-col gap-6 p-6 bg-card/80 ...">
       <CardTitle className="text-xl font-semibold text-muted-foreground text-center transition-colors duration-300 group-hover/card:text-foreground">
         Technical Expertise
       </CardTitle>
@@ -21,7 +21,7 @@ export function Skills(currentSkillFocus: CurrentFocusType) {
               className="grid grid-cols-[80px_1fr] gap-4 items-center"
             >
               {/* Category */}
-              <div className="text-[10px] font-extrabold tracking-widest text-primary uppercase select-none transition-all duration-300 cursor-default hover:tracking-[0.15em] hover:drop-shadow-[0_0_8px_rgba(from_var(--primary)_r_g_b_/_0.4)]">
+              <div className="text-xs font-extrabold tracking-widest text-primary uppercase select-none transition-all duration-300 cursor-default hover:tracking-[0.15em] hover:drop-shadow-[0_0_8px_rgba(from_var(--primary)_r_g_b_/_0.4)] font-heading">
                 {group.category}
               </div>
 

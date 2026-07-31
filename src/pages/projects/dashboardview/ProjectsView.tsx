@@ -58,7 +58,7 @@ export function ProjectsView({ onViewProjects }: ProjectsCardProps) {
 
   return (
     <div className="space-y-4">
-      <h2 className="text-center text-xl font-semibold text-foreground">
+      <h2 className="text-center text-xl font-semibold text-foreground font-heading">
         Projects
       </h2>
 

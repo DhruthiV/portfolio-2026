@@ -26,7 +26,7 @@ export function ProjectRow({ project, onViewProjects }: ProjectRowProps) {
             </h3>
 
             <div className="mt-1 flex flex-wrap">
-              <span className="rounded-full border border-border bg-muted px-2 py-1 text-[11px] font-medium text-foreground">
+              <span className="rounded-full border border-border bg-muted px-2 py-1 mr-1 text-[11px] font-medium text-foreground">
                 {project.type}
               </span>
 

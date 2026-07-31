@@ -3,7 +3,7 @@ import { Card, CardTitle, CardDescription } from "@/components/ui/card";
 
 export function Education() {
   return (
-    <Card className="group/card flex flex-col gap-6 p-6 bg-card/50 ...">
+    <Card className="group/card flex flex-col gap-6 p-6 bg-card/80 ...">
       <CardTitle className="text-xl font-semibold text-muted-foreground text-center transition-colors duration-300 group-hover/card:text-foreground">
         Education
       </CardTitle>
@@ -21,7 +21,7 @@ export function Education() {
           >
             <div className="grid grid-cols-[1fr_auto] gap-6 items-start">
               <div>
-                <h3 className="text-base font-semibold text-foreground ">
+                <h3 className="text-base font-semibold text-foreground font-heading">
                   {edu.degree}
                 </h3>
 
@@ -29,12 +29,12 @@ export function Education() {
                   {edu.desc}
                 </CardDescription>
 
-                <p className="mt-2 text-sm text-primary/75 font-semibold">
+                <p className="mt-2 text-sm text-primary/75 font-semibold font-heading">
                   {edu.school}
                 </p>
               </div>
 
-              <p className="text-sm text-muted-foreground whitespace-nowrap">
+              <p className="text-sm text-muted-foreground whitespace-nowrap ">
                 {edu.period}
               </p>
             </div>

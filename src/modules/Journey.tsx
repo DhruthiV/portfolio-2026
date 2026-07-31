@@ -21,32 +21,15 @@ export function Journey() {
                 <div className="hidden sm:block absolute -left-[31px] top-1/2 -translate-y-1/2 h-1.5 w-1.5 rounded-full bg-muted-foreground/40 border border-background transition-all duration-300 group-hover:bg-primary group-hover:scale-125" />
 
                 {/* 
-                  Logo Container:
-                  Mobile: Sized down to h-10 w-10 with tight padding.
-                  Desktop (sm+): Restored to your original h-12 w-12 sizes.
-                */}
-                {/* <div className="flex h-10 w-10 sm:h-12 sm:w-12 items-center justify-center rounded-xl border border-border/60 bg-muted/10 p-1.5 sm:p-1 shrink-0 shadow-sm">
-                  {entry.icon && Icons[entry.icon as keyof typeof Icons] ? (
-                    <img
-                      src={Icons[entry.icon as keyof typeof Icons]}
-                      alt={entry.org}
-                      className="w-full h-full object-contain"
-                    />
-                  ) : (
-                    <Code2 className="w-4 h-4 sm:w-5 sm:h-5 text-muted-foreground/80" />
-                  )}
-                </div> */}
-
-                {/* 
                   Three-Row Metadata Stack */}
                 <div className="flex flex-col min-w-0">
-                  <h3 className="text-base sm:text-md font-bold tracking-tight text-primary break-words whitespace-normal">
+                  <h3 className="text-base sm:text-md font-bold tracking-tight text-primary break-words whitespace-normal font-heading">
                     {entry.title}
                   </h3>
-                  <p className="text-sm sm:text-base font-semibold text-foreground/90 mt-0.5 break-words whitespace-normal sm:truncate">
+                  <p className="text-sm sm:text-sm font-semibold text-foreground/90 mt-0.5 break-words whitespace-normal sm:truncate">
                     {entry.org}
                   </p>
-                  <span className="text-[10px] sm:text-sm font-mono font-medium text-muted-foreground/80 mt-0.5">
+                  <span className="text-[10px] sm:text-sm font-mono font-base text-muted-foreground/90 mt-0.5">
                     {entry.period}
                   </span>
                 </div>

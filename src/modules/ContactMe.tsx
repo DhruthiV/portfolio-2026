@@ -23,12 +23,11 @@ export function ContactMe() {
 
   return (
     <div className="flex flex-col gap-1 w-full">
-      <div className="flex flex-col gap-1">
+      <div className="flex flex-col gap-2">
         {/* Email button with matching radius variables */}
         <Button
           onClick={handleCopy}
-          className="inline-flex h-7 w-full items-center justify-center gap-2 rounded-(--radius) border border-border bg-muted/40 text-sm font-medium text-foreground transition-all duration-200 hover:bg-muted"
-          style={{ fontFamily: "var(--font-heading)" }}
+          className="inline-flex h-8 w-full items-center justify-center gap-2 rounded-(--radius) border border-border bg-muted/40 text-sm font-medium text-foreground transition-all duration-200 hover:bg-muted"
         >
           {copied ? (
             <>
@@ -52,8 +51,7 @@ export function ContactMe() {
           href={resumeMailto}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center justify-center gap-2 h-7 w-full rounded-(--radius) bg-primary text-primary-foreground text-sm font-medium transition-all duration-150 hover:brightness-110 hover:shadow-sm"
-          style={{ fontFamily: "var(--font-heading)" }}
+          className="inline-flex items-center justify-center gap-2 h-8 w-full rounded-(--radius) bg-primary text-primary-foreground text-sm font-medium transition-all duration-150 hover:brightness-110 hover:shadow-sm"
         >
           <FileText size={14} />
           <span>Request Resume</span>
