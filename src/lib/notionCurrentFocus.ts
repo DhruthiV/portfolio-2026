@@ -1,5 +1,10 @@
 export interface CurrentFocusType {
-  type: "Building" | "Learning" | "Exploring" | "Collaboration";
+  type:
+    | "Building"
+    | "Learning"
+    | "Exploring"
+    | "Collaborating"
+    | "Contributing";
   title: string;
   description: string;
   link?: string;
@@ -9,10 +14,9 @@ export interface CurrentFocusType {
 let pendingRequest: Promise<CurrentFocusType> | null = null;
 
 export const fallbackCurrentFocus: CurrentFocusType = {
-  type: "Learning",
-  title: "System Design",
-  description:
-    "Learning scalable backend architecture and distributed systems.",
+  type: "Building",
+  title: "Web Apps",
+  description: "Designing and Building full-stack and frontend applications",
 };
 
 export async function fetchCurrentFocus(): Promise<CurrentFocusType> {

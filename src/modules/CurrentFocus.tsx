@@ -5,7 +5,8 @@ const focusConfig = {
   Building: { label: "Building", icon: Hammer },
   Learning: { label: "Learning", icon: BookOpen },
   Exploring: { label: "Exploring", icon: Compass },
-  Collaboration: { label: "Collaboration", icon: Users },
+  Collaborating: { label: "Collaborating", icon: Users },
+  Contributing: { label: "Contributing", icon: Users },
 } satisfies Record<
   CurrentFocusType["type"],
   {
