@@ -5,8 +5,9 @@ export const SITE_CONFIG = {
   initials: "DVH",
   headline: "Building, Exploring and Learning!",
   role: "Software Engineer",
-  summary:
+  summary: [
     "Building full-stack applications, exploring scalable system design, and continuously learning modern technologies.",
+  ],
   email: "dhruthivenkateshheerguppe@gmail.com",
   socials: {
     github: "https://github.com/dhruthiv",

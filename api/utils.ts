@@ -52,7 +52,7 @@ export function mapBlocksToCurrentWork(blocks: any[]) {
   type CurrentFocus = {
     bio: {
       headline: string;
-      summary: string;
+      summary: string[];
     };
     currentWork: {
       type: string;
@@ -69,7 +69,7 @@ export function mapBlocksToCurrentWork(blocks: any[]) {
   const result: CurrentFocus = {
     bio: {
       headline: "",
-      summary: "",
+      summary: [],
     },
 
     currentWork: {
@@ -121,11 +121,18 @@ export function mapBlocksToCurrentWork(blocks: any[]) {
     const mapping = SECTION_MAP[currentSection as keyof typeof SECTION_MAP];
 
     if (mapping && block.type === "paragraph") {
+      const text = getText(block);
+
       if (mapping.object === "bio") {
-        result.bio[mapping.field] = getText(block);
+        if (mapping.field === "headline") {
+          result.bio.headline = text;
+        } else {
+          result.bio.summary.push(text);
+        }
       } else {
-        result.currentWork[mapping.field] = getText(block);
+        result.currentWork[mapping.field] = text;
       }
+
       continue;
     }
 

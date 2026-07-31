@@ -1,7 +1,7 @@
 export interface ProfileContent {
   bio: {
     headline: string;
-    summary: string;
+    summary: string[];
   };
 
   currentWork: {
@@ -23,7 +23,7 @@ let pendingRequest: Promise<ProfileContent> | null = null;
 export const fallbackProfileContent: ProfileContent = {
   bio: {
     headline: "",
-    summary: "",
+    summary: [],
   },
 
   currentWork: {

@@ -3,13 +3,11 @@ import { CardTitle, CardDescription, Card } from "@/components/ui/card";
 
 interface BioProps {
   headline?: string;
-  summary?: string;
+  summary?: string[];
 }
 
 export function Bio({ headline, summary }: BioProps) {
-  const bioHeadline =
-    headline ??
-    "Building scalable full-stack applications & engineering intuitive digital ecosystems.";
+  const bioHeadline = headline ?? SITE_CONFIG.headline;
 
   const bioSummary = summary ?? SITE_CONFIG.summary;
 
@@ -26,7 +24,16 @@ export function Bio({ headline, summary }: BioProps) {
 
         <div className="space-y-3">
           <CardDescription className="text-sm md:text-sm leading-relaxed text-muted-foreground/90 font-medium">
-            {bioSummary}
+            <div className="space-y-3">
+              {bioSummary.map((paragraph: string, index: number) => (
+                <CardDescription
+                  key={index}
+                  className="text-sm md:text-sm leading-relaxed text-muted-foreground/90 font-medium"
+                >
+                  {paragraph}
+                </CardDescription>
+              ))}
+            </div>
           </CardDescription>
         </div>
       </div>
