@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /// <reference types="node" />
 
-import { queryDatabase } from "./client.js";
-import { mapPageToCurrentFocus } from "./utils.js";
+import { getPageBlocks } from "./client.js";
+import { mapBlocksToCurrentWork } from "./utils.js";
 
 export const config = {
   runtime: "nodejs",
@@ -14,21 +14,14 @@ export default async function handler(req: any, res: any) {
   }
 
   try {
-    const data = await queryDatabase({
-      page_size: 1,
-      filter: {
-        property: "Active",
-        checkbox: {
-          equals: true,
-        },
-      },
-    });
+    const pageId = process.env.NOTION_PAGE_ID!;
+
+    const data = await getPageBlocks(pageId);
 
     if (!data.results.length) {
       return res.status(404).json({ error: "No active focus found." });
     }
-
-    const focus = mapPageToCurrentFocus(data.results[0]);
+    const focus = mapBlocksToCurrentWork(data.results);
 
     res.setHeader("Cache-Control", "s-maxage=60, stale-while-revalidate=300");
 

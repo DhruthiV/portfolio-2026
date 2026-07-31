@@ -5,7 +5,7 @@ export function getPlainText(richTextArray: any[]): string {
 
 /* -------------------- Projects -------------------- */
 
-export function mapPageToProject(page: any) {
+export function mapDBToProject(page: any) {
   const props = page.properties;
 
   return {
@@ -43,16 +43,100 @@ export function mapPageToProject(page: any) {
 
 /* ---------------- Current Focus ---------------- */
 
-export function mapPageToCurrentFocus(page: any) {
-  const props = page.properties;
+function getText(block: any) {
+  const richText = block[block.type]?.rich_text ?? [];
+  return richText.map((t: any) => t.plain_text).join("");
+}
 
-  return {
-    type: props.Type?.select?.name ?? "Learning",
-
-    title: getPlainText(props.Title?.rich_text),
-
-    description: getPlainText(props.Description?.rich_text),
-
-    skills: (props["Tech Stack"]?.multi_select ?? []).map((t: any) => t.name),
+export function mapBlocksToCurrentWork(blocks: any[]) {
+  type CurrentFocus = {
+    bio: {
+      headline: string;
+      summary: string;
+    };
+    currentWork: {
+      type: string;
+      title: string;
+      description: string;
+    };
+    skills: string[];
   };
+
+  type SectionMapValue =
+    | { object: "bio"; field: "headline" | "summary" }
+    | { object: "currentWork"; field: "type" | "title" | "description" };
+
+  const result: CurrentFocus = {
+    bio: {
+      headline: "",
+      summary: "",
+    },
+
+    currentWork: {
+      type: "",
+      title: "",
+      description: "",
+    },
+
+    skills: [] as string[],
+  };
+
+  const SECTION_MAP: Record<string, SectionMapValue> = {
+    bio_headline: {
+      object: "bio",
+      field: "headline",
+    },
+
+    bio_summary: {
+      object: "bio",
+      field: "summary",
+    },
+
+    current_work_type: {
+      object: "currentWork",
+      field: "type",
+    },
+
+    current_work_title: {
+      object: "currentWork",
+      field: "title",
+    },
+
+    current_work_description: {
+      object: "currentWork",
+      field: "description",
+    },
+  };
+
+  let currentSection = "";
+
+  for (const block of blocks) {
+    // Heading changes the active section
+    if (block.type === "heading_1") {
+      currentSection = getText(block);
+      continue;
+    }
+
+    // Handle paragraph-based sections
+    const mapping = SECTION_MAP[currentSection as keyof typeof SECTION_MAP];
+
+    if (mapping && block.type === "paragraph") {
+      if (mapping.object === "bio") {
+        result.bio[mapping.field] = getText(block);
+      } else {
+        result.currentWork[mapping.field] = getText(block);
+      }
+      continue;
+    }
+
+    // Handle list-based sections
+    if (
+      currentSection === "skills_current_focus" &&
+      block.type === "numbered_list_item"
+    ) {
+      result.skills.push(getText(block));
+    }
+  }
+
+  return result;
 }

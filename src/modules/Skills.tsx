@@ -1,11 +1,12 @@
 import { Card, CardTitle } from "@/components/ui/card";
 import { SKILL_GROUPS } from "../data/skills";
-import type { CurrentFocusType } from "../lib/notionCurrentFocus";
 
-export function Skills(currentSkillFocus: CurrentFocusType) {
-  const isActiveFocus = (skillName: string) => {
-    return currentSkillFocus.skills?.includes(skillName) ?? false;
-  };
+interface SkillsProps {
+  skills: string[];
+}
+
+export function Skills({ skills }: SkillsProps) {
+  const isActiveFocus = (skillName: string) => skills.includes(skillName);
 
   return (
     <Card className="group/card flex flex-col gap-6 p-6 bg-card/80 ...">

@@ -2,18 +2,16 @@ import { SITE_CONFIG } from "../config";
 import { CardTitle, CardDescription, Card } from "@/components/ui/card";
 
 interface BioProps {
-  notionBio?: {
-    headline?: string;
-    paragraphs?: string[];
-  };
+  headline?: string;
+  summary?: string;
 }
 
-export function Bio({ notionBio }: BioProps) {
+export function Bio({ headline, summary }: BioProps) {
   const bioHeadline =
-    notionBio?.headline ||
+    headline ??
     "Building scalable full-stack applications & engineering intuitive digital ecosystems.";
 
-  const bioParagraphs = notionBio?.paragraphs || [SITE_CONFIG.summary];
+  const bioSummary = summary ?? SITE_CONFIG.summary;
 
   return (
     <Card className="group/card flex flex-col gap-6 p-6 bg-card/50 ...">
@@ -27,14 +25,9 @@ export function Bio({ notionBio }: BioProps) {
         </h3>
 
         <div className="space-y-3">
-          {bioParagraphs.map((paragraph, index) => (
-            <CardDescription
-              key={index}
-              className="text-sm md:text-sm leading-relaxed text-muted-foreground/90 font-medium"
-            >
-              {paragraph}
-            </CardDescription>
-          ))}
+          <CardDescription className="text-sm md:text-sm leading-relaxed text-muted-foreground/90 font-medium">
+            {bioSummary}
+          </CardDescription>
         </div>
       </div>
     </Card>

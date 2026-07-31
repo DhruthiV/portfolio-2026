@@ -1,31 +1,33 @@
-import { useState, useEffect } from "react";
-import { Bio } from "../../modules/Bio";
-import { CurrentFocus } from "../../modules/CurrentFocus";
-import { Education } from "../../modules/Education";
-import { Identity } from "../../modules/Identity";
-
 import {
-  fallbackCurrentFocus,
-  fetchCurrentFocus,
-  type CurrentFocusType,
-} from "../../lib/notionCurrentFocus";
-import { ProjectsView } from "../projects/dashboardview/ProjectsView";
-import { ContactMe } from "../../modules/ContactMe";
+  type ProfileContent,
+  fallbackProfileContent,
+  fetchProfileContent,
+} from "@/lib/notionProfile";
+import { Bio } from "@/modules/Bio";
+import { ContactMe } from "@/modules/ContactMe";
+import { CurrentWork } from "@/modules/CurrentWork";
+import { Education } from "@/modules/Education";
+import { Identity } from "@/modules/Identity";
 import { Journey } from "@/modules/Journey";
 import { Skills } from "@/modules/Skills";
+import { useState, useEffect } from "react";
+import { ProjectsView } from "../projects/dashboardview/ProjectsView";
 
 interface DashboardProps {
   onViewProjects: () => void;
 }
 
 export function Dashboard({ onViewProjects }: DashboardProps) {
-  const [currentSkillFocus, setCurrentSkillFocus] =
-    useState<CurrentFocusType>(fallbackCurrentFocus);
+  const [profile, setProfile] = useState<ProfileContent>(
+    fallbackProfileContent,
+  );
 
   useEffect(() => {
-    fetchCurrentFocus()
-      .then(setCurrentSkillFocus)
-      .catch(() => {});
+    fetchProfileContent()
+      .then(setProfile)
+      .catch((err) => {
+        console.error(err);
+      });
   }, []);
 
   return (
@@ -38,7 +40,11 @@ export function Dashboard({ onViewProjects }: DashboardProps) {
               <Identity />
             </div>
             <div className="w-full">
-              <CurrentFocus {...currentSkillFocus} />
+              <CurrentWork
+                type={profile.currentWork.type}
+                title={profile.currentWork.title}
+                description={profile.currentWork.description}
+              />
             </div>
             <div className="w-full">
               <ContactMe />
@@ -47,10 +53,13 @@ export function Dashboard({ onViewProjects }: DashboardProps) {
 
           {/* Main content — experience, projects, skills, education */}
           <main className="flex flex-col gap-10 order-2">
-            <Bio />
+            <Bio
+              headline={profile.bio.headline}
+              summary={profile.bio.summary}
+            />
             <Journey />
             <ProjectsView onViewProjects={onViewProjects} />
-            <Skills {...currentSkillFocus} />
+            <Skills skills={profile.skills} />
             <Education />
           </main>
         </div>
