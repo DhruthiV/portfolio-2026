@@ -1,13 +1,4 @@
-export interface Project {
-  name: string;
-  emoji: string;
-  desc: string;
-  category: string;
-  kind: string;
-  tech: string[];
-  github: string;
-  live?: string;
-}
+import type { Project } from "@/data/projects";
 
 let pendingRequest: Promise<Project[]> | null = null;
 

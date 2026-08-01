@@ -3,11 +3,11 @@
 export const SITE_CONFIG = {
   name: "Dhruthi V H",
   initials: "DVH",
-  headline:
-    "Let's connect to talk tech, architecture, or potential collaborations.",
+  headline: "Building, Exploring and Learning!",
   role: "Software Engineer",
-  summary:
-    "Building full-stack applications, exploring scalable system design, and continuously learning modern technologies.",
+  summary: [
+    " Building full-stack applications, designing systems, and continuously learning new technologies.",
+  ],
   email: "dhruthivenkateshheerguppe@gmail.com",
   socials: {
     github: "https://github.com/dhruthiv",
@@ -15,21 +15,30 @@ export const SITE_CONFIG = {
   },
   contactLine: "Let's connect! I typically reply within a business day.",
   notionProjectsUrl:
-    "https://dhruthivh.notion.site/2508debe72c980a39969f972dfe7706a?v=2508debe72c980a89df1000c2570ddf0",
+    "https://app.notion.com/p/dhruthivh/3ae8debe72c980518dc1f690ca4d66eb?v=3ae8debe72c98064a2fb000c563ddea5",
 };
 
 // "Request latest resume" mailto button on the Home page
 export const RESUME_REQUEST_MAILTO = {
   to: SITE_CONFIG.email,
-  subject: "Requesting your latest resume",
+  subject: "Request for Your Latest Resume",
   body: [
-    "Hi Dhruthi,",
+    "Dear Dhruthi,",
     "",
-    "I am [YOUR NAME] from [YOUR COMPANY / REASON].",
-    "I am requesting your latest resume.",
+    "I hope you are doing well.",
     "",
-    "Thanks,",
+    "My name is [YOUR NAME]. I would like to request a copy of your latest resume.",
+    "",
+    "Reason for my request:",
+    "[PLEASE ADD YOUR MESSAGE HERE]",
+    "",
+    "I would appreciate it if you could share it at your convenience.",
+    "",
+    "Thank you for your time. I look forward to hearing from you.",
+    "",
+    "Kind regards,",
     "[YOUR NAME]",
+    "[COMPANY / ORGANIZATION (Optional)]",
   ].join("\n"),
 };
 

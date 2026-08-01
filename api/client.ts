@@ -34,3 +34,27 @@ export async function queryDatabase(body: Record<string, unknown>) {
 
   return response.json();
 }
+
+export async function getPageBlocks(pageId: string) {
+  const token = process.env.NOTION_TOKEN;
+
+  if (!token) {
+    throw new Error("NOTION_TOKEN is not configured.");
+  }
+
+  const response = await fetch(
+    `https://api.notion.com/v1/blocks/${pageId}/children`,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Notion-Version": NOTION_VERSION,
+      },
+    },
+  );
+
+  if (!response.ok) {
+    throw new Error(await response.text());
+  }
+
+  return response.json();
+}

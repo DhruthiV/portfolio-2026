@@ -2,7 +2,7 @@
 /// <reference types="node" />
 
 import { queryDatabase } from "./client.js";
-import { mapPageToProject } from "./utils.js";
+import { mapDBToProject } from "./utils.js";
 
 export const config = {
   runtime: "nodejs",
@@ -16,15 +16,9 @@ export default async function handler(req: any, res: any) {
   try {
     const data = await queryDatabase({
       page_size: 20,
-      filter: {
-        property: "Status",
-        status: {
-          equals: "Completed",
-        },
-      },
     });
 
-    const projects = data.results.map(mapPageToProject);
+    const projects = data.results.map(mapDBToProject);
 
     res.setHeader("Cache-Control", "s-maxage=60, stale-while-revalidate=300");
 

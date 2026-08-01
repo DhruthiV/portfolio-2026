@@ -1,0 +1,79 @@
+import { Skeleton } from "@/components/ui/skeleton";
+import { SITE_CONFIG } from "../config";
+import { CardTitle, CardDescription, Card } from "@/components/ui/card";
+
+interface BioProps {
+  loading: boolean;
+  headline: string;
+  summary: string[];
+}
+
+export function Bio({ loading, headline, summary }: BioProps) {
+  if (loading) {
+    return <BioSkeleton />;
+  }
+  const bioHeadline = headline ?? SITE_CONFIG.headline;
+
+  const bioSummary = summary ?? SITE_CONFIG.summary;
+
+  return (
+    <Card className="group/card flex flex-col gap-6 p-6 bg-card/50 ...">
+      <CardTitle className="text-xl font-semibold text-muted-foreground text-center transition-colors duration-300 group-hover/card:text-foreground">
+        About Me
+      </CardTitle>
+
+      <div className="flex flex-col gap-3 ">
+        <h3 className="text-base font-bold leading-snug text-foreground/95 tracking-tight transition-colors duration-1000 hover:text-primary text-center">
+          {bioHeadline}
+        </h3>
+
+        <div className="space-y-3">
+          <div className="space-y-3">
+            {bioSummary.map((paragraph: string, index: number) => (
+              <CardDescription
+                key={index}
+                className="text-sm md:text-sm leading-relaxed text-muted-foreground font-medium"
+              >
+                {paragraph}
+              </CardDescription>
+            ))}
+          </div>
+        </div>
+      </div>
+    </Card>
+  );
+}
+
+function BioSkeleton() {
+  return (
+    <Card className="flex flex-col gap-6 p-6 bg-card/50">
+      <CardTitle
+        className="
+          text-xl 
+          font-semibold 
+          text-center
+        "
+      >
+        About Me
+      </CardTitle>
+
+      <div className="flex flex-col gap-4">
+        {/* headline */}
+        <div className="flex justify-center">
+          <Skeleton className="h-5 w-85" />
+        </div>
+
+        {/* paragraphs */}
+        <div className="space-y-5">
+          {[0, 1].map((paragraph) => (
+            <div key={paragraph} className="space-y-3">
+              <Skeleton className="h-3 w-full" />
+              <Skeleton className="h-3 w-full" />
+              <Skeleton className="h-3 w-4/5" />
+            </div>
+          ))}
+        </div>
+      </div>
+    </Card>
+  );
+}

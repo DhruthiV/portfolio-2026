@@ -1,9 +1,9 @@
 import { AnimatePresence, motion } from "motion/react";
 import { Routes, Route, useNavigate, useLocation } from "react-router-dom";
 
-import { AuroraBackground } from "./components/AuroraBackground";
-import { BentoDashboard } from "./components/BentoDashboard";
-import { ProjectsPage } from "./components/ProjectsPage";
+import { AuroraBackground } from "./pages/dashboard/AuroraBackground";
+import { Dashboard } from "./pages/dashboard/Dashboard";
+import { ProjectsPage } from "./pages/projects/detailedview/ProjectsPage";
 
 const PAGE_TRANSITION = {
   duration: 0.2,
@@ -32,9 +32,7 @@ export default function App() {
               <Route
                 path="/"
                 element={
-                  <BentoDashboard
-                    onViewProjects={() => navigate("/projects")}
-                  />
+                  <Dashboard onViewProjects={() => navigate("/projects")} />
                 }
               />
               <Route

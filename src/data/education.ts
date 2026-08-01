@@ -1,6 +1,5 @@
 export interface EducationInfo {
   id: string;
-  icon: string;
   desc: string;
   degree: string;
   school: string;
@@ -10,7 +9,6 @@ export interface EducationInfo {
 export const EDUCATION: EducationInfo[] = [
   {
     id: "2",
-    icon: "pesuIcon",
     degree: "Master of Computer Applications (MCA)",
     desc: "Full Stack Engineering & Data Engineering",
     school: "PES University",
@@ -18,7 +16,6 @@ export const EDUCATION: EducationInfo[] = [
   },
   {
     id: "1",
-    icon: "bmsIcon",
     degree: "Bachelor of Science",
     desc: "Physics, Mathematics & Computer Science",
     school: "B.M.S. College for Women",
