@@ -5,12 +5,7 @@ export interface ProfileContent {
   };
 
   currentWork: {
-    type:
-      | "Building"
-      | "Learning"
-      | "Exploring"
-      | "Collaborating"
-      | "Contributing";
+    type: string;
     title: string;
     description: string;
   };

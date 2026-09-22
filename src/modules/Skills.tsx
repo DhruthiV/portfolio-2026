@@ -1,68 +1,60 @@
-import { Card, CardTitle } from "@/components/ui/card";
-import { SKILL_GROUPS } from "../data/skills";
+import { SKILL_SECTIONS } from "../data/skills";
 
-interface SkillsProps {
-  skills: string[];
-}
-
-export function Skills({ skills }: SkillsProps) {
-  const isActiveFocus = (skillName: string) => {
-    return skills.some((skill) =>
-      skill.toLowerCase().includes(skillName.toLowerCase()),
-    );
-  };
-
+export function Skills() {
   return (
-    <Card className="group/card flex flex-col gap-6 p-6 bg-card/80 ...">
-      <CardTitle className="text-xl font-semibold text-muted-foreground text-center transition-colors duration-300 group-hover/card:text-foreground">
-        Technical Expertise
-      </CardTitle>
+    <section className="flex flex-col gap-16">
+      {SKILL_SECTIONS.map((section, index) => {
+        const isMiddle = index === 1;
 
-      <div className="flex flex-col w-full my-1">
-        <div className="flex flex-col gap-3 w-full">
-          {SKILL_GROUPS.map((group) => (
+        return (
+          <div
+            key={section.title}
+            className={`w-full ${
+              isMiddle ? "flex justify-end" : "flex justify-start"
+            }`}
+          >
             <div
-              key={group.category}
-              className="grid grid-cols-[80px_1fr] gap-4 items-center"
+              className={`w-full max-w-3xl ${
+                isMiddle ? "text-right" : "text-left"
+              }`}
             >
-              {/* Category */}
-              <div className="text-xs font-extrabold tracking-widest text-primary uppercase select-none transition-all duration-300 cursor-default hover:tracking-[0.15em] hover:drop-shadow-[0_0_8px_rgba(from_var(--primary)_r_g_b_/_0.4)] font-heading">
-                {group.category}
-              </div>
+              {/* Heading */}
+              <h2 className="text-xl font-semibold tracking-tight text-foreground">
+                {section.title}
+              </h2>
 
-              {/* Skills */}
-              <div className="flex flex-wrap items-center">
-                {group.items.map((item, idx) => {
-                  const active = isActiveFocus(item.name);
+              {/* Description */}
+              <p
+                className={`mt-2 max-w-xl text-sm leading-relaxed text-muted-foreground ${
+                  isMiddle ? "ml-auto text-left" : "text-left"
+                }`}
+              >
+                {section.description}
+              </p>
 
-                  return (
-                    <div
-                      key={item.name}
-                      className="inline-flex items-center space-y-1"
-                    >
-                      <span
-                        className={`relative text-sm tracking-wide transition-all duration-300 cursor-default select-none py-0.5 px-2 ${
-                          active
-                            ? "text-foreground hover:text-primary font-bold tracking-tight"
-                            : "text-muted-foreground font-medium hover:text-foreground hover:scale-105 hover:drop-shadow-[0_0_8px_rgba(from_var(--foreground)_r_g_b_/_0.3)]"
-                        }`}
-                      >
-                        {item.name}
-                      </span>
+              {/* Content */}
+              <div
+                className={`mt-6 flex flex-wrap gap-3 ${
+                  isMiddle ? "justify-end" : "justify-start"
+                }`}
+              >
+                {section.items.map((item) => (
+                  <div
+                    key={item.name}
+                    className="inline-flex items-center gap-2 rounded-md border border-border/60 px-3 py-2 text-sm text-muted-foreground transition-colors duration-200 hover:border-primary/40 hover:text-foreground"
+                  >
+                    {item.icon && (
+                      <span className="text-muted-foreground">{item.icon}</span>
+                    )}
 
-                      {idx < group.items.length - 1 && (
-                        <span className="text-muted-foreground/25 font-bold select-none pointer-events-none text-[10px] mx-1">
-                          |
-                        </span>
-                      )}
-                    </div>
-                  );
-                })}
+                    <span>{item.name}</span>
+                  </div>
+                ))}
               </div>
             </div>
-          ))}
-        </div>
-      </div>
-    </Card>
+          </div>
+        );
+      })}
+    </section>
   );
 }

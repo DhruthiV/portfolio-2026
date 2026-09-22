@@ -46,16 +46,15 @@ export function Dashboard({ onViewProjects }: DashboardProps) {
               summary={profile.bio.summary}
             />
 
-            <Journey />
-
             <ProjectsView
               projects={projects}
               loading={projectsLoading}
               error={error}
               onViewProjects={onViewProjects}
             />
-
             <Skills skills={profile.skills} />
+
+            <Journey />
 
             <Education />
           </main>

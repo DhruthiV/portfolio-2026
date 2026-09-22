@@ -1,51 +1,52 @@
 export interface SkillItem {
   name: string;
+  icon?: string;
 }
 
-export interface SkillGroup {
-  category: string;
-  note?: string;
+export interface SkillSection {
+  title: string;
+  description: string;
   items: SkillItem[];
 }
 
-export const SKILL_GROUPS: SkillGroup[] = [
+export const SKILL_SECTIONS: SkillSection[] = [
   {
-    category: "Frontend",
+    title: "What do I use?",
+    description:
+      "The technologies and tools I use to build, design, and develop software.",
     items: [
-      { name: "JavaScript" },
-      { name: "TypeScript" },
-      { name: "HTML5" },
-      { name: "CSS3" },
       { name: "React" },
+      { name: "TypeScript" },
       { name: "Next.js" },
-    ],
-  },
-  {
-    category: "Backend",
-    note: "Learning",
-    items: [
-      { name: "Node.js" },
-      { name: "Express.js" },
-      { name: "MongoDB" },
-      { name: "PostgreSQL(Neon)" },
-    ],
-  },
-  {
-    category: "Styling",
-    items: [
       { name: "Tailwind CSS" },
-      { name: "shadcn/ui" },
-      { name: "Material UI" },
-    ],
-  },
-  {
-    category: "Tools",
-    items: [
       { name: "Git" },
       { name: "Figma" },
-      { name: "VS Code" },
-      { name: "Vite" },
-      { name: "Vercel" },
+    ],
+  },
+
+  {
+    title: "What do I have?",
+    description:
+      "The experience, knowledge, and technical foundation I have built through projects and professional work.",
+    items: [
+      { name: "Frontend Development" },
+      { name: "REST APIs" },
+      { name: "Component Design" },
+      { name: "System Design" },
+      { name: "Technical Documentation" },
+    ],
+  },
+
+  {
+    title: "What can I make?",
+    description:
+      "The kind of software and experiences I can turn ideas and requirements into.",
+    items: [
+      { name: "Web Applications" },
+      { name: "Full-Stack Applications" },
+      { name: "Interactive Interfaces" },
+      { name: "Developer Tools" },
+      { name: "AI-Powered Applications" },
     ],
   },
 ];
