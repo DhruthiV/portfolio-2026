@@ -12,6 +12,14 @@ export function mapDBToProject(page: any) {
     name: getPlainText(props["Project Name"]?.title) || "Untitled",
 
     description: getPlainText(props["Project Description"]?.rich_text),
+    pic:
+      props["pic"]?.files?.[0]?.file?.url ??
+      props["pic"]?.files?.[0]?.external?.url ??
+      undefined,
+
+    slug: getPlainText(props["Project Slug"]?.rich_text) || undefined,
+
+    caseStudyId: getPlainText(props["Case Study Id"]?.rich_text) || undefined,
 
     whatIDid: getPlainText(props["What I did"]?.rich_text),
 

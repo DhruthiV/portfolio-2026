@@ -1,9 +1,9 @@
 import { ArrowRight, LayoutGrid } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import ProjectsError from "../common/ProjectsError";
-import { ProjectRow } from "./blocks/ProjectRow";
 import { EmptyState } from "./blocks/EmptyState";
 import type { Project } from "@/data/projects";
+import { ProjectCard } from "./blocks/ProjectCard";
 
 interface ProjectsCardProps {
   projects: Project[];
@@ -22,7 +22,6 @@ export function ProjectsView({
     .filter((project) => project.visibility && project.order !== undefined)
     .sort((a, b) => {
       const orderA = a.order ?? Number.MAX_SAFE_INTEGER;
-
       const orderB = b.order ?? Number.MAX_SAFE_INTEGER;
 
       return orderA - orderB;
@@ -42,20 +41,18 @@ export function ProjectsView({
 
   return (
     <div className="space-y-4">
-      <h2 className="text-center text-xl font-semibold text-foreground font-heading">
+      <h2 className="text-center font-heading text-xl font-semibold text-foreground">
         Projects
       </h2>
 
-      <div className="overflow-hidden border border-border bg-card">
-        <div className="divide-y divide-border">
-          {previewProjects.map((project) => (
-            <ProjectRow
-              key={project.name}
-              project={project}
-              onViewProjects={onViewProjects}
-            />
-          ))}
-        </div>
+      <div className="grid gap-4 md:grid-cols-2">
+        {previewProjects.map((project) => (
+          <ProjectCard
+            key={project.name}
+            project={project}
+            onViewProjects={onViewProjects}
+          />
+        ))}
       </div>
 
       <Button

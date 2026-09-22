@@ -4,6 +4,7 @@ import { Routes, Route, useNavigate, useLocation } from "react-router-dom";
 import { AuroraBackground } from "./pages/dashboard/AuroraBackground";
 import { Dashboard } from "./pages/dashboard/Dashboard";
 import { ProjectsPage } from "./pages/projects/detailedview/ProjectsPage";
+import { CaseStudyPage } from "./pages/CaseStudy/CaseStudy";
 
 const PAGE_TRANSITION = {
   duration: 0.2,
@@ -39,6 +40,7 @@ export default function App() {
                 path="/projects"
                 element={<ProjectsPage onBack={() => navigate("/")} />}
               />
+              <Route path="/p/:id" element={<CaseStudyPage />} />
             </Routes>
           </motion.div>
         </AnimatePresence>
