@@ -12,7 +12,7 @@ interface ProjectsCardProps {
   onViewProjects: () => void;
 }
 
-export function ProjectsView({
+export function Projects({
   projects,
   loading,
   error,

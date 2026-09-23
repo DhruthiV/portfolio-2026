@@ -1,14 +1,26 @@
 import type { Project } from "@/data/projects";
 import { ProjectLinks } from "../../common/ProjectLinks";
 import { Badge } from "@/components/ui/badge";
+import { useNavigate } from "react-router-dom";
 
 interface ProjectCardProps {
   project: Project;
 }
 
 export function ProjectCard({ project }: ProjectCardProps) {
+  const navigate = useNavigate();
+
+  const handleOpen = () => {
+    if (!project.caseStudyId) return;
+
+    navigate(`/p/${project.caseStudyId}`);
+  };
+
   return (
-    <article className="overflow-hidden border border-border bg-card shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-primary/20 hover:shadow-lg">
+    <article
+      onClick={handleOpen}
+      className="cursor-pointer overflow-hidden border border-border bg-card shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-primary/20 hover:shadow-lg"
+    >
       {/* Header */}
       <header className="p-6">
         <h2 className="text-xl font-semibold text-foreground">
@@ -17,7 +29,9 @@ export function ProjectCard({ project }: ProjectCardProps) {
 
         <div className="mt-3 flex flex-wrap gap-2">
           <Badge className="bg-chart-5">{project.type}</Badge>
+
           <Badge variant="secondary">{project.density}</Badge>
+
           {project.status === "Ongoing" && (
             <Badge className="bg-secondary text-chart-1">
               <span className="h-1 w-1 shrink-0 rounded-full bg-emerald-500 animate-pulse shadow-[0_0_8px_#10b981]" />
@@ -34,9 +48,11 @@ export function ProjectCard({ project }: ProjectCardProps) {
       {project.whatIDid && (
         <Section title="What I did">{project.whatIDid}</Section>
       )}
+
       {project.whyIDid && (
         <Section title="Why I built it">{project.whyIDid}</Section>
       )}
+
       {project.whoItHelps && (
         <Section title="Who it helps">{project.whoItHelps}</Section>
       )}

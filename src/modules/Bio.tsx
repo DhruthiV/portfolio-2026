@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Skeleton } from "@/components/ui/skeleton";
-import { NotionRenderer } from "@/pages/CaseStudy/blocks/NotionRenderer";
+import { NotionRenderer } from "@/components/blocks/NotionRenderer";
 
 interface BioProps {
   loading: boolean;

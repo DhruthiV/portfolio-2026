@@ -6,9 +6,8 @@ import { Identity } from "@/modules/Identity";
 import { Journey } from "@/modules/Journey";
 import { Skills } from "@/modules/Skills";
 
-import { ProjectsView } from "../projects/dashboardview/ProjectsView";
-
 import { usePortfolio } from "@/hooks/usePortfolio";
+import { Projects } from "../projects/homepagesection/Projects";
 
 interface DashboardProps {
   onViewProjects: () => void;
@@ -46,7 +45,7 @@ export function Dashboard({ onViewProjects }: DashboardProps) {
               blocks={profile.bio.blocks}
             />
 
-            <ProjectsView
+            <Projects
               projects={projects}
               loading={projectsLoading}
               error={error}

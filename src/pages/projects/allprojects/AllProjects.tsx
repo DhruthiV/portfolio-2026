@@ -11,11 +11,11 @@ import { EmptyState } from "./blocks/EmptyState";
 
 type LoadStatus = "loading" | "loaded" | "error";
 
-interface ProjectsPageProps {
+interface AllProjectsPageProps {
   onBack: () => void;
 }
 
-export function ProjectsPage({ onBack }: ProjectsPageProps) {
+export function AllProjects({ onBack }: AllProjectsPageProps) {
   const [status, setStatus] = useState<LoadStatus>("loading");
   const [projects, setProjects] = useState<Project[]>([]);
 

@@ -5,8 +5,8 @@ import { ArrowLeft, ArrowRight } from "lucide-react";
 import { useNavigate, useParams } from "react-router-dom";
 
 import { fetchNotionCaseStudy } from "@/lib/notionCaseStudy";
-import { NotionRenderer } from "./blocks/NotionRenderer";
 import { SITE_CONFIG } from "@/config";
+import { NotionRenderer } from "@/components/blocks/NotionRenderer";
 
 type LoadStatus = "loading" | "loaded" | "error";
 
