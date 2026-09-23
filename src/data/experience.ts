@@ -11,7 +11,7 @@ export interface ExperienceEntry {
 export const EXPERIENCE: ExperienceEntry[] = [
   {
     id: "3",
-    title: "Transitioning to UX/Product Design",
+    title: "UX/Product Designer",
     org: "Independent",
     period: "May 2026 – Present",
     bullets: [

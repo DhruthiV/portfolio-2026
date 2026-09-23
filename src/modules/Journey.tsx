@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { EXPERIENCE } from "../data/experience";
 import { Card, CardTitle } from "@/components/ui/card";
 
@@ -26,6 +26,30 @@ export function Journey() {
   const [hoveredId, setHoveredId] = useState<string | null>(null);
 
   const hoverTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const mobileTimelineRef = useRef<HTMLDivElement | null>(null);
+
+  // Scroll selected role into view on mobile
+  useEffect(() => {
+    if (!selectedId || !mobileTimelineRef.current) return;
+
+    const selectedIndex = sortedExperience.findIndex(
+      (entry) => entry.id === selectedId,
+    );
+
+    if (selectedIndex === -1) return;
+
+    const itemWidth = 150;
+
+    mobileTimelineRef.current.scrollTo({
+      left: Math.max(
+        0,
+        selectedIndex * itemWidth -
+          mobileTimelineRef.current.clientWidth / 2 +
+          itemWidth / 2,
+      ),
+      behavior: "smooth",
+    });
+  }, [selectedId, sortedExperience]);
 
   // Start hover preview after a short delay
   const handleMouseEnter = (id: string) => {
@@ -72,9 +96,164 @@ export function Journey() {
           [&::-webkit-scrollbar]:hidden
         "
       >
-        <div className="relative w-full px-3 py-2 ">
+        {/* MOBILE TIMELINE */}
+        <div
+          ref={mobileTimelineRef}
+          className="
+            relative
+            min-w-max
+            px-3
+            py-2
+            md:hidden
+            [scrollbar-width:none]
+            [-ms-overflow-style:none]
+            [&::-webkit-scrollbar]:hidden
+          "
+        >
           {/* Roles */}
-          <div className="grid grid-cols-3 ">
+          <div className="flex">
+            {sortedExperience.map((entry) => {
+              const isSelected = entry.id === selectedId;
+              const isHovered = entry.id === hoveredId;
+
+              return (
+                <button
+                  key={entry.id}
+                  type="button"
+                  onClick={() => setSelectedId(entry.id)}
+                  onMouseEnter={() => handleMouseEnter(entry.id)}
+                  onMouseLeave={handleMouseLeave}
+                  className="
+                    w-[150px]
+                    shrink-0
+                    px-3
+                    text-center
+                    outline-none
+                  "
+                >
+                  <span
+                    className={`
+                      mx-auto block
+                      max-w-[140px]
+                      text-base
+                      font-semibold
+                      leading-tight
+                      transition-colors
+                      duration-200
+                      ${
+                        isHovered || isSelected
+                          ? "text-primary"
+                          : "text-foreground"
+                      }
+                    `}
+                  >
+                    {entry.title}
+                  </span>
+                </button>
+              );
+            })}
+          </div>
+
+          {/* Dots + line */}
+          <div className="relative mt-4 flex">
+            {/* Timeline line */}
+            <div
+              className="
+                pointer-events-none
+                absolute
+                left-[75px]
+                right-[75px]
+                top-1/2
+                h-px
+                -translate-y-1/2
+                bg-border
+              "
+            />
+
+            {sortedExperience.map((entry) => {
+              const isSelected = entry.id === selectedId;
+              const isHovered = entry.id === hoveredId;
+
+              return (
+                <div
+                  key={entry.id}
+                  className="
+                    relative
+                    z-10
+                    flex
+                    w-[150px]
+                    shrink-0
+                    justify-center
+                  "
+                >
+                  <button
+                    type="button"
+                    onClick={() => setSelectedId(entry.id)}
+                    onMouseEnter={() => handleMouseEnter(entry.id)}
+                    onMouseLeave={handleMouseLeave}
+                    aria-label={`Select ${entry.title}`}
+                    className="outline-none"
+                  >
+                    <span
+                      className={`
+                        block
+                        h-3.5
+                        w-3.5
+                        rounded-full
+                        border-2
+                        transition-all
+                        duration-200
+                        ${
+                          isHovered || isSelected
+                            ? "scale-110 border-primary bg-primary"
+                            : "border-muted-foreground/50 bg-background"
+                        }
+                      `}
+                    />
+                  </button>
+                </div>
+              );
+            })}
+          </div>
+
+          {/* Periods */}
+          <div className="flex">
+            {sortedExperience.map((entry) => {
+              const isSelected = entry.id === selectedId;
+              const isHovered = entry.id === hoveredId;
+
+              return (
+                <div
+                  key={entry.id}
+                  className="w-[150px] shrink-0 px-2 text-center"
+                >
+                  <span
+                    className={`
+                      mt-3
+                      block
+                      text-xs
+                      font-mono
+                      transition-colors
+                      duration-200
+                      ${
+                        isHovered || isSelected
+                          ? "text-primary"
+                          : "text-muted-foreground"
+                      }
+                    `}
+                  >
+                    {entry.period}
+                  </span>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* DESKTOP TIMELINE */}
+        <div className="relative hidden w-full px-3 py-2 md:block">
+          {/* Roles */}
+          <div className="grid grid-cols-3">
             {sortedExperience.map((entry) => {
               const isSelected = entry.id === selectedId;
               const isHovered = entry.id === hoveredId;
@@ -90,10 +269,14 @@ export function Journey() {
                 >
                   <span
                     className={`
-                      mx-auto block max-w-[180px]
-                      text-lg font-semibold leading-tight  
-                      transition-colors duration-200 [-ms-overflow-style:none]
-                      [&::-webkit-scrollbar]:hidden
+                      mx-auto
+                      block
+                      max-w-[180px]
+                      text-lg
+                      font-semibold
+                      leading-tight
+                      transition-colors
+                      duration-200
                       ${
                         isHovered || isSelected
                           ? "text-primary"
@@ -115,7 +298,8 @@ export function Journey() {
               className="
                 pointer-events-none
                 absolute
-                left-0 right-0
+                left-0
+                right-0
                 top-1/2
                 h-px
                 -translate-y-1/2
@@ -142,8 +326,13 @@ export function Journey() {
                   >
                     <span
                       className={`
-                        block h-3.5 w-3.5 rounded-full border-2
-                        transition-all duration-200
+                        block
+                        h-3.5
+                        w-3.5
+                        rounded-full
+                        border-2
+                        transition-all
+                        duration-200
                         ${
                           isHovered || isSelected
                             ? "scale-110 border-primary bg-primary"
@@ -157,7 +346,7 @@ export function Journey() {
             })}
           </div>
 
-          {/* dots */}
+          {/* Periods */}
           <div className="grid grid-cols-3">
             {sortedExperience.map((entry) => {
               const isSelected = entry.id === selectedId;
@@ -167,8 +356,12 @@ export function Journey() {
                 <div key={entry.id} className="px-2 text-center">
                   <span
                     className={`
-                      mt-3 block text-sm font-mono
-                      transition-colors duration-200
+                      mt-3
+                      block
+                      text-sm
+                      font-mono
+                      transition-colors
+                      duration-200
                       ${
                         isHovered || isSelected
                           ? "text-primary"
@@ -188,8 +381,12 @@ export function Journey() {
       {/* Selected / Hovered Experience */}
       <div
         className="
-          h-[200px] shrink-0 overflow-y-auto
-          border-t border-border/60 pt-5
+          h-[200px]
+          shrink-0
+          overflow-y-auto
+          border-t
+          border-border/60
+          pt-5
           [scrollbar-width:none]
           [-ms-overflow-style:none]
           [&::-webkit-scrollbar]:hidden
@@ -214,7 +411,6 @@ export function Journey() {
                   className="relative pl-5 text-md leading-relaxed text-foreground/90"
                 >
                   <span className="absolute left-0 text-primary/70">-</span>
-
                   {bullet}
                 </li>
               ))}
