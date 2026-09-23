@@ -41,7 +41,7 @@ export function Projects({
 
   return (
     <div className="space-y-4">
-      <h2 className="text-center font-heading text-xl font-semibold text-foreground">
+      <h2 className="text-center font-heading text-2xl font-semibold text-foreground">
         Projects
       </h2>
 
@@ -56,12 +56,12 @@ export function Projects({
       </div>
 
       <Button
-        variant="outline"
+        variant="secondary"
         onClick={onViewProjects}
         className="group/view h-auto w-full justify-between border border-accent/50 px-6 py-3 transition-colors md:px-12"
       >
         <div className="flex items-center gap-3">
-          <LayoutGrid className="size-6 text-primary" />
+          <LayoutGrid className="size-4 text-primary" />
 
           <div className="text-left">
             <p className="text-md font-semibold text-foreground">
@@ -74,7 +74,7 @@ export function Projects({
           </div>
         </div>
 
-        <ArrowRight className="size-5 text-foreground transition-transform duration-200 group-hover/view:translate-x-1" />
+        <ArrowRight className="size-5 text-foreground transition-transform duration-200 group-hover/view:translate-x-1 group-hover/view:bg-accent/25 rounded-full" />
       </Button>
     </div>
   );

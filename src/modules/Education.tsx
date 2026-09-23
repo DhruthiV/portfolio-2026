@@ -1,8 +1,8 @@
 export function Education() {
   return (
     <section className="flex flex-col gap-6 items-center">
-      <h2 className="text-xl font-semibold text-muted-foreground text-center">
-        My Degree
+      <h2 className="text-2xl font-semibold text-foreground/90 text-center">
+        Education
       </h2>
 
       <div className="w-full flex justify-center">
@@ -21,33 +21,31 @@ export function Education() {
           </h3>
 
           {/* Full degree names */}
-          <p className="mt-2 text-md text-muted-foreground">
+          <p className="mt-2 text-md font-semibold  text-chart-5">
             Bachelor of Science
           </p>
 
           <div />
 
-          <p className="mt-2 text-md text-muted-foreground">
+          <p className="mt-2 text-md font-semibold  text-chart-5">
             Master of Computer Applications
           </p>
 
           {/* Institutions */}
-          <p className="mt-3 text-sm text-muted-foreground/70">
+          <p className="mt-3 text-sm text-foreground/70">
             B.M.S. College for Women
           </p>
 
           <div />
 
-          <p className="mt-3 text-sm text-muted-foreground/70">
-            PES University
-          </p>
+          <p className="mt-3 text-sm text-foreground/70">PES University</p>
 
           {/* Years */}
-          <p className="mt-1 text-sm text-muted-foreground/70">2020–2023</p>
+          <p className="mt-1 text-sm text-foreground/70">2020–2023</p>
 
           <div />
 
-          <p className="mt-1 text-sm text-muted-foreground/70">2023–2025</p>
+          <p className="mt-1 text-sm text-foreground/70">2023–2025</p>
         </div>
       </div>
     </section>

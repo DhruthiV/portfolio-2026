@@ -59,8 +59,8 @@ export function Journey() {
   return (
     <Card className="group/card flex h-[500px] w-full flex-col gap-6 bg-card p-6 shadow-sm backdrop-blur-sm sm:h-[520px]">
       {/* Heading */}
-      <CardTitle className="text-center text-xl font-semibold text-muted-foreground transition-colors duration-300 group-hover/card:text-foreground">
-        Engineering Journey
+      <CardTitle className="text-center text-2xl font-semibold text-muted-foreground transition-colors duration-300 group-hover/card:text-foreground">
+        Journey
       </CardTitle>
 
       {/* Timeline */}

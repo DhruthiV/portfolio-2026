@@ -14,8 +14,8 @@ export function Certifications() {
   return (
     <>
       <section className="flex min-h-[60vh] flex-col gap-8">
-        <h2 className="text-center text-xl font-semibold text-muted-foreground">
-          Certifications
+        <h2 className="text-center text-2xl font-semibold text-foreground">
+          Certification
         </h2>
 
         <div className="grid items-center gap-10 md:grid-cols-[minmax(592,0.8fr)_1.2fr]">
@@ -31,29 +31,32 @@ export function Certifications() {
           {/* Certification information */}
           <div className="flex flex-col">
             <h3 className="text-xl font-semibold tracking-tight">
-              Certifications & Learning
+              Google UX Design Professional Certificate (In Progress)
             </h3>
 
             <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-              A collection of certifications and learning milestones from my
-              technical journey.
+              Building a structured foundation in UX design - from user research
+              to prototyping to support my transition from frontend engineering
+              into product design.
             </p>
 
             <ul className="mt-5 space-y-2">
-              <li className="relative pl-5 text-sm leading-relaxed text-muted-foreground">
+              <li className="relative pl-5 text-sm leading-relaxed text-foreground/90">
                 <span className="absolute left-0 text-primary">•</span>
-                Technical concepts and skills developed
+                User research, Understanding Business, wireframing, and low to
+                high-fidelity prototyping in Figma.
               </li>
 
-              <li className="relative pl-5 text-sm leading-relaxed text-muted-foreground">
+              <li className="relative pl-5 text-sm leading-relaxed text-foreground/90">
                 <span className="absolute left-0 text-primary">•</span>
-                Continued learning alongside practical development
+                Applying design principles alongside my existing frontend
+                development experience
               </li>
             </ul>
 
             <Button
               type="button"
-              variant="outline"
+              variant="default"
               className="mt-6 w-fit"
               onClick={() => setIsViewerOpen(true)}
             >
