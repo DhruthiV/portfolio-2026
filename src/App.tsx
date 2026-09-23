@@ -40,7 +40,10 @@ export default function App() {
                 path="/projects"
                 element={<AllProjects onBack={() => navigate("/")} />}
               />
-              <Route path="/p/:id" element={<CaseStudyPage />} />
+              <Route
+                path="/projects/case-study/:id"
+                element={<CaseStudyPage />}
+              />
             </Routes>
           </motion.div>
         </AnimatePresence>

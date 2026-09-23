@@ -21,7 +21,9 @@ export function ProjectCard({ project }: ProjectCardProps) {
 
   const handleOpen = () => {
     if (project.caseStudyId) {
-      navigate(`/p/${project.caseStudyId}`);
+      navigate(`/projects/case-study/${project.caseStudyId}`, {
+        state: { title: project.name },
+      });
     }
   };
 

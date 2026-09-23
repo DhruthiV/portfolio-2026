@@ -14,6 +14,10 @@ interface NotionBlockProps {
   block: any;
 }
 
+function renderChildren(children: any[]) {
+  return children.map((child) => <NotionBlock key={child.id} block={child} />);
+}
+
 export function NotionBlock({ block }: NotionBlockProps) {
   switch (block.type) {
     case "paragraph":
@@ -45,6 +49,20 @@ export function NotionBlock({ block }: NotionBlockProps) {
 
     case "divider":
       return <NotionDivider />;
+
+    case "column_list":
+      return (
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+          {renderChildren(block.children ?? [])}
+        </div>
+      );
+
+    case "column":
+      return (
+        <div className="min-w-0 space-y-6">
+          {renderChildren(block.children ?? [])}
+        </div>
+      );
 
     default:
       console.log("Unsupported Notion block type:", block.type);

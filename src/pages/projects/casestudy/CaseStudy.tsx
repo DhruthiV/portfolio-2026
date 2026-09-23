@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { ArrowLeft, ArrowRight } from "lucide-react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 
 import { fetchNotionCaseStudy } from "@/lib/notionCaseStudy";
 import { SITE_CONFIG } from "@/config";
@@ -12,6 +12,9 @@ type LoadStatus = "loading" | "loaded" | "error";
 
 interface CaseStudyData {
   blocks: any[];
+  title?: string;
+}
+interface CaseStudyLocationState {
   title?: string;
 }
 
@@ -27,7 +30,9 @@ export function CaseStudyPage() {
 
 function CaseStudyContent({ id }: { id: string }) {
   const navigate = useNavigate();
+  const location = useLocation();
 
+  const title = (location.state as CaseStudyLocationState | null)?.title;
   const [status, setStatus] = useState<LoadStatus>("loading");
   const [caseStudy, setCaseStudy] = useState<CaseStudyData | null>(null);
 
@@ -103,12 +108,12 @@ function CaseStudyContent({ id }: { id: string }) {
         </button>
 
         <main>
-          {caseStudy.title && (
+          {title && (
             <h1
               className="mb-10 text-4xl font-bold tracking-tight text-foreground md:text-5xl"
               style={{ fontFamily: "var(--font-heading)" }}
             >
-              {caseStudy.title}
+              {title}
             </h1>
           )}
 

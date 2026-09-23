@@ -1,9 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+
 import { NotionRichText } from "./NotionRichText";
 
 interface NotionImageProps {
   block: any;
 }
+
 export function NotionImage({ block }: NotionImageProps) {
   const image = block.image;
 
@@ -16,8 +18,8 @@ export function NotionImage({ block }: NotionImageProps) {
 
   return (
     <figure className="space-y-2">
-      <div className="aspect-video w-full overflow-hidden rounded-xl">
-        <img src={src} alt="" className="h-full w-full object-cover" />
+      <div className="w-full overflow-hidden rounded-xl">
+        <img src={src} alt="" className="block h-auto w-full object-contain" />
       </div>
 
       {image.caption?.length > 0 && (
