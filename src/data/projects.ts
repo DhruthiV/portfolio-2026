@@ -19,7 +19,7 @@ export interface Project {
   density: ProjectDensity;
   status: ProjectStatus;
 
-  techStack: string[];
+  techStack?: string[];
 
   github: string;
   youtube?: string;
