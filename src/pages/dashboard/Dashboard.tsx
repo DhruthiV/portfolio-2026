@@ -55,7 +55,7 @@ export function Dashboard({ onViewProjects }: DashboardProps) {
 
             <Certifications />
 
-            <Skills skills={profile.skills} />
+            <Skills />
 
             <Journey />
 
