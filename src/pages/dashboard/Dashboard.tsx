@@ -8,6 +8,7 @@ import { Skills } from "@/modules/Skills";
 
 import { usePortfolio } from "@/hooks/usePortfolio";
 import { Projects } from "../projects/homepagesection/Projects";
+import { Certifications } from "../certification/Certifications";
 
 interface DashboardProps {
   onViewProjects: () => void;
@@ -51,6 +52,9 @@ export function Dashboard({ onViewProjects }: DashboardProps) {
               error={error}
               onViewProjects={onViewProjects}
             />
+
+            <Certifications />
+
             <Skills skills={profile.skills} />
 
             <Journey />
