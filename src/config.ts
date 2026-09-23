@@ -4,7 +4,7 @@ export const SITE_CONFIG = {
   name: "Dhruthi V H",
   initials: "DVH",
   headline: "Building, Exploring and Learning!",
-  role: "Software Engineer",
+  role: "UX Product Designer",
   summary: [
     " Building full-stack applications, designing systems, and continuously learning new technologies.",
   ],

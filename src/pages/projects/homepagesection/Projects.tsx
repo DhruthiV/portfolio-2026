@@ -40,7 +40,7 @@ export function Projects({
   }
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-8">
       <h2 className="text-center font-heading text-2xl font-semibold text-foreground">
         Projects
       </h2>

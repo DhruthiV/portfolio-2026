@@ -34,20 +34,20 @@ export function Certifications() {
               Google UX Design Professional Certificate (In Progress)
             </h3>
 
-            <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+            <p className="mt-3 text-md leading-relaxed text-muted-foreground">
               Building a structured foundation in UX design - from user research
               to prototyping to support my transition from frontend engineering
               into product design.
             </p>
 
             <ul className="mt-5 space-y-2">
-              <li className="relative pl-5 text-sm leading-relaxed text-foreground/90">
+              <li className="relative pl-5 text-md leading-relaxed text-foreground/90">
                 <span className="absolute left-0 text-primary">•</span>
                 User research, Understanding Business, wireframing, and low to
                 high-fidelity prototyping in Figma.
               </li>
 
-              <li className="relative pl-5 text-sm leading-relaxed text-foreground/90">
+              <li className="relative pl-5 text-md leading-relaxed text-foreground/90">
                 <span className="absolute left-0 text-primary">•</span>
                 Applying design principles alongside my existing frontend
                 development experience

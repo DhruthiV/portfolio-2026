@@ -39,7 +39,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
           <img
             src={project.pic}
             alt={`${project.name} project preview`}
-            className="aspect-[16/9] w-full object-cover transition-transform duration-300 group-hover:scale-[1.02]"
+            className="aspect-[3/2] w-full object-cover transition-transform duration-300 group-hover:scale-[1.02]"
           />
         </div>
       ) : (
@@ -50,7 +50,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
 
       {/* Content */}
       <CardHeader>
-        <CardTitle className="text-lg font-semibold transition-colors group-hover:text-primary">
+        <CardTitle className="text-xl font-semibold transition-colors group-hover:text-primary">
           {project.name}
         </CardTitle>
 
@@ -64,7 +64,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
           </span>
         </div>
 
-        <CardDescription className="mt-2 line-clamp-3 text-sm leading-6">
+        <CardDescription className="mt-2 line-clamp-3 text-md leading-6">
           {project.description}
         </CardDescription>
       </CardHeader>

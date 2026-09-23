@@ -91,7 +91,7 @@ export function Journey() {
                   <span
                     className={`
                       mx-auto block max-w-[180px]
-                      text-sm font-semibold leading-tight font-heading 
+                      text-lg font-semibold leading-tight font-heading 
                       transition-colors duration-200 [-ms-overflow-style:none]
                       [&::-webkit-scrollbar]:hidden
                       ${
@@ -167,7 +167,7 @@ export function Journey() {
                 <div key={entry.id} className="px-2 text-center">
                   <span
                     className={`
-                      mt-3 block text-xs font-mono
+                      mt-3 block text-sm font-mono
                       transition-colors duration-200
                       ${
                         isHovered || isSelected
@@ -211,7 +211,7 @@ export function Journey() {
               {displayedExperience.bullets.map((bullet, index) => (
                 <li
                   key={index}
-                  className="relative pl-5 text-sm leading-relaxed text-muted-foreground/95"
+                  className="relative pl-5 text-sm leading-relaxed text-foreground/90"
                 >
                   <span className="absolute left-0 text-primary/70">-</span>
 
