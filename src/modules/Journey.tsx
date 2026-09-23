@@ -72,9 +72,9 @@ export function Journey() {
           [&::-webkit-scrollbar]:hidden
         "
       >
-        <div className="relative w-full px-3 py-2">
+        <div className="relative w-full px-3 py-2 ">
           {/* Roles */}
-          <div className="grid grid-cols-3">
+          <div className="grid grid-cols-3 ">
             {sortedExperience.map((entry) => {
               const isSelected = entry.id === selectedId;
               const isHovered = entry.id === hoveredId;
@@ -91,8 +91,9 @@ export function Journey() {
                   <span
                     className={`
                       mx-auto block max-w-[180px]
-                      text-sm font-semibold leading-tight font-heading
-                      transition-colors duration-200
+                      text-sm font-semibold leading-tight font-heading 
+                      transition-colors duration-200 [-ms-overflow-style:none]
+                      [&::-webkit-scrollbar]:hidden
                       ${
                         isHovered || isSelected
                           ? "text-primary"
@@ -156,7 +157,7 @@ export function Journey() {
             })}
           </div>
 
-          {/* Periods */}
+          {/* dots */}
           <div className="grid grid-cols-3">
             {sortedExperience.map((entry) => {
               const isSelected = entry.id === selectedId;
@@ -185,7 +186,15 @@ export function Journey() {
       </div>
 
       {/* Selected / Hovered Experience */}
-      <div className="h-[200px] shrink-0 overflow-y-auto border-t border-border/60 pt-5">
+      <div
+        className="
+          h-[200px] shrink-0 overflow-y-auto
+          border-t border-border/60 pt-5
+          [scrollbar-width:none]
+          [-ms-overflow-style:none]
+          [&::-webkit-scrollbar]:hidden
+        "
+      >
         {displayedExperience && (
           <>
             <div className="mb-4">

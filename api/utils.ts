@@ -50,6 +50,7 @@ export function mapDBToProject(page: any) {
 }
 
 /* ---------------- Current Focus ---------------- */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
 function getText(block: any) {
   const richText = block[block.type]?.rich_text ?? [];
@@ -57,27 +58,25 @@ function getText(block: any) {
 }
 
 export function mapBlocksToCurrentWork(blocks: any[]) {
-  type CurrentFocus = {
+  type Profile = {
     bio: {
       headline: string;
-      summary: string[];
+      blocks: any[];
     };
+
     currentWork: {
       type: string;
       title: string;
       description: string;
     };
+
     skills: string[];
   };
 
-  type SectionMapValue =
-    | { object: "bio"; field: "headline" | "summary" }
-    | { object: "currentWork"; field: "type" | "title" | "description" };
-
-  const result: CurrentFocus = {
+  const result: Profile = {
     bio: {
       headline: "",
-      summary: [],
+      blocks: [],
     },
 
     currentWork: {
@@ -86,65 +85,55 @@ export function mapBlocksToCurrentWork(blocks: any[]) {
       description: "",
     },
 
-    skills: [] as string[],
-  };
-
-  const SECTION_MAP: Record<string, SectionMapValue> = {
-    bio_headline: {
-      object: "bio",
-      field: "headline",
-    },
-
-    bio_summary: {
-      object: "bio",
-      field: "summary",
-    },
-
-    current_work_type: {
-      object: "currentWork",
-      field: "type",
-    },
-
-    current_work_title: {
-      object: "currentWork",
-      field: "title",
-    },
-
-    current_work_description: {
-      object: "currentWork",
-      field: "description",
-    },
+    skills: [],
   };
 
   let currentSection = "";
 
   for (const block of blocks) {
-    // Heading changes the active section
     if (block.type === "heading_1") {
       currentSection = getText(block);
       continue;
     }
 
-    // Handle paragraph-based sections
-    const mapping = SECTION_MAP[currentSection as keyof typeof SECTION_MAP];
+    // Bio headline
+    if (currentSection === "bio_headline" && block.type === "paragraph") {
+      result.bio.headline = getText(block);
+      continue;
+    }
 
-    if (mapping && block.type === "paragraph") {
+    // Bio content
+    if (currentSection === "bio_summary") {
+      result.bio.blocks.push(block);
+      continue;
+    }
+
+    // Current work
+    if (
+      currentSection === "current_work_type" ||
+      currentSection === "current_work_title" ||
+      currentSection === "current_work_description"
+    ) {
+      if (block.type !== "paragraph") continue;
+
       const text = getText(block);
 
-      if (mapping.object === "bio") {
-        if (mapping.field === "headline") {
-          result.bio.headline = text;
-        } else {
-          result.bio.summary.push(text);
-        }
-      } else {
-        result.currentWork[mapping.field] = text;
+      if (currentSection === "current_work_type") {
+        result.currentWork.type = text;
+      }
+
+      if (currentSection === "current_work_title") {
+        result.currentWork.title = text;
+      }
+
+      if (currentSection === "current_work_description") {
+        result.currentWork.description = text;
       }
 
       continue;
     }
 
-    // Handle list-based sections
+    // Skills
     if (
       currentSection === "skills_current_focus" &&
       block.type === "numbered_list_item"

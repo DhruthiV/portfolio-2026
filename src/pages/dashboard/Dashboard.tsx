@@ -39,11 +39,11 @@ export function Dashboard({ onViewProjects }: DashboardProps) {
             </div>
           </aside>
 
-          <main className="flex flex-col gap-10 order-2">
+          <main className="flex flex-col gap-24 order-2 md:gap-28">
             <Bio
               loading={profileLoading}
               headline={profile.bio.headline}
-              summary={profile.bio.summary}
+              blocks={profile.bio.blocks}
             />
 
             <ProjectsView
