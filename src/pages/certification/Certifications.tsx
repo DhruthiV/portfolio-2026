@@ -7,7 +7,6 @@ import { CERTIFICATES } from "@/data/certificates";
 
 const CERTIFICATION_PREVIEW_IMAGE =
   "src/certificates/certification-preview.png";
-
 export function Certifications() {
   const [isViewerOpen, setIsViewerOpen] = useState(false);
 
@@ -18,18 +17,18 @@ export function Certifications() {
           Certification
         </h2>
 
-        <div className="grid items-center gap-10 md:grid-cols-[minmax(592,0.8fr)_1.2fr]">
-          {/* Homepage-only image */}
-          <div className="flex h-full min-h-[100px] items-stretch justify-center">
+        <div className="flex flex-col items-center gap-8 md:flex-row md:items-start">
+          {/* Certification badge image */}
+          <div className="flex shrink-0 items-center justify-center">
             <img
               src={CERTIFICATION_PREVIEW_IMAGE}
-              alt=""
-              className="h-full w-full rounded-xl object-cover"
+              alt="Google UX Design Certificate badge"
+              className="h-52 w-52 rounded-xl object-contain md:h-52 md:w-52"
             />
           </div>
 
           {/* Certification information */}
-          <div className="flex flex-col">
+          <div className="flex flex-1 flex-col">
             <h3 className="text-xl font-bold font-heading">
               Google UX Design Professional Certificate (In Progress)
             </h3>
@@ -43,7 +42,7 @@ export function Certifications() {
             <ul className="mt-5 space-y-2">
               <li className="relative pl-5 text-md leading-relaxed text-foreground/90">
                 <span className="absolute left-0 text-primary">•</span>
-                User research, Understanding Business, wireframing, and low to
+                User research, understanding business, wireframing, and low- to
                 high-fidelity prototyping in Figma.
               </li>
 
