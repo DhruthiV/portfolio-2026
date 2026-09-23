@@ -14,7 +14,7 @@ export function Certifications() {
   return (
     <>
       <section className="flex min-h-[60vh] flex-col gap-8">
-        <h2 className="text-center text-2xl font-semibold text-foreground">
+        <h2 className="text-center text-2xl font-semibold text-foreground font-heading">
           Certification
         </h2>
 
@@ -30,7 +30,7 @@ export function Certifications() {
 
           {/* Certification information */}
           <div className="flex flex-col">
-            <h3 className="text-xl font-semibold tracking-tight">
+            <h3 className="text-xl font-bold font-heading">
               Google UX Design Professional Certificate (In Progress)
             </h3>
 

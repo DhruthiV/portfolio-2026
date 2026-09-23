@@ -3,7 +3,7 @@ import { SKILL_SECTIONS } from "../data/skills";
 export function Skills() {
   return (
     <section className="flex flex-col gap-16">
-      <h2 className="text-center text-2xl font-semibold text-foreground/90">
+      <h2 className="text-center text-2xl font-semibold text-foreground/90 font-heading">
         Skills
       </h2>
       {SKILL_SECTIONS.map((section, index) => {
@@ -22,7 +22,7 @@ export function Skills() {
               }`}
             >
               {/* Heading */}
-              <h2 className="text-2xl font-semibold tracking-tight text-foreground">
+              <h2 className="text-3xl font-semibold text-foreground font-heading">
                 {section.title}
               </h2>
 

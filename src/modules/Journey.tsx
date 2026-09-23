@@ -91,7 +91,7 @@ export function Journey() {
                   <span
                     className={`
                       mx-auto block max-w-[180px]
-                      text-lg font-semibold leading-tight font-heading 
+                      text-lg font-semibold leading-tight  
                       transition-colors duration-200 [-ms-overflow-style:none]
                       [&::-webkit-scrollbar]:hidden
                       ${
@@ -211,7 +211,7 @@ export function Journey() {
               {displayedExperience.bullets.map((bullet, index) => (
                 <li
                   key={index}
-                  className="relative pl-5 text-sm leading-relaxed text-foreground/90"
+                  className="relative pl-5 text-md leading-relaxed text-foreground/90"
                 >
                   <span className="absolute left-0 text-primary/70">-</span>
 

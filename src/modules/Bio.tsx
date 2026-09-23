@@ -15,12 +15,12 @@ export function Bio({ loading, headline, blocks }: BioProps) {
 
   return (
     <section className="flex min-h-[calc(100vh-4rem)] flex-col gap-6">
-      <h2 className="text-center text-2xl font-semibold text-foreground/90">
+      <h2 className="text-center text-2xl font-semibold text-foreground/90 font-heading">
         About
       </h2>
 
       <div className="flex flex-col gap-3">
-        <h3 className="text-center text-base font-bold leading-snug tracking-tight text-foreground/95">
+        <h3 className="text-center text-base font-semibold leading-snug tracking-tight text-chart-5 font-heading">
           {headline}
         </h3>
 
@@ -33,7 +33,7 @@ export function Bio({ loading, headline, blocks }: BioProps) {
 function BioSkeleton() {
   return (
     <section className="flex min-h-[calc(100vh-4rem)] flex-col gap-6">
-      <h2 className="text-center text-2xl font-semibold text-foreground/90">
+      <h2 className="text-center text-2xl font-semibold text-foreground/90 font-heading">
         About
       </h2>
 

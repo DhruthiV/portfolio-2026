@@ -8,7 +8,7 @@ interface NotionParagraphProps {
 
 export function NotionParagraph({ block }: NotionParagraphProps) {
   return (
-    <p className="whitespace-pre-line text-base leading-7 text-muted-foreground">
+    <p className="whitespace-pre-line text-base leading-7 text-foreground/85">
       <NotionRichText richText={block.paragraph.rich_text} />
     </p>
   );

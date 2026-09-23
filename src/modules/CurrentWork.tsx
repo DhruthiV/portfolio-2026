@@ -52,12 +52,7 @@ export function CurrentWork({
         <div className="flex items-center gap-1 shrink-0 bg-primary/5 border border-primary/10 px-2 py-0.5 rounded-md">
           <Icon size={12} className="text-primary" />
 
-          <span
-            className="text-[10px] font-semibold text-primary tracking-wide uppercase"
-            style={{
-              fontFamily: "var(--font-heading)",
-            }}
-          >
+          <span className="text-[10px] font-semibold text-primary tracking-wide uppercase">
             {typeLabel}
           </span>
         </div>
