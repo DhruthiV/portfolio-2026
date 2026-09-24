@@ -1,10 +1,13 @@
 import { AnimatePresence, motion } from "motion/react";
 import { Routes, Route, useNavigate, useLocation } from "react-router-dom";
 
-import { AuroraBackground } from "./pages/dashboard/AuroraBackground";
-import { Dashboard } from "./pages/dashboard/Dashboard";
 import { AllProjects } from "./pages/projects/allprojects/AllProjects";
 import { CaseStudyPage } from "./pages/projects/casestudy/CaseStudy";
+
+import { About } from "./pages/portfolio/About";
+import { AuroraBackground } from "./pages/portfolio/AuroraBackground";
+import { PortfolioLayout } from "./pages/portfolio/PortfolioLayout";
+import { Home } from "./pages/portfolio/Home";
 
 const PAGE_TRANSITION = {
   duration: 0.2,
@@ -25,16 +28,21 @@ export default function App() {
             key={location.pathname}
             className="absolute inset-0"
             initial={{ opacity: 0 }}
-            animate={{ opacity: 1, y: 0 }}
+            animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={PAGE_TRANSITION}
           >
             <Routes location={location}>
-              <Route path="/" element={<Dashboard />} />
+              <Route element={<PortfolioLayout />}>
+                <Route path="/" element={<Home />} />
+                <Route path="/about" element={<About />} />
+              </Route>
+
               <Route
                 path="/projects"
                 element={<AllProjects onBack={() => navigate("/")} />}
               />
+
               <Route
                 path="/projects/case-study/:id"
                 element={<CaseStudyPage />}
