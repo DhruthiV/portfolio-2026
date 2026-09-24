@@ -30,12 +30,7 @@ export default function App() {
             transition={PAGE_TRANSITION}
           >
             <Routes location={location}>
-              <Route
-                path="/"
-                element={
-                  <Dashboard onViewProjects={() => navigate("/projects")} />
-                }
-              />
+              <Route path="/" element={<Dashboard />} />
               <Route
                 path="/projects"
                 element={<AllProjects onBack={() => navigate("/")} />}
