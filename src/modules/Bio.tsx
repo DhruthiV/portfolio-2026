@@ -14,7 +14,7 @@ export function Bio({ loading, headline, blocks }: BioProps) {
   }
 
   return (
-    <section className="flex min-h-[calc(100vh-4rem)] flex-col gap-6">
+    <section className="flex lg:min-h-[calc(100vh-4rem)] flex-col gap-6">
       <h2 className="text-center text-2xl font-semibold text-foreground/90 font-heading">
         About
       </h2>

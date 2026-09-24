@@ -11,7 +11,7 @@ export function Certifications() {
 
   return (
     <>
-      <section className="flex min-h-[60vh] flex-col gap-8">
+      <section className="flex flex-col gap-8">
         <h2 className="text-center text-2xl font-semibold text-foreground font-heading">
           Certification
         </h2>

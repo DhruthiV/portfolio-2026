@@ -24,16 +24,16 @@ export function Dashboard({ onViewProjects }: DashboardProps) {
         <div className="w-full max-w-6xl grid grid-cols-1 lg:grid-cols-[250px_1fr] gap-8 lg:gap-12">
           <aside
             className="
-    order-1
-    flex
-    flex-col
-    gap-4
-    self-start
-    lg:sticky
-    lg:top-8
-    lg:h-[calc(100vh-4rem)]
-    lg:justify-between
-  "
+            order-1
+            flex
+            flex-col
+            gap-4
+            self-start
+            lg:sticky
+            lg:top-8
+            lg:h-[calc(100vh-4rem)]
+            lg:justify-between
+          "
           >
             <div className="w-full">
               <Identity />
