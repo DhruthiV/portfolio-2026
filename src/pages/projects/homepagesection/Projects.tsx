@@ -1,28 +1,21 @@
 import { ArrowRight, LayoutGrid } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import ProjectsError from "../common/ProjectsError";
-import { ProjectRow } from "./blocks/ProjectRow";
 import { EmptyState } from "./blocks/EmptyState";
 import type { Project } from "@/data/projects";
+import { ProjectCard } from "./blocks/ProjectCard";
+import { Link } from "react-router-dom";
 
 interface ProjectsCardProps {
   projects: Project[];
   loading: boolean;
   error: string | null;
-  onViewProjects: () => void;
 }
 
-export function ProjectsView({
-  projects,
-  loading,
-  error,
-  onViewProjects,
-}: ProjectsCardProps) {
+export function Projects({ projects, loading, error }: ProjectsCardProps) {
   const previewProjects = projects
     .filter((project) => project.visibility && project.order !== undefined)
     .sort((a, b) => {
       const orderA = a.order ?? Number.MAX_SAFE_INTEGER;
-
       const orderB = b.order ?? Number.MAX_SAFE_INTEGER;
 
       return orderA - orderB;
@@ -41,30 +34,23 @@ export function ProjectsView({
   }
 
   return (
-    <div className="space-y-4">
-      <h2 className="text-center text-xl font-semibold text-foreground font-heading">
+    <div className="space-y-8">
+      <h2 className="text-center font-heading text-2xl font-semibold text-foreground">
         Projects
       </h2>
 
-      <div className="overflow-hidden border border-border bg-card">
-        <div className="divide-y divide-border">
-          {previewProjects.map((project) => (
-            <ProjectRow
-              key={project.name}
-              project={project}
-              onViewProjects={onViewProjects}
-            />
-          ))}
-        </div>
+      <div className="grid gap-4 md:grid-cols-2">
+        {previewProjects.map((project) => (
+          <ProjectCard key={project.name} project={project} />
+        ))}
       </div>
 
-      <Button
-        variant="outline"
-        onClick={onViewProjects}
-        className="group/view h-auto w-full justify-between border border-accent/50 px-6 py-3 transition-colors md:px-12"
+      <Link
+        to="/projects"
+        className="group/view flex h-auto w-full items-center justify-between rounded-md bg-secondary px-6 py-3 transition-colors hover:bg-secondary/80 border border-accent/50 md:px-12"
       >
         <div className="flex items-center gap-3">
-          <LayoutGrid className="size-6 text-primary" />
+          <LayoutGrid className="size-4 text-primary" />
 
           <div className="text-left">
             <p className="text-md font-semibold text-foreground">
@@ -72,13 +58,13 @@ export function ProjectsView({
             </p>
 
             <p className="text-sm text-foreground/70">
-              Detailed write-ups behind each build
+              Detailed write-ups behind each app
             </p>
           </div>
         </div>
 
-        <ArrowRight className="size-5 text-foreground transition-transform duration-200 group-hover/view:translate-x-1" />
-      </Button>
+        <ArrowRight className="size-5 rounded-full text-foreground transition-transform duration-200 group-hover/view:translate-x-1 group-hover/view:bg-accent/25" />
+      </Link>
     </div>
   );
 }

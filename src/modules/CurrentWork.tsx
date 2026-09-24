@@ -4,14 +4,8 @@ import { Skeleton } from "@/components/ui/skeleton";
 
 type CurrentWorkType = ProfileContent["currentWork"]["type"];
 
-const focusConfig = {
-  Building: { label: "Building", icon: Hammer },
-  Learning: { label: "Learning", icon: BookOpen },
-  Exploring: { label: "Exploring", icon: Compass },
-  Collaborating: { label: "Collaborating", icon: Users },
-  Contributing: { label: "Contributing", icon: Users },
-} satisfies Record<
-  CurrentWorkType,
+const focusConfig: Record<
+  string,
   {
     label: string;
     icon: React.ComponentType<{
@@ -19,7 +13,13 @@ const focusConfig = {
       className?: string;
     }>;
   }
->;
+> = {
+  Building: { label: "Building", icon: Hammer },
+  Learning: { label: "Learning", icon: BookOpen },
+  Exploring: { label: "Exploring", icon: Compass },
+  Collaborating: { label: "Collaborating", icon: Users },
+  Contributing: { label: "Contributing", icon: Users },
+};
 
 interface CurrentWorkProps {
   loading: boolean;
@@ -37,8 +37,10 @@ export function CurrentWork({
   if (loading) {
     return <CurrentWorkSkeleton />;
   }
-
-  const { icon: Icon, label: typeLabel } = focusConfig[type];
+  const { icon: Icon, label: typeLabel } = focusConfig[type] ?? {
+    label: type,
+    icon: Compass,
+  };
 
   return (
     <div className="flex flex-col gap-2 w-full border-t border-border/40 pt-4">
@@ -50,12 +52,7 @@ export function CurrentWork({
         <div className="flex items-center gap-1 shrink-0 bg-primary/5 border border-primary/10 px-2 py-0.5 rounded-md">
           <Icon size={12} className="text-primary" />
 
-          <span
-            className="text-[10px] font-semibold text-primary tracking-wide uppercase"
-            style={{
-              fontFamily: "var(--font-heading)",
-            }}
-          >
+          <span className="text-[10px] font-semibold text-primary tracking-wide uppercase">
             {typeLabel}
           </span>
         </div>

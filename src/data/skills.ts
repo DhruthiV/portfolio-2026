@@ -1,51 +1,53 @@
 export interface SkillItem {
   name: string;
+  icon?: string;
 }
 
-export interface SkillGroup {
-  category: string;
-  note?: string;
+export interface SkillSection {
+  title: string;
+  description: string;
   items: SkillItem[];
 }
 
-export const SKILL_GROUPS: SkillGroup[] = [
+export const SKILL_SECTIONS: SkillSection[] = [
   {
-    category: "Frontend",
+    title: "What do I use?",
+    description: "The tools I reach for to research, design, and build.",
     items: [
-      { name: "JavaScript" },
-      { name: "TypeScript" },
-      { name: "HTML5" },
-      { name: "CSS3" },
-      { name: "React" },
-      { name: "Next.js" },
-    ],
-  },
-  {
-    category: "Backend",
-    note: "Learning",
-    items: [
-      { name: "Node.js" },
-      { name: "Express.js" },
-      { name: "MongoDB" },
-      { name: "PostgreSQL(Neon)" },
-    ],
-  },
-  {
-    category: "Styling",
-    items: [
-      { name: "Tailwind CSS" },
-      { name: "shadcn/ui" },
-      { name: "Material UI" },
-    ],
-  },
-  {
-    category: "Tools",
-    items: [
-      { name: "Git" },
+      { name: "Pen and Paper" },
       { name: "Figma" },
-      { name: "VS Code" },
-      { name: "Vite" },
-      { name: "Vercel" },
+      { name: "Notion" },
+      { name: "Adobe Lightroom" },
+      { name: "React / TypeScript / HTML / CSS" },
+      { name: "Material UI & shadcn/ui" },
+      { name: "AI for Research" },
+    ],
+  },
+
+  {
+    title: "What do I have?",
+    description:
+      "The foundation I've built through real projects and professional engineering work.",
+    items: [
+      { name: "Problem Framing" },
+      { name: "User Flows & Information Architecture" },
+      { name: "Usability Thinking & Testing" },
+      { name: "An Eye for UX Friction" },
+      { name: "2 Years of Frontend Engineering Fluency" },
+    ],
+  },
+
+  {
+    title: "What can I do?",
+    description:
+      "How I take a problem, understand who it's for, and shape a solution that works for both users and business.",
+    items: [
+      { name: "Understand Users and Their Needs" },
+      { name: "Ideate Multiple Solutions" },
+      { name: "Sketch → Structured Flow → Prototype" },
+      { name: "Balance Business Needs with User Needs" },
+      { name: "Build Case Studies from Real Friction, Not Assigned Briefs" },
+      { name: "Think Through Edge Cases" },
     ],
   },
 ];

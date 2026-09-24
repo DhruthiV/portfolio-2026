@@ -3,7 +3,8 @@ import { Routes, Route, useNavigate, useLocation } from "react-router-dom";
 
 import { AuroraBackground } from "./pages/dashboard/AuroraBackground";
 import { Dashboard } from "./pages/dashboard/Dashboard";
-import { ProjectsPage } from "./pages/projects/detailedview/ProjectsPage";
+import { AllProjects } from "./pages/projects/allprojects/AllProjects";
+import { CaseStudyPage } from "./pages/projects/casestudy/CaseStudy";
 
 const PAGE_TRANSITION = {
   duration: 0.2,
@@ -29,15 +30,14 @@ export default function App() {
             transition={PAGE_TRANSITION}
           >
             <Routes location={location}>
-              <Route
-                path="/"
-                element={
-                  <Dashboard onViewProjects={() => navigate("/projects")} />
-                }
-              />
+              <Route path="/" element={<Dashboard />} />
               <Route
                 path="/projects"
-                element={<ProjectsPage onBack={() => navigate("/")} />}
+                element={<AllProjects onBack={() => navigate("/")} />}
+              />
+              <Route
+                path="/projects/case-study/:id"
+                element={<CaseStudyPage />}
               />
             </Routes>
           </motion.div>

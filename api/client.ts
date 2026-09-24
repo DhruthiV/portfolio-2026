@@ -58,3 +58,27 @@ export async function getPageBlocks(pageId: string) {
 
   return response.json();
 }
+
+export async function getBlockChildren(blockId: string) {
+  const token = process.env.NOTION_TOKEN;
+
+  if (!token) {
+    throw new Error("NOTION_TOKEN is not configured.");
+  }
+
+  const response = await fetch(
+    `https://api.notion.com/v1/blocks/${blockId}/children`,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Notion-Version": NOTION_VERSION,
+      },
+    },
+  );
+
+  if (!response.ok) {
+    throw new Error(await response.text());
+  }
+
+  return response.json();
+}

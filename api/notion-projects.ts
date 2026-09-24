@@ -16,6 +16,12 @@ export default async function handler(req: any, res: any) {
   try {
     const data = await queryDatabase({
       page_size: 20,
+      filter: {
+        property: "Visibility",
+        checkbox: {
+          equals: true,
+        },
+      },
     });
 
     const projects = data.results.map(mapDBToProject);

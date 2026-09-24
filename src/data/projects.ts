@@ -8,7 +8,9 @@ export type ProjectDensity = "Major Project" | "Mini Project";
 export interface Project {
   name: string;
   description: string;
-
+  pic?: string;
+  slug?: string;
+  caseStudyId?: string;
   whatIDid: string;
   whyIDid: string;
   whoItHelps: string;
@@ -17,7 +19,7 @@ export interface Project {
   density: ProjectDensity;
   status: ProjectStatus;
 
-  techStack: string[];
+  techStack?: string[];
 
   github: string;
   youtube?: string;

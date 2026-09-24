@@ -11,36 +11,34 @@ export interface ExperienceEntry {
 export const EXPERIENCE: ExperienceEntry[] = [
   {
     id: "3",
-    title: "Full Stack Engineer",
+    title: "UX/Product Designer",
     org: "Independent",
     period: "May 2026 – Present",
     bullets: [
-      "Building full-stack projects and strengthening system design expertise.",
+      "Moving from frontend engineering toward UX and product design, building on an interest in usability and interface clarity that grew through working on real products.",
+      "Exploring design by noticing friction in the apps I use, understanding what feels difficult or unclear, and designing better solutions through user flows, sketches, and Figma prototypes.",
     ],
   },
   {
     id: "2",
-    title: "Software Engineer (Frontend)",
+    title: "Software Engineer – Frontend",
     icon: "vegamIcon",
-    org: "Vegam Smart Factory Solutions",
+    org: "Vegam Smart Factory Solutions Pvt. Ltd.",
     period: "Sep 2025 – May 2026",
     bullets: [
-      "Worked on AI-Product - AI Intime an exterprise SaaS internal Knowledge Management System ",
-      "Built the frontend for an AI-powered SaaS product and enhanced the customer experience.",
-      "Improved the codebase by resolving performance issues and refining the application's architecture.",
-      "Developed reusable, maintainable React components following SOLID principles.",
+      "Designed and built reusable React components, while addressing UI and usability issues and documenting components with Storybook to improve consistency across the product.",
+      "Collaborated with product and backend teams to build frontend features for AI InTime, an enterprise AI platform, including authentication, user management, and knowledge hub integrations.",
     ],
   },
   {
     id: "1",
     title: "Frontend Developer (Self-Learning & Collaboration)",
-    icon: "pesuIcon",
     org: "Independent + University",
     period: "Feb 2025 – May 2026",
+    icon: "pesuIcon",
     bullets: [
-      "Built mini projects using React, Tailwind CSS, and shadcn/ui.",
-      "Collaborated with peers on learning-focused group projects and UI implementations.",
-      "Continuously improved frontend development skills through documentation, tutorials, and open-source projects.",
+      "Built mini projects using React, Tailwind CSS, and shadcn/ui, with a focus on clean, usable interfaces.",
+      "Collaborated with peers on learning-focused group projects, sharpening frontend and design sensibility through documentation, tutorials, and open-source work.",
     ],
   },
 ];

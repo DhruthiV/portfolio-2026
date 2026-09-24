@@ -1,57 +1,422 @@
+import { useEffect, useRef, useState } from "react";
 import { EXPERIENCE } from "../data/experience";
 import { Card, CardTitle } from "@/components/ui/card";
 
 export function Journey() {
+  // Oldest → newest
+  const sortedExperience = [...EXPERIENCE].sort((a, b) => {
+    const getStartDate = (period: string) => {
+      const match = period.match(/([A-Za-z]{3})\s+(\d{4})/);
+
+      if (!match) return 0;
+
+      return new Date(`${match[1]} 1, ${match[2]}`).getTime();
+    };
+
+    return getStartDate(a.period) - getStartDate(b.period);
+  });
+
+  // Present role is selected by default
+  const currentExperience =
+    sortedExperience.find((entry) =>
+      entry.period.toLowerCase().includes("present"),
+    ) ?? sortedExperience[sortedExperience.length - 1];
+
+  const [selectedId, setSelectedId] = useState(currentExperience?.id);
+  const [hoveredId, setHoveredId] = useState<string | null>(null);
+
+  const hoverTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const mobileTimelineRef = useRef<HTMLDivElement | null>(null);
+
+  // Scroll selected role into view on mobile
+  useEffect(() => {
+    if (!selectedId || !mobileTimelineRef.current) return;
+
+    const selectedIndex = sortedExperience.findIndex(
+      (entry) => entry.id === selectedId,
+    );
+
+    if (selectedIndex === -1) return;
+
+    const itemWidth = 150;
+
+    mobileTimelineRef.current.scrollTo({
+      left: Math.max(
+        0,
+        selectedIndex * itemWidth -
+          mobileTimelineRef.current.clientWidth / 2 +
+          itemWidth / 2,
+      ),
+      behavior: "smooth",
+    });
+  }, [selectedId, sortedExperience]);
+
+  // Start hover preview after a short delay
+  const handleMouseEnter = (id: string) => {
+    if (hoverTimeout.current) {
+      clearTimeout(hoverTimeout.current);
+    }
+
+    hoverTimeout.current = setTimeout(() => {
+      setHoveredId(id);
+    }, 200);
+  };
+
+  // Immediately return to selected experience
+  const handleMouseLeave = () => {
+    if (hoverTimeout.current) {
+      clearTimeout(hoverTimeout.current);
+      hoverTimeout.current = null;
+    }
+
+    setHoveredId(null);
+  };
+
+  // Hover temporarily controls the displayed content.
+  // When there is no hover, the selected experience is shown.
+  const displayedId = hoveredId ?? selectedId;
+
+  const displayedExperience = sortedExperience.find(
+    (entry) => entry.id === displayedId,
+  );
+
   return (
-    <Card className="group/card flex flex-col gap-3 p-6 bg-card backdrop-blur-sm border border-white/10 dark:border-white/5 w-full h-fit shadow-sm">
-      <CardTitle className="text-xl font-semibold text-muted-foreground text-center transition-colors duration-300 group-hover/card:text-foreground">
-        Engineering Journey
+    <Card className="group/card flex h-[500px] w-full flex-col gap-6 bg-card p-6 shadow-sm backdrop-blur-sm sm:h-[520px]">
+      {/* Heading */}
+      <CardTitle className="text-center text-2xl font-semibold text-muted-foreground transition-colors duration-300 group-hover/card:text-foreground">
+        Journey
       </CardTitle>
 
-      <div className="relative border-none sm:border-l-2 sm:border-border/70 sm:ml-2 pl-0 sm:pl-6 space-y-4 ">
-        {EXPERIENCE.map((entry) => {
-          return (
-            <div key={entry.id} className="relative group p-2 ">
-              <div className="relative flex items-center gap-4 mb-2">
-                {/* 
-                  Timeline Dot:
-                  Mobile: Hidden entirely using `hidden`.
-                  Desktop (sm+): Restored with `sm:block` using your exact original positions.
-                */}
-                <div className="hidden sm:block absolute -left-[31px] top-1/2 -translate-y-1/2 h-1.5 w-1.5 rounded-full bg-muted-foreground/40 border border-background transition-all duration-300 group-hover:bg-primary group-hover:scale-125" />
+      {/* Timeline */}
+      <div
+        className="
+          w-full overflow-x-auto
+          [scrollbar-width:none]
+          [-ms-overflow-style:none]
+          [&::-webkit-scrollbar]:hidden
+        "
+      >
+        {/* MOBILE TIMELINE */}
+        <div
+          ref={mobileTimelineRef}
+          className="
+            relative
+            min-w-max
+            px-3
+            py-2
+            md:hidden
+            [scrollbar-width:none]
+            [-ms-overflow-style:none]
+            [&::-webkit-scrollbar]:hidden
+          "
+        >
+          {/* Roles */}
+          <div className="flex">
+            {sortedExperience.map((entry) => {
+              const isSelected = entry.id === selectedId;
+              const isHovered = entry.id === hoveredId;
 
-                {/* 
-                  Three-Row Metadata Stack */}
-                <div className="flex flex-col min-w-0">
-                  <h3 className="text-base sm:text-md font-bold tracking-tight text-primary break-words whitespace-normal font-heading">
+              return (
+                <button
+                  key={entry.id}
+                  type="button"
+                  onClick={() => setSelectedId(entry.id)}
+                  onMouseEnter={() => handleMouseEnter(entry.id)}
+                  onMouseLeave={handleMouseLeave}
+                  className="
+                    w-[150px]
+                    shrink-0
+                    px-3
+                    text-center
+                    outline-none
+                  "
+                >
+                  <span
+                    className={`
+                      mx-auto block
+                      max-w-[140px]
+                      text-base
+                      font-semibold
+                      leading-tight
+                      transition-colors
+                      duration-200
+                      ${
+                        isHovered || isSelected
+                          ? "text-primary"
+                          : "text-foreground"
+                      }
+                    `}
+                  >
                     {entry.title}
-                  </h3>
-                  <p className="text-sm sm:text-sm font-semibold text-foreground/90 mt-0.5 break-words whitespace-normal sm:truncate">
-                    {entry.org}
-                  </p>
-                  <span className="text-[10px] sm:text-sm font-mono font-base text-muted-foreground/90 mt-0.5">
+                  </span>
+                </button>
+              );
+            })}
+          </div>
+
+          {/* Dots + line */}
+          <div className="relative mt-4 flex">
+            {/* Timeline line */}
+            <div
+              className="
+                pointer-events-none
+                absolute
+                left-[75px]
+                right-[75px]
+                top-1/2
+                h-px
+                -translate-y-1/2
+                bg-border
+              "
+            />
+
+            {sortedExperience.map((entry) => {
+              const isSelected = entry.id === selectedId;
+              const isHovered = entry.id === hoveredId;
+
+              return (
+                <div
+                  key={entry.id}
+                  className="
+                    relative
+                    z-10
+                    flex
+                    w-[150px]
+                    shrink-0
+                    justify-center
+                  "
+                >
+                  <button
+                    type="button"
+                    onClick={() => setSelectedId(entry.id)}
+                    onMouseEnter={() => handleMouseEnter(entry.id)}
+                    onMouseLeave={handleMouseLeave}
+                    aria-label={`Select ${entry.title}`}
+                    className="outline-none"
+                  >
+                    <span
+                      className={`
+                        block
+                        h-3.5
+                        w-3.5
+                        rounded-full
+                        border-2
+                        transition-all
+                        duration-200
+                        ${
+                          isHovered || isSelected
+                            ? "scale-110 border-primary bg-primary"
+                            : "border-muted-foreground/50 bg-background"
+                        }
+                      `}
+                    />
+                  </button>
+                </div>
+              );
+            })}
+          </div>
+
+          {/* Periods */}
+          <div className="flex">
+            {sortedExperience.map((entry) => {
+              const isSelected = entry.id === selectedId;
+              const isHovered = entry.id === hoveredId;
+
+              return (
+                <div
+                  key={entry.id}
+                  className="w-[150px] shrink-0 px-2 text-center"
+                >
+                  <span
+                    className={`
+                      mt-3
+                      block
+                      text-xs
+                      font-mono
+                      transition-colors
+                      duration-200
+                      ${
+                        isHovered || isSelected
+                          ? "text-primary"
+                          : "text-muted-foreground"
+                      }
+                    `}
+                  >
                     {entry.period}
                   </span>
                 </div>
-              </div>
+              );
+            })}
+          </div>
+        </div>
 
-              {/* Achievement Bullets */}
-              <ul className="space-y-1 pl-1.5">
-                {entry.bullets.map((bullet, index) => (
-                  <li
-                    key={index}
-                    className="relative pl-4 text-sm leading-relaxed text-muted-foreground/95 transition-colors duration-200 hover:text-foreground hover:drop-shadow-[0_0_6px_rgba(from_var(--primary)_r_g_b_/_0.15)] flex items-start group/bullet"
+        {/* DESKTOP TIMELINE */}
+        <div className="relative hidden w-full px-3 py-2 md:block">
+          {/* Roles */}
+          <div className="grid grid-cols-3">
+            {sortedExperience.map((entry) => {
+              const isSelected = entry.id === selectedId;
+              const isHovered = entry.id === hoveredId;
+
+              return (
+                <button
+                  key={entry.id}
+                  type="button"
+                  onClick={() => setSelectedId(entry.id)}
+                  onMouseEnter={() => handleMouseEnter(entry.id)}
+                  onMouseLeave={handleMouseLeave}
+                  className="px-2 text-center outline-none"
+                >
+                  <span
+                    className={`
+                      mx-auto
+                      block
+                      max-w-[180px]
+                      text-lg
+                      font-semibold
+                      leading-tight
+                      transition-colors
+                      duration-200
+                      ${
+                        isHovered || isSelected
+                          ? "text-primary"
+                          : "text-foreground"
+                      }
+                    `}
                   >
-                    <span className="absolute left-0 text-primary/70 font-bold select-none group-hover/bullet:text-primary transition-colors duration-200">
-                      -
-                    </span>
-                    <p className="w-full break-words pl-1">{bullet}</p>
-                  </li>
-                ))}
-              </ul>
+                    {entry.title}
+                  </span>
+                </button>
+              );
+            })}
+          </div>
+
+          {/* Dots + line */}
+          <div className="relative mt-4 grid grid-cols-3">
+            {/* Timeline line */}
+            <div
+              className="
+                pointer-events-none
+                absolute
+                left-0
+                right-0
+                top-1/2
+                h-px
+                -translate-y-1/2
+                bg-border
+              "
+            />
+
+            {sortedExperience.map((entry) => {
+              const isSelected = entry.id === selectedId;
+              const isHovered = entry.id === hoveredId;
+
+              return (
+                <div
+                  key={entry.id}
+                  className="relative z-10 flex justify-center"
+                >
+                  <button
+                    type="button"
+                    onClick={() => setSelectedId(entry.id)}
+                    onMouseEnter={() => handleMouseEnter(entry.id)}
+                    onMouseLeave={handleMouseLeave}
+                    aria-label={`Select ${entry.title}`}
+                    className="outline-none"
+                  >
+                    <span
+                      className={`
+                        block
+                        h-3.5
+                        w-3.5
+                        rounded-full
+                        border-2
+                        transition-all
+                        duration-200
+                        ${
+                          isHovered || isSelected
+                            ? "scale-110 border-primary bg-primary"
+                            : "border-muted-foreground/50 bg-background"
+                        }
+                      `}
+                    />
+                  </button>
+                </div>
+              );
+            })}
+          </div>
+
+          {/* Periods */}
+          <div className="grid grid-cols-3">
+            {sortedExperience.map((entry) => {
+              const isSelected = entry.id === selectedId;
+              const isHovered = entry.id === hoveredId;
+
+              return (
+                <div key={entry.id} className="px-2 text-center">
+                  <span
+                    className={`
+                      mt-3
+                      block
+                      text-sm
+                      font-mono
+                      transition-colors
+                      duration-200
+                      ${
+                        isHovered || isSelected
+                          ? "text-primary"
+                          : "text-muted-foreground"
+                      }
+                    `}
+                  >
+                    {entry.period}
+                  </span>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </div>
+
+      {/* Selected / Hovered Experience */}
+      <div
+        className="
+          h-[200px]
+          shrink-0
+          overflow-y-auto
+          border-t
+          border-border/60
+          pt-5
+          [scrollbar-width:none]
+          [-ms-overflow-style:none]
+          [&::-webkit-scrollbar]:hidden
+        "
+      >
+        {displayedExperience && (
+          <>
+            <div className="mb-4">
+              <p className="text-sm font-semibold text-primary">
+                {displayedExperience.org}
+              </p>
+
+              <p className="mt-1 text-sm text-muted-foreground">
+                {displayedExperience.title}
+              </p>
             </div>
-          );
-        })}
+
+            <ul className="space-y-2">
+              {displayedExperience.bullets.map((bullet, index) => (
+                <li
+                  key={index}
+                  className="relative pl-5 text-md leading-relaxed text-foreground/90"
+                >
+                  <span className="absolute left-0 text-primary/70">-</span>
+                  {bullet}
+                </li>
+              ))}
+            </ul>
+          </>
+        )}
       </div>
     </Card>
   );

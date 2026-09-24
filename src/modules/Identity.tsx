@@ -49,7 +49,7 @@ export function Identity() {
           src={"/portfolio-photo-dhruthi.png"}
           alt={SITE_CONFIG.name}
           draggable={false}
-          className={`absolute inset-0 h-full w-full object-contain transition-opacity duration-300 pointer-events-none ${
+          className={`absolute inset-0 h-full w-full object-contain brightness-110 transition-opacity duration-300 pointer-events-none ${
             playing ? "opacity-0" : "opacity-95"
           }`}
         />
@@ -61,7 +61,7 @@ export function Identity() {
           controls={false}
           disablePictureInPicture
           controlsList="nodownload noplaybackrate noremoteplayback nofullscreen"
-          className={`absolute inset-0 h-full w-full object-contain transition-opacity duration-300 pointer-events-none ${
+          className={`absolute inset-0 h-full w-full object-contain brightness-100 transition-opacity duration-300 pointer-events-none ${
             playing ? "opacity-95" : "opacity-0"
           }`}
         >
@@ -74,10 +74,10 @@ export function Identity() {
         <h1 className="text-lg font-bold text-foreground tracking-tight leading-tight">
           {SITE_CONFIG.name}
         </h1>
-        <p className="mt-1 text-base font-semibold text-primary font-heading">
+        <p className="mt-1 text-base font-semibold text-chart-5 font-heading">
           {SITE_CONFIG.role}
         </p>
-        <p className="mt-2 text-sm leading-relaxed text-muted-foreground w-full max-w-[240px] mx-auto">
+        <p className="mt-2 text-sm leading-relaxed text-foreground/80 w-full max-w-[240px] mx-auto">
           {SITE_CONFIG.headline}
         </p>
       </div>

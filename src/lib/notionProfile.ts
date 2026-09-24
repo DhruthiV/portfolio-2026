@@ -1,16 +1,12 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 export interface ProfileContent {
   bio: {
     headline: string;
-    summary: string[];
+    blocks: any[];
   };
 
   currentWork: {
-    type:
-      | "Building"
-      | "Learning"
-      | "Exploring"
-      | "Collaborating"
-      | "Contributing";
+    type: string;
     title: string;
     description: string;
   };
@@ -23,7 +19,7 @@ let pendingRequest: Promise<ProfileContent> | null = null;
 export const fallbackProfileContent: ProfileContent = {
   bio: {
     headline: "",
-    summary: [],
+    blocks: [],
   },
 
   currentWork: {

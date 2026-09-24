@@ -1,79 +1,63 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Skeleton } from "@/components/ui/skeleton";
-import { SITE_CONFIG } from "../config";
-import { CardTitle, CardDescription, Card } from "@/components/ui/card";
+import { NotionRenderer } from "@/components/blocks/NotionRenderer";
 
 interface BioProps {
   loading: boolean;
   headline: string;
-  summary: string[];
+  blocks: any[];
 }
 
-export function Bio({ loading, headline, summary }: BioProps) {
+export function Bio({ loading, headline, blocks }: BioProps) {
   if (loading) {
     return <BioSkeleton />;
   }
-  const bioHeadline = headline ?? SITE_CONFIG.headline;
-
-  const bioSummary = summary ?? SITE_CONFIG.summary;
 
   return (
-    <Card className="group/card flex flex-col gap-6 p-6 bg-card/50 ...">
-      <CardTitle className="text-xl font-semibold text-muted-foreground text-center transition-colors duration-300 group-hover/card:text-foreground">
-        About Me
-      </CardTitle>
+    <section className="flex lg:min-h-[calc(100vh-4rem)] flex-col gap-6 justify-center">
+      <h2 className="text-center text-2xl font-semibold text-foreground/90 font-heading">
+        About
+      </h2>
 
       <div className="flex flex-col gap-3 ">
-        <h3 className="text-base font-bold leading-snug text-foreground/95 tracking-tight transition-colors duration-1000 hover:text-primary text-center">
-          {bioHeadline}
+        <h3 className="text-center text-base font-semibold leading-snug tracking-tight text-chart-5 font-heading">
+          {headline}
         </h3>
 
-        <div className="space-y-3">
-          <div className="space-y-3">
-            {bioSummary.map((paragraph: string, index: number) => (
-              <CardDescription
-                key={index}
-                className="text-sm md:text-sm leading-relaxed text-muted-foreground font-medium"
-              >
-                {paragraph}
-              </CardDescription>
-            ))}
-          </div>
-        </div>
+        <NotionRenderer blocks={blocks} />
       </div>
-    </Card>
+    </section>
   );
 }
 
 function BioSkeleton() {
   return (
-    <Card className="flex flex-col gap-6 p-6 bg-card/50">
-      <CardTitle
-        className="
-          text-xl 
-          font-semibold 
-          text-center
-        "
-      >
-        About Me
-      </CardTitle>
+    <section className="flex min-h-[calc(100vh-4rem)] flex-col gap-6">
+      <h2 className="text-center text-2xl font-semibold text-foreground/90 font-heading">
+        About
+      </h2>
 
-      <div className="flex flex-col gap-4">
-        {/* headline */}
+      <div className="flex flex-col gap-10">
+        {/* Headline */}
         <div className="flex justify-center">
-          <Skeleton className="h-5 w-85" />
+          <Skeleton className="h-5 w-3/4 max-w-[340px]" />
         </div>
 
-        {/* paragraphs */}
-        <div className="space-y-5">
-          {[0, 1].map((paragraph) => (
-            <div key={paragraph} className="space-y-3">
-              <Skeleton className="h-3 w-full" />
-              <Skeleton className="h-3 w-full" />
-              <Skeleton className="h-3 w-4/5" />
-            </div>
-          ))}
+        {/* Body */}
+        <div className="space-y-8">
+          <div className="space-y-4">
+            <Skeleton className="h-4 w-full" />
+            <Skeleton className="h-4 w-full" />
+            <Skeleton className="h-4 w-4/5" />
+          </div>
+
+          <div className="space-y-4">
+            <Skeleton className="h-4 w-full" />
+            <Skeleton className="h-4 w-11/12" />
+            <Skeleton className="h-4 w-3/4" />
+          </div>
         </div>
       </div>
-    </Card>
+    </section>
   );
 }
