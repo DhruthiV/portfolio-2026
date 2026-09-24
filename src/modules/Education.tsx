@@ -1,7 +1,9 @@
 export function Education() {
   return (
     <section className="flex flex-col items-center gap-5">
-      <h2 className="text-2xl font-semibold text-foreground/90">Education</h2>
+      <h2 className="text-2xl font-semibold text-foreground/90 font-heading">
+        Education
+      </h2>
 
       <div className="grid grid-cols-[1fr_auto_1fr] items-start text-center">
         {/* Degrees */}

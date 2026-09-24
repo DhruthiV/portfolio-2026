@@ -16,12 +16,12 @@ export function Certifications() {
           Certification
         </h2>
 
-        <div className="flex flex-col items-center gap-8 md:flex-row md:items-start">
+        <div className="flex flex-col items-center gap-4 md:flex-row md:items-start px-3">
           <div className="flex shrink-0 items-center justify-center">
             <img
               src={certificationPreview}
               alt="Google UX Design Certificate badge"
-              className="h-52 w-52 rounded-xl object-contain md:h-52 md:w-52"
+              className="rounded-xl object-contain md:h-52 md:w-52"
             />
           </div>
 

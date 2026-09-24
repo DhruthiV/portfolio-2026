@@ -22,7 +22,7 @@ export default function App() {
     <div className="relative h-screen bg-background">
       <AuroraBackground />
 
-      <main className="relative z-10 h-full overflow-y-auto">
+      <main className="relative z-10 h-full">
         <AnimatePresence mode="wait" initial={false}>
           <motion.div
             key={location.pathname}

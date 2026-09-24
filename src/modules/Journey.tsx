@@ -1,19 +1,16 @@
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import { EXPERIENCE } from "../data/experience";
-import { Card, CardTitle } from "@/components/ui/card";
 
 export function Journey() {
   // Oldest → newest
   const sortedExperience = [...EXPERIENCE].sort((a, b) => {
     const getStartDate = (period: string) => {
       const match = period.match(/([A-Za-z]{3})\s+(\d{4})/);
-
       if (!match) return 0;
-
       return new Date(`${match[1]} 1, ${match[2]}`).getTime();
     };
 
-    return getStartDate(a.period) - getStartDate(b.period);
+    return getStartDate(b.period) - getStartDate(a.period);
   });
 
   // Present role is selected by default
@@ -23,401 +20,104 @@ export function Journey() {
     ) ?? sortedExperience[sortedExperience.length - 1];
 
   const [selectedId, setSelectedId] = useState(currentExperience?.id);
-  const [hoveredId, setHoveredId] = useState<string | null>(null);
-
-  const hoverTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const mobileTimelineRef = useRef<HTMLDivElement | null>(null);
-
-  // Scroll selected role into view on mobile
-  useEffect(() => {
-    if (!selectedId || !mobileTimelineRef.current) return;
-
-    const selectedIndex = sortedExperience.findIndex(
-      (entry) => entry.id === selectedId,
-    );
-
-    if (selectedIndex === -1) return;
-
-    const itemWidth = 150;
-
-    mobileTimelineRef.current.scrollTo({
-      left: Math.max(
-        0,
-        selectedIndex * itemWidth -
-          mobileTimelineRef.current.clientWidth / 2 +
-          itemWidth / 2,
-      ),
-      behavior: "smooth",
-    });
-  }, [selectedId, sortedExperience]);
-
-  // Start hover preview after a short delay
-  const handleMouseEnter = (id: string) => {
-    if (hoverTimeout.current) {
-      clearTimeout(hoverTimeout.current);
-    }
-
-    hoverTimeout.current = setTimeout(() => {
-      setHoveredId(id);
-    }, 200);
-  };
-
-  // Immediately return to selected experience
-  const handleMouseLeave = () => {
-    if (hoverTimeout.current) {
-      clearTimeout(hoverTimeout.current);
-      hoverTimeout.current = null;
-    }
-
-    setHoveredId(null);
-  };
-
-  // Hover temporarily controls the displayed content.
-  // When there is no hover, the selected experience is shown.
-  const displayedId = hoveredId ?? selectedId;
-
-  const displayedExperience = sortedExperience.find(
-    (entry) => entry.id === displayedId,
-  );
 
   return (
-    <Card className="group/card flex h-[500px] w-full flex-col gap-6 bg-card p-6 shadow-sm backdrop-blur-sm sm:h-[520px]">
-      {/* Heading */}
-      <CardTitle className="text-center text-2xl font-semibold text-muted-foreground transition-colors duration-300 group-hover/card:text-foreground">
+    <div className="w-full max-w-2xl mx-auto px-4 py-6">
+      <h2 className="mb-8 text-2xl font-bold text-foreground text-center font-heading">
         Journey
-      </CardTitle>
+      </h2>
 
-      {/* Timeline */}
-      <div
-        className="
-          w-full overflow-x-auto
-          [scrollbar-width:none]
-          [-ms-overflow-style:none]
-          [&::-webkit-scrollbar]:hidden
-        "
-      >
-        {/* MOBILE TIMELINE */}
-        <div
-          ref={mobileTimelineRef}
-          className="
-            relative
-            min-w-max
-            px-3
-            py-2
-            md:hidden
-            [scrollbar-width:none]
-            [-ms-overflow-style:none]
-            [&::-webkit-scrollbar]:hidden
-          "
-        >
-          {/* Roles */}
-          <div className="flex">
-            {sortedExperience.map((entry) => {
-              const isSelected = entry.id === selectedId;
-              const isHovered = entry.id === hoveredId;
+      {/* Unified Timeline Container */}
+      <div className="relative flex flex-col pl-2">
+        {/* Continuous Vertical Tracking Line */}
+        <div className="absolute bottom-4 left-[15px] top-4 w-px bg-border/80" />
 
-              return (
+        {sortedExperience.map((entry) => {
+          const isActive = entry.id === selectedId;
+
+          return (
+            <div
+              key={entry.id}
+              className="relative flex flex-col pb-8 last:pb-2"
+            >
+              {/* Node Button Row */}
+              <div className="relative flex items-start gap-4">
+                {/* Interactive Dot Node */}
                 <button
-                  key={entry.id}
                   type="button"
                   onClick={() => setSelectedId(entry.id)}
-                  onMouseEnter={() => handleMouseEnter(entry.id)}
-                  onMouseLeave={handleMouseLeave}
-                  className="
-                    w-[150px]
-                    shrink-0
-                    px-3
-                    text-center
-                    outline-none
-                  "
+                  aria-label={`Select ${entry.title}`}
+                  className="relative z-10 mt-1.5 outline-none shrink-0"
                 >
                   <span
                     className={`
-                      mx-auto block
-                      max-w-[140px]
-                      text-base
-                      font-semibold
-                      leading-tight
-                      transition-colors
-                      duration-200
+                      block h-3.5 w-3.5 rounded-full border-2 transition-all duration-300
                       ${
-                        isHovered || isSelected
-                          ? "text-primary"
-                          : "text-foreground"
+                        isActive
+                          ? "scale-110 border-primary bg-primary"
+                          : "border-muted-foreground/40 bg-background"
                       }
                     `}
+                  />
+                </button>
+
+                {/* Metadata Interactive Column */}
+                <button
+                  type="button"
+                  onClick={() => setSelectedId(entry.id)}
+                  className="flex flex-col items-start text-left outline-none group w-full"
+                >
+                  <span
+                    className={`text-md font-semibold leading-tight transition-colors duration-200 ${
+                      isActive
+                        ? "text-primary"
+                        : "text-foreground group-hover:text-primary/80"
+                    }`}
                   >
                     {entry.title}
                   </span>
-                </button>
-              );
-            })}
-          </div>
 
-          {/* Dots + line */}
-          <div className="relative mt-4 flex">
-            {/* Timeline line */}
-            <div
-              className="
-                pointer-events-none
-                absolute
-                left-[75px]
-                right-[75px]
-                top-1/2
-                h-px
-                -translate-y-1/2
-                bg-border
-              "
-            />
+                  <span className="text-sm font-medium text-muted-foreground/80 mt-0.5">
+                    {entry.org}
+                  </span>
 
-            {sortedExperience.map((entry) => {
-              const isSelected = entry.id === selectedId;
-              const isHovered = entry.id === hoveredId;
-
-              return (
-                <div
-                  key={entry.id}
-                  className="
-                    relative
-                    z-10
-                    flex
-                    w-[150px]
-                    shrink-0
-                    justify-center
-                  "
-                >
-                  <button
-                    type="button"
-                    onClick={() => setSelectedId(entry.id)}
-                    onMouseEnter={() => handleMouseEnter(entry.id)}
-                    onMouseLeave={handleMouseLeave}
-                    aria-label={`Select ${entry.title}`}
-                    className="outline-none"
-                  >
-                    <span
-                      className={`
-                        block
-                        h-3.5
-                        w-3.5
-                        rounded-full
-                        border-2
-                        transition-all
-                        duration-200
-                        ${
-                          isHovered || isSelected
-                            ? "scale-110 border-primary bg-primary"
-                            : "border-muted-foreground/50 bg-background"
-                        }
-                      `}
-                    />
-                  </button>
-                </div>
-              );
-            })}
-          </div>
-
-          {/* Periods */}
-          <div className="flex">
-            {sortedExperience.map((entry) => {
-              const isSelected = entry.id === selectedId;
-              const isHovered = entry.id === hoveredId;
-
-              return (
-                <div
-                  key={entry.id}
-                  className="w-[150px] shrink-0 px-2 text-center"
-                >
                   <span
-                    className={`
-                      mt-3
-                      block
-                      text-xs
-                      font-mono
-                      transition-colors
-                      duration-200
-                      ${
-                        isHovered || isSelected
-                          ? "text-primary"
-                          : "text-muted-foreground"
-                      }
-                    `}
+                    className={`mt-1 font-mono text-sm transition-colors duration-200 ${
+                      isActive ? "text-primary/80" : "text-foreground/60"
+                    }`}
                   >
                     {entry.period}
                   </span>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-
-        {/* DESKTOP TIMELINE */}
-        <div className="relative hidden w-full px-3 py-2 md:block">
-          {/* Roles */}
-          <div className="grid grid-cols-3">
-            {sortedExperience.map((entry) => {
-              const isSelected = entry.id === selectedId;
-              const isHovered = entry.id === hoveredId;
-
-              return (
-                <button
-                  key={entry.id}
-                  type="button"
-                  onClick={() => setSelectedId(entry.id)}
-                  onMouseEnter={() => handleMouseEnter(entry.id)}
-                  onMouseLeave={handleMouseLeave}
-                  className="px-2 text-center outline-none"
-                >
-                  <span
-                    className={`
-                      mx-auto
-                      block
-                      max-w-[180px]
-                      text-lg
-                      font-semibold
-                      leading-tight
-                      transition-colors
-                      duration-200
-                      ${
-                        isHovered || isSelected
-                          ? "text-primary"
-                          : "text-foreground"
-                      }
-                    `}
-                  >
-                    {entry.title}
-                  </span>
                 </button>
-              );
-            })}
-          </div>
+              </div>
 
-          {/* Dots + line */}
-          <div className="relative mt-4 grid grid-cols-3">
-            {/* Timeline line */}
-            <div
-              className="
-                pointer-events-none
-                absolute
-                left-0
-                right-0
-                top-1/2
-                h-px
-                -translate-y-1/2
-                bg-border
-              "
-            />
-
-            {sortedExperience.map((entry) => {
-              const isSelected = entry.id === selectedId;
-              const isHovered = entry.id === hoveredId;
-
-              return (
-                <div
-                  key={entry.id}
-                  className="relative z-10 flex justify-center"
-                >
-                  <button
-                    type="button"
-                    onClick={() => setSelectedId(entry.id)}
-                    onMouseEnter={() => handleMouseEnter(entry.id)}
-                    onMouseLeave={handleMouseLeave}
-                    aria-label={`Select ${entry.title}`}
-                    className="outline-none"
-                  >
-                    <span
-                      className={`
-                        block
-                        h-3.5
-                        w-3.5
-                        rounded-full
-                        border-2
-                        transition-all
-                        duration-200
-                        ${
-                          isHovered || isSelected
-                            ? "scale-110 border-primary bg-primary"
-                            : "border-muted-foreground/50 bg-background"
-                        }
-                      `}
-                    />
-                  </button>
+              {/* 
+                SMOOTH EXPANDING CONTAINER 
+                Uses Tailwind grid rows transition trick to smoothly animate from height 0 -> auto
+              */}
+              <div
+                className={`
+                  grid transition-all duration-300 ease-in-out pl-7 pr-2
+                  ${isActive ? "grid-rows-[1fr] opacity-100 mt-4" : "grid-rows-[0fr] opacity-0 mt-0"}
+                `}
+              >
+                <div className="overflow-hidden">
+                  <ul className="space-y-2.5 border-l-2 border-primary/20 pl-4 py-1">
+                    {entry.bullets.map((bullet, index) => (
+                      <li
+                        key={index}
+                        className="text-md leading-relaxed text-foreground/90 transition-colors duration-200"
+                      >
+                        {bullet}
+                      </li>
+                    ))}
+                  </ul>
                 </div>
-              );
-            })}
-          </div>
-
-          {/* Periods */}
-          <div className="grid grid-cols-3">
-            {sortedExperience.map((entry) => {
-              const isSelected = entry.id === selectedId;
-              const isHovered = entry.id === hoveredId;
-
-              return (
-                <div key={entry.id} className="px-2 text-center">
-                  <span
-                    className={`
-                      mt-3
-                      block
-                      text-sm
-                      font-mono
-                      transition-colors
-                      duration-200
-                      ${
-                        isHovered || isSelected
-                          ? "text-primary"
-                          : "text-muted-foreground"
-                      }
-                    `}
-                  >
-                    {entry.period}
-                  </span>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </div>
-
-      {/* Selected / Hovered Experience */}
-      <div
-        className="
-          h-[200px]
-          shrink-0
-          overflow-y-auto
-          border-t
-          border-border/60
-          pt-5
-          [scrollbar-width:none]
-          [-ms-overflow-style:none]
-          [&::-webkit-scrollbar]:hidden
-        "
-      >
-        {displayedExperience && (
-          <>
-            <div className="mb-4">
-              <p className="text-sm font-semibold text-primary">
-                {displayedExperience.org}
-              </p>
-
-              <p className="mt-1 text-sm text-muted-foreground">
-                {displayedExperience.title}
-              </p>
+              </div>
             </div>
-
-            <ul className="space-y-2">
-              {displayedExperience.bullets.map((bullet, index) => (
-                <li
-                  key={index}
-                  className="relative pl-5 text-md leading-relaxed text-foreground/90"
-                >
-                  <span className="absolute left-0 text-primary/70">-</span>
-                  {bullet}
-                </li>
-              ))}
-            </ul>
-          </>
-        )}
+          );
+        })}
       </div>
-    </Card>
+    </div>
   );
 }
