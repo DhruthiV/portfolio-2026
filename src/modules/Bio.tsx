@@ -14,12 +14,12 @@ export function Bio({ loading, headline, blocks }: BioProps) {
   }
 
   return (
-    <section className="flex lg:min-h-[calc(100vh-4rem)] flex-col gap-6">
+    <section className="flex lg:min-h-[calc(100vh-4rem)] flex-col gap-6 justify-center">
       <h2 className="text-center text-2xl font-semibold text-foreground/90 font-heading">
         About
       </h2>
 
-      <div className="flex flex-col gap-3">
+      <div className="flex flex-col gap-3 ">
         <h3 className="text-center text-base font-semibold leading-snug tracking-tight text-chart-5 font-heading">
           {headline}
         </h3>

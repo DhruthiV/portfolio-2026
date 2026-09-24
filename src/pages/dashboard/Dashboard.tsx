@@ -10,11 +10,7 @@ import { usePortfolio } from "@/hooks/usePortfolio";
 import { Projects } from "../projects/homepagesection/Projects";
 import { Certifications } from "../certification/Certifications";
 
-interface DashboardProps {
-  onViewProjects: () => void;
-}
-
-export function Dashboard({ onViewProjects }: DashboardProps) {
+export function Dashboard() {
   const { profile, profileLoading, projects, projectsLoading, error } =
     usePortfolio();
 
@@ -38,6 +34,7 @@ export function Dashboard({ onViewProjects }: DashboardProps) {
             <div className="w-full">
               <Identity />
             </div>
+
             <div className="w-full">
               <CurrentWork
                 loading={profileLoading}
@@ -46,6 +43,7 @@ export function Dashboard({ onViewProjects }: DashboardProps) {
                 description={profile.currentWork.description}
               />
             </div>
+
             <div className="w-full">
               <ContactMe />
             </div>
@@ -62,7 +60,6 @@ export function Dashboard({ onViewProjects }: DashboardProps) {
               projects={projects}
               loading={projectsLoading}
               error={error}
-              onViewProjects={onViewProjects}
             />
 
             <Certifications />

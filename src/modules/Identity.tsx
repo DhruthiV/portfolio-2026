@@ -49,7 +49,7 @@ export function Identity() {
           src={"/portfolio-photo-dhruthi.png"}
           alt={SITE_CONFIG.name}
           draggable={false}
-          className={`absolute inset-0 h-full w-full object-contain transition-opacity duration-300 pointer-events-none ${
+          className={`absolute inset-0 h-full w-full object-contain brightness-110 transition-opacity duration-300 pointer-events-none ${
             playing ? "opacity-0" : "opacity-95"
           }`}
         />
@@ -61,7 +61,7 @@ export function Identity() {
           controls={false}
           disablePictureInPicture
           controlsList="nodownload noplaybackrate noremoteplayback nofullscreen"
-          className={`absolute inset-0 h-full w-full object-contain transition-opacity duration-300 pointer-events-none ${
+          className={`absolute inset-0 h-full w-full object-contain brightness-100 transition-opacity duration-300 pointer-events-none ${
             playing ? "opacity-95" : "opacity-0"
           }`}
         >
