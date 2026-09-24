@@ -4,9 +4,8 @@ import { Button } from "@/components/ui/button";
 
 import { CertificateViewer } from "./CertificateViewer";
 import { CERTIFICATES } from "@/data/certificates";
+import certificationPreview from "@/certificates/certification-preview.png";
 
-const CERTIFICATION_PREVIEW_IMAGE =
-  "src/certificates/certification-preview.png";
 export function Certifications() {
   const [isViewerOpen, setIsViewerOpen] = useState(false);
 
@@ -18,16 +17,14 @@ export function Certifications() {
         </h2>
 
         <div className="flex flex-col items-center gap-8 md:flex-row md:items-start">
-          {/* Certification badge image */}
           <div className="flex shrink-0 items-center justify-center">
             <img
-              src={CERTIFICATION_PREVIEW_IMAGE}
+              src={certificationPreview}
               alt="Google UX Design Certificate badge"
               className="h-52 w-52 rounded-xl object-contain md:h-52 md:w-52"
             />
           </div>
 
-          {/* Certification information */}
           <div className="flex flex-1 flex-col">
             <h3 className="text-xl font-bold font-heading">
               Google UX Design Professional Certificate (In Progress)
