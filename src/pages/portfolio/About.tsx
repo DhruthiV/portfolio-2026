@@ -2,12 +2,15 @@ import { Education } from "@/modules/Education";
 import { Journey } from "@/modules/Journey";
 import { Certifications } from "../certification/Certifications";
 import { useNavigate } from "react-router-dom";
+import { Events } from "@/modules/Events";
 
 export function About() {
   const navigate = useNavigate();
   return (
     <>
       <Certifications />
+
+      <Events />
 
       <Journey />
 
